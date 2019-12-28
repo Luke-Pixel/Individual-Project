@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="newscreening.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+</head>
+<body>
+
+        <form action="includes/interview.php" method="post" class="sighnup-form">
+            <h1>Tell us about yourself :)</h1> <br>
+            <hr>
+            <br>
+            
+            <h4>Chlyamidia</h4> <br>
+            
+            <label class = "container">Positive 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span><br> 
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span><br> 
+            </label>
+            <hr>
+            <br>
+            <h4>Gonnorea</h4> <br>
+            
+            <label class = "container">Positive 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br> 
+            <hr>
+            <br>
+            <h4>Gonnorea</h4> 
+            <br>
+            
+            <label class = "container">Positive 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br> 
+            <hr>
+            <br>
+            <h4>Gonnorea</h4> <br>
+            
+            <label class = "container">Positive 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+                
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="checkbox" 
+                name="mental_helath_yes" 
+                value="mental_helath_yes" > 
+                <span class = "checkmark"></span><br> 
+            </label>
+
+
+            <div class = txtb>
+            <p name = "date_pick">Date of test: <input type="text" id="datepicker"></p>
+            </div>
+            <button type="submit" name = "next" class="next_btn">Submit</button><br><br>
+            Have an account? <a href="#">Log in</a>
+          </div>
+    
+    
+        </form>
+    
+        <script type="text/javascript">
+        $(".txtb input").on("focus",function(){
+          $(this).addClass("focus");
+        });
+    
+        $(".txtb input").on("blur",function(){
+          if($(this).val() == "")
+          $(this).removeClass("focus");
+        });
+    
+        </script>
+    
+    
+    </body>
+    </html>
