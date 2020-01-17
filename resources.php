@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
   </head>
+  <body>
   <div class="middle">
         <div class="menu">
           <li class="item" id='sports'>
@@ -49,4 +50,38 @@
           </li>
         </div>
       </div>
+
+      <?php
+
+//if (isset($_POST['login-submit'])){
+    require 'includes/dbcon.php';
+
+   
+        $sql = 'SELECT * FROM Patient_rersources WHERE category = "Sports" ';
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ../index.html?error=mysqlerror_connection_resources");
+            exit();
+        }else {
+            //mysqli_stmt_bind_param($stmt,"s", $mailuid);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $resultCheck = mysqli_num_rows($result);
+            while ($row = mysqli_fetch_assoc($result)){
+                echo $row['name'] . "<br>";
+                echo $row['url'] . "<br>";
+            }
+
+        
+        
+    }
+/*}else {
+    header("Location: ../index.html");
+    exit();
+}*/
+?>
+
+    
+
+    </body>
 </html>

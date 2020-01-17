@@ -12,17 +12,17 @@
       <h1>Sign up</h1>
 
       <div class="txtb">
-        <input type="text" name="email">
+        <input type="text" name="mail">
         <span data-placeholder="Email"></span>
       </div>
 
       <div class="txtb">
-        <input type="password" name="password1">
+        <input type="password" name="pass1">
         <span data-placeholder="Password"></span>
       </div>
 
       <div class="txtb">
-        <input type="password" name = "password2">
+        <input type="password" name = "pass2">
         <span data-placeholder="Confirm Password"></span>
       </div>
 

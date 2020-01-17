@@ -4,7 +4,7 @@
 $servername = "localhost";
 $dBUseraneme = "root";
 $dbPassword = "";
-$dBName ="project";
+$dBName ="ProjectDB";
 
 $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
