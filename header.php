@@ -29,6 +29,5 @@ session_start();
                 </ul>
             </nav>
         </aside>
-        <h1 class = "header1">Welcome Back</h1>
-        <form class = "Home_1">
-        <main>
+</body>
+        

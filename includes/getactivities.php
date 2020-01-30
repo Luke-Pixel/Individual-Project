@@ -32,7 +32,7 @@ if (isset($_GET["ID"])){
             header("Location: ../index.html?error=nouser");
         }
     }
-}
+
 }else {
 header("Location: ../index.html");
 exit();

@@ -60,6 +60,7 @@ if (isset($_POST['sighnup-submit'])){
                     session_start();
                     $_SESSION['id'] = $row['idUser'];
                     $_SESSION['contact'] = $row['email'];
+                    
                     header("Location: ../registerpatient.php");
                     exit();
                 }
