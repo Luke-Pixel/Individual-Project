@@ -17,117 +17,119 @@
 </head>
 <body>
 
-        <form action="includes/interview.php" method="post" class="sighnup-form">
+        <form action="includes/addScrrening.php" method="post" class="screening-form">
             <h1>Add new STI Results</h1> <br>
             <hr>
             <br>
             
-            <h4>Chlyamidia</h4> <br>
-            
+            <h4>Chlamydia</h4> <br>
+            <fieldset id = "group1">
             <label class = "container">Positive 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="Chlamydia" 
+                value="chlamydia_yes" > 
                 <span class = "checkmark"></span>
             </label>
             <br>
             <label class = "container">Negative
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="Chlamydia" 
+                value="chlamydia_no" > 
                 <span class = "checkmark"></span><br> 
             </label>
             <br>
             <label class = "container">Not Applicable 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="Chlamydia" 
+                value="chlamydia_na" > 
                 <span class = "checkmark"></span><br> 
             </label>
+        </fieldset>
             <hr>
             <br>
-            <h4>Gonnorea</h4> <br>
-            
+            <h4>Gonorrhea</h4> <br>
+            <fieldset id = "group2">
             <label class = "container">Positive 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="Gonorrhea" 
+                value="gonorrhea_yes" > 
                 <span class = "checkmark"></span>
             </label>
             <br>
             <label class = "container">Negative
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="Gonorrhea" 
+                value="gonorrhea_no" > 
                 <span class = "checkmark"></span>
             </label>
             <br>
             <label class = "container">Not Applicable 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="Gonorrhea" 
+                value="gonorrhea_na" > 
+                <span class = "checkmark"></span>
+            </label>
+        </fieldset>
+            <br> 
+            <hr>
+            <br>
+            <h4>Syphilis</h4> 
+            <br>
+            
+            <label class = "container">Positive 
+                <input type="radio" 
+                name="Syphilis" 
+                value="syphilis_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="radio" 
+                name="Syphilis" 
+                value="syphilis_no" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="radio" 
+                name="Syphilis" 
+                value="syphilis_na" > 
                 <span class = "checkmark"></span>
             </label>
             <br> 
             <hr>
             <br>
-            <h4>Gonnorea</h4> 
-            <br>
+            <h4>HIV</h4> <br>
             
             <label class = "container">Positive 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
-                <span class = "checkmark"></span>
-            </label>
-            <br>
-            <label class = "container">Negative
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
-                <span class = "checkmark"></span>
-            </label>
-            <br>
-            <label class = "container">Not Applicable 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
-                <span class = "checkmark"></span>
-            </label>
-            <br> 
-            <hr>
-            <br>
-            <h4>Gonnorea</h4> <br>
-            
-            <label class = "container">Positive 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="HIV" 
+                value="hiv_yes" > 
                 <span class = "checkmark"></span>
                 
             </label>
             <br>
             <label class = "container">Negative
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="HIV" 
+                value="hiv_no" > 
                 <span class = "checkmark"></span>
             </label>
             <br>
             <label class = "container">Not Applicable 
-                <input type="checkbox" 
-                name="mental_helath_yes" 
-                value="mental_helath_yes" > 
+                <input type="radio" 
+                name="HIV" 
+                value="hiv_na" > 
                 <span class = "checkmark"></span><br> 
             </label>
 
 
             <div class = txtb>
-            <p name = "date_pick">Date of test: <input type="text" id="datepicker"></p>
+            <p name = "date_pick">Date of test: <input type="text" id="datepicker" name = "date"></p>
             </div>
             
-            <button type="submit" name = "next" class="next_btn">Submit</button><br><br>
-            Have an account? <a href="#">Log in</a>
+            <button type="submit" name = "submit_screening" class="next_btn">Submit</button><br><br>
+           
           </div>
     
     
