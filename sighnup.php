@@ -17,6 +17,16 @@
       </div>
 
       <div class="txtb">
+        <input type="text" name="name1">
+        <span data-placeholder="First Name"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name2">
+        <span data-placeholder="Surname"></span>
+      </div>
+
+      <div class="txtb">
         <input type="password" name="pass1">
         <span data-placeholder="Password"></span>
       </div>
@@ -25,6 +35,50 @@
         <input type="password" name = "pass2">
         <span data-placeholder="Confirm Password"></span>
       </div>
+
+      
+     
+
+    
+
+      <div class = "txtb">
+        <input type="text" id="datepicker" name = "DOB"> 
+        <span data-placeholder="Date Of Birth"></span>
+      </div>
+
+      
+      <hr>
+      <br>
+      <h4>Address</h4>
+      
+
+      <div class="txtb">
+        <input type="text" name="address1">
+        <span data-placeholder="Address 1"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="address2">
+        <span data-placeholder="Address 2"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="city">
+        <span data-placeholder="City"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="county">
+        <span data-placeholder="County"></span>
+      </div>
+
+
+      <div class="txtb">
+        <input type="text" name="postcode">
+        <span data-placeholder="Post Code"></span>
+      </div>
+
+
 
       <input type="submit" name="sighnup-submit" class="logbtn" value="Sign Up">
 

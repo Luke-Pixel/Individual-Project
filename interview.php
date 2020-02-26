@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -9,10 +12,10 @@
 <body>
 
     <form action="includes/interview.php" method="post" class="sighnup-form">
-        <h1>Tell us about yourself :)</h1> <br>
+        <h1>Tell us about yourself </h1> <br>
         <h4>Mental Health</h4>  <br>
         
-        <label class = "container">Have you been diagnosed with a mental helth condition, eg Depression & Anxiety
+        <label class = "container">Have you been diagnosed with a mental health condition, eg Depression & Anxiety
           <input type="checkbox" 
           name="mental_helath_yes" 
           value="mental_helath_yes" > 
@@ -85,10 +88,7 @@
           <span class = "checkmark"></span><br> <br>
       </label>
 
-        
-        
-        
-
+      <button type="submit" name = "submit_questions" class="next_btn">Next</button>
 
     </form>
 
@@ -101,9 +101,7 @@
       if($(this).val() == "")
       $(this).removeClass("focus");
     });
-
     </script>
-
 
 </body>
 </html>

@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -13,15 +17,15 @@
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
           <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">View STI Screenings</a></li>
-              <li><a href="#">View HPV Vacination</a></li>
-              <li><a href="#">View HEP A&B Vaciniation</a></li>
-              <li><a href="#">Order a Test Kit</a></li>
-              <li><a href="#">Find a Clinic</a></li>
-              <li><a href="#">Resources & Activities</a></li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="home.html">Home</a></li>
+              <li><a href="viewscreenings.html">View STI Screenings</a></li>
+              <li><a href="viewhpv.html">View HPV Vacination</a></li>
+              <li><a href="viewhep.html">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
+              <li><a href="resources.php">Resources & Activities</a></li>
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
   </aside>
@@ -35,11 +39,24 @@
           <main>
               <h2>Screening History</h2>
               <p>Add ypur STI screening results for a full history of all your STI screens</p>
+              <?php
+                $chl = 'NA';
+                $gon = 'NA';
+                $syph = 'NA';
+                $hiv = 'NA';
+                $sql = 'SELECT * from screening Where latest = true';
+                $result = mysqli_query($conn,$sql);
+                $resultCheck = mysqli_num_rows($result);
+                if ($resultCheck > 0){
+                  //test found 
+                  
+                }
+              ?>
               <h3>Last Test</h3>
-            <h4>Chlamydia: </h4>
-            <h4>Gonnorea: </h4>
-            <h4>Syphilis: </h4>
-            <h4>HIV: </h4>
+            <h4>Chlamydia:<?php echo $row['Chlamydia'];?></h4>
+            <h4>Gonnorea: <?php echo $row['Gonnorea '];?> </h4>
+            <h4>Syphilis: <?php echo $row['Syphilis'];?> </h4>
+            <h4>HIV: <?php echo $row['HIV'];?></h4>
               <a href="https://www.shl.uk" target="_blank" class="cta">Add STI Screening results</a>
               <a href="https://www.shl.uk" target="_blank" class="cta">View More History</a>
           </main>
@@ -71,14 +88,26 @@
         </form>
         
         <form class = "home_1">
+        <?php
+                $dose1 = 'NA';
+                $dose2 = 'NA';
+                $dose3 = 'NA';
+                $sql = 'SELECT * from HPV ';
+                $result = mysqli_query($conn,$sql);
+                $resultCheck = mysqli_num_rows($result);
+                if ($resultCheck > 0){
+                  //test found 
+                  
+                }
+              ?>
           <main>
           <h1>HPV Status</h1>
             <br>
-            <h4>Dose 1: </h4> 
+            <h4>Dose 1: <?php echo $row['Chlamydia'];?> </h4> 
             <br>
-            <h4>Dose 2: </h4>
+            <h4>Dose 2: <?php echo $row['Chlamydia'];?> </h4>
             <br>
-            <h4>Dose 3: </h4>
+            <h4>Dose 3: <?php echo $row['Chlamydia'];?> </h4>
             <br>
             <hr>
             <br>
@@ -99,51 +128,42 @@
          
     
           </main>
-        </form>
+        </form>4
 
         <form class = "home_1">
           <main>
-          <h1>Hep A Status</h1>
-    
-          
+          <?php
+                $dose1 = 'NA';
+                $dose2 = 'NA';
+                $dose3 = 'NA';
+                $sql = 'SELECT * from HPV ';
+                $result = mysqli_query($conn,$sql);
+                $resultCheck = mysqli_num_rows($result);
+                if ($resultCheck > 0){
+                  //test found 
+                  
+                }
+              ?>
+          <h1>Hep A&B Status</h1>
+            <br>  
+            <h4>Dose 1: <?php echo $row['Chlamydia'];?> </h4>         
             <br>
-    
-            <h4>Dose 1: </h4>
-            
+            <h4>Dose 2: <?php echo $row['Chlamydia'];?> </h4>
             <br>
-            <h4>Dose 2: </h4>
-            <br>
-            <h4>Dose 3: </h4>
+            <h4>Dose 3: <?php echo $row['Chlamydia'];?> </h4>
             <br>
             <hr>
             <br>
-            <h4>Next Dose: </h4>
+            <h4>Next Dose: <?php echo $row['Chlamydia'];?> </h4>
             <br>
             <hr>
-    
             <br>
             <input  type="button" id="button" class="logbtn" value="Edit" onclick="openModal()">
           <br>
           
          
     
-          <h1>Hep B Status</h1>
-    
-          
-            <br>    
-            <h4>Dose 1: </h4>
-            <br>
-            <h4>Dose 2: </h4>
-            <br>
-            <h4>Dose 3: </h4>
-            <br>
-            <hr>
-            <br>
-            <h4>Next Dose: </h4>
-            <br>
-            <hr>
-            <br>
-            <input type="button"  id="button" class="logbtn" value="Edit" onclick="openModal()">
+         
           </main>
         </form>
 
@@ -219,7 +239,19 @@
             </div>
         </div>
         </main>
-
+        <script>
+        
+          (function() {
+              var menu = document.querySelector('ul'),
+                  menulink = document.querySelector('img');
+              
+              menulink.addEventListener('click', function(e) {
+                  menu.classList.toggle('active');
+                  e.preventDefault();
+              });
+          })();
+      
+      </script>
         </body> 
         <footer>
           <br>

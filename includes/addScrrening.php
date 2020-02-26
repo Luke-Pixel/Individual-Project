@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['submit_screening'])){
-    //require 'dbcon.php';
+     //require 'dbcon.php';
 
     $chl;
     $gon;
