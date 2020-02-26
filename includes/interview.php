@@ -16,7 +16,7 @@ if (isset($_POST["submit_questions"])){
     session_start();
     //$username = $_POST [''];
     $mental = isset($_POST['mental_health_yes']);
-    $out= isset($_POST['out_yes']);
+    $pout = isset($_POST['out_yes']);
     $cutdrink = isset($_POST['cutdrink_yes']);
     $annoying = isset($_POST['annoying_yes']);
     $feltbad = isset($_POST['feltbad_yes']);
@@ -91,7 +91,7 @@ if (isset($_POST["submit_questions"])){
     }else{
         mysqli_stmt_bind_param($stmt,"iiiiiiiiii",$SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
         mysqli_stmt_execute($stmt);
-        header("Location: ../home.php")
+        header("Location: ../home.php");
     }
 }
         

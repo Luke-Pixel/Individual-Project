@@ -6,13 +6,14 @@ if (isset($_POST['sighnup-submit'])){
 $servername = "localhost";
 $dBUseraneme = "root";
 $dbPassword = "";
-$dBName ="projectdb2";
+$dBName ="ProjectDB2";
 
 $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
 if(!$conn){
     header("Location: ../index.html?error=mysqlerror_connection");
     die("connection failed ".mysqli_connect_error());
+    exit();
 }
 
     //$username = $_POST [''];
@@ -40,7 +41,7 @@ if(!$conn){
             header("Location: ../sighnup.php?error=passwordcheck&email=" .$email);
             exit();
         }else{
-            $sql = "SELECT * FROM `patient` WHERE email = ?";
+            $sql = "SELECT * FROM patient WHERE email = ?";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt, $sql)){
                 header("Location: ../sighnup.php?error=selesctemailerror" .$email);
@@ -53,38 +54,39 @@ if(!$conn){
                 if($resultCheck > 0) {
                     header("Location: ../sighnup.php?error=userExists");
                     exit();
-            }else{
-                $sql = "INSERT INTO patient (email, userPass, first_name, second_name, birth, address1,address2, city,county,post_code) 
-                VALUES (?,?,?,?,?,?,?,?,?,?)";
-                $stmt = mysqli_stmt_init($conn);
-                if(!mysqli_stmt_prepare($stmt, $sql)){
-                    header("Location: ../sighnup.php?error=connectionerrorinsert&email=" .$email);
+                }else{
+                $sql2 = "INSERT INTO `Patient` (`email`, `userPass`, `first_name`, `second_name`,`birth`, `address1`,`address2`, `city`,`county`,`post_code`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                $stmt2 = mysqli_stmt_init($conn);
+                if(!mysqli_stmt_prepare($stmt2, $sql2)){
+                    header("Location: ../sighnup.php?error=sqlerrorinsert&email=" .$email);
                     exit();
                 }else{
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt,"ssssssssss",$email, $hashedPwd,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
-                    mysqli_stmt_execute($stmt);    
+                    mysqli_stmt_bind_param($stmt2,"ssssssssss",$email, $hashedPwd,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
+                    mysqli_stmt_execute($stmt2);    
+           
+                    
                     //signup suuccesful
 
-                    $sql = "SELECT * FROM `patient` WHERE email = ?";
+                    $sql = "SELECT * FROM patient WHERE email = ?";
                     $stmt = mysqli_stmt_init($conn);
                     if(!mysqli_stmt_prepare($stmt, $sql)){
                         header("Location: ../sighnup.php?error=selesctemailerror" .$email);
                         exit();
                     }else{
-                    mysqli_stmt_bind_param($stmt,"s",$email);
-                    mysqli_stmt_execute($stmt);    
-                    //mysqli_stmt_store_result($stmt); 
-                    $result = mysqli_stmt_get_result($stmt);
-                    if($row = mysqli_fetch_assoc($result)){
-                        session_start();
-                        $_SESSION["ID"] = $row['patient_ID'];
-                        $_SESSION["fNmae"] = $row['first_name'];
-                        $_SESSION["sName"] = $row ['second_name'];    
-                    }else{
-                        header("Location: ../sighnup.php?error=sessionsCreate" .$email);
-                        exit();
-                    }
+                        mysqli_stmt_bind_param($stmt,"s",$email);
+                        mysqli_stmt_execute($stmt);    
+                        //mysqli_stmt_store_result($stmt); 
+                        $result = mysqli_stmt_get_result($stmt);
+                        if($row = mysqli_fetch_assoc($result)){
+                            session_start();
+                            $_SESSION["ID"] = $row['patient_ID'];
+                            $_SESSION["fNmae"] = $row['first_name'];
+                            $_SESSION["sName"] = $row ['second_name'];    
+                        }else{
+                            header("Location: ../sighnup.php?error=sessionsCreate" .$email);
+                            exit();
+                        }
                     header("Location: ../interview.html" );
                     }
                     
