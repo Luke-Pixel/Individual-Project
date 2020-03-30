@@ -1,3 +1,31 @@
+<?php
+session_start();
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM screening WHERE `patient_ID` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = 1;
+    mysqli_stmt_bind_param($stmt,"i", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -14,41 +42,53 @@
         $( "#datepicker" ).datepicker();
         } );
     </script>
+    <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+          <ul>
+              <li><a href="home.html">Home</a></li>
+              <li><a href="viewscreenings.html">View STI Screenings</a></li>
+              <li><a href="viewhpv.html">View HPV Vacination</a></li>
+              <li><a href="viewhep.html">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
+              <li><a href="resources.php">Resources & Activities</a></li>
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
 </head>
 <body>
 
         <form action="includes/interview.php" method="post" class="sighnup-form">
             <h1>Results</h1> <br>
             <?php
-              require 'dbcon.php';
-              $sql = 'SELECT * from HPV ';
-                $result = mysqli_query($conn,$sql);
-                $resultCheck = mysqli_num_rows($result);
-                if ($resultCheck > 0){
-                  //test found 
-                  
-                }
+             
               
           
             ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
             <hr>
             <br>
-            <h4>TST#1</h4>
+            <h4>TST#<?php echo $row['screening_ID'] ?></h4>
             <br>          
-             Date: 01/09/2019 <br>
-             <h3>Chlamydia: </h3>
-             <h5>Gonnorea: </h5>
-             <h4>Syphilis: </h4>
-             <h4>HIV: 2</h4>
-             
+             Date: <?php echo $row['date_tested'] ?> <br>
+             <h4>Chlamydia: <?php echo $row['Chlamydia'] ?> </h4>
+             <h4>Gonnorea: <?php echo $row['Gonnorhea'] ?> </h4>
+             <h4>Syphilis: <?php echo $row['Syphilis'] ?> </h4>
+             <h4>HIV: <?php echo $row['HIV'] ?></h4>
+             <br>
+      <?php endwhile; ?>
               
                       
-            <br>
-            <br>
+            
             <hr>            
-            <button type="submit" name = "next" class="next_btn">View</button><br><br>
-            Have an account? <a href="#">Log in</a>
-          </div>
+           
     
     
         </form>
@@ -64,6 +104,20 @@
         });
     
         </script>
+
+<script>
+        
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    
+    </script>
     
     
     </body>

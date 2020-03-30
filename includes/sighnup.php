@@ -55,14 +55,16 @@ if(!$conn){
                     header("Location: ../sighnup.php?error=userExists");
                     exit();
                 }else{
-                $sql2 = "INSERT INTO `Patient` (`email`, `userPass`, `first_name`, `second_name`,`birth`, `address1`,`address2`, `city`,`county`,`post_code`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                $sql2 = "INSERT INTO `Patient` (`email`, `userPass`, 
+                `first_name`, `second_name`,`birth`, `address1`,
+                `address2`, `city`,`county`,`post_code`) VALUES (?,?,?,?,?,?,?,?,?,?)";
                 $stmt2 = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt2, $sql2)){
                     header("Location: ../sighnup.php?error=sqlerrorinsert&email=" .$email);
                     exit();
                 }else{
-                    $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt2,"ssssssssss",$email, $hashedPwd,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
+                    $hashedPwd = password_hash($password2, PASSWORD_DEFAULT);
+                    mysqli_stmt_bind_param($stmt2,"ssssssssss",$email, $password2,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
                     mysqli_stmt_execute($stmt2);    
            
                     
@@ -82,12 +84,36 @@ if(!$conn){
                             session_start();
                             $_SESSION["ID"] = $row['patient_ID'];
                             $_SESSION["fNmae"] = $row['first_name'];
-                            $_SESSION["sName"] = $row ['second_name'];    
+                            $_SESSION["sName"] = $row ['second_name']; 
+                           
+                            $sql = "INSERT INTO `hep` (`patient_ID`,`severity`,`dose1`,`dose2`,`dose3`,`next_dose`) VALUES  (?,?,?,?,?,?)";
+                            $stmt = mysqli_stmt_init($conn);  
+                            if(!mysqli_stmt_prepare($stmt,$sql)){
+                                header("Location: ../sighnup.php?error=hepCreate" .$email);
+                                exit();
+                            }else{
+                                $empty = "";
+                                $priority = 2;
+                                mysqli_stmt_bind_param($stmt,"iissss",$_SESSION['ID'],$priority, 
+                                $empty, $empty, $empty, $empty);
+                                mysqli_stmt_execute($stmt);
+
+                                $sql3 = "INSERT INTO `HPV` (`patient_ID`,`severity`,`dose1`,`dose2`,`dose3`,`next_dose`) VALUES  (?,?,?,?,?,?)";
+                                $stmt3 = mysqli_stmt_init($conn);
+                                if(!mysqli_stmt_prepare($stmt3,$sql3)){
+                                    header("Location: ../sighnup.php?error=hpvCreate" .$email);
+                                    exit();
+                                }else{
+                                    mysqli_stmt_bind_param($stmt,"iissss",$_SESSION['ID'],$priority, 
+                                    $empty, $empty, $empty, $empty);
+                                    mysqli_stmt_execute($stmt);
+                                }
+                            } 
                         }else{
                             header("Location: ../sighnup.php?error=sessionsCreate" .$email);
                             exit();
                         }
-                    header("Location: ../interview.html" );
+                    header("Location: ../interview.php" );
                     }
                     
                 }

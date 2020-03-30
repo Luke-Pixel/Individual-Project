@@ -1,6 +1,22 @@
 <?php
+
+session_start();
+
 if (isset($_POST['submit_screening'])){
-     //require 'dbcon.php';
+     
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+
+}
 
     $chl;
     $gon;
@@ -9,11 +25,11 @@ if (isset($_POST['submit_screening'])){
     $tstDate;
     
     //check selection for chlym
-    if(isset($_POST['Chlamydia']) == 'chlamydia_na'){
+    if($_POST['Chlamydia'] == 'chlamydia_na'){
         $chl  = 'Not Applicable';
-    }else if(isset($_POST['Chlamydia']) == 'chlamydia_yes'){
+    }else if($_POST['Chlamydia'] == 'chlamydia_yes'){
         $chl = 'Positive';
-    }else if(isset($_POST['Chlamydia']) == 'chlamydia_no'){
+    }else if($_POST['Chlamydia'] == 'chlamydia_no'){
         $chl = 'Negative';
     }else{
         //send back to page with uncheck fields 
@@ -22,11 +38,11 @@ if (isset($_POST['submit_screening'])){
     }
 
     //check selection for gon
-    if(isset($_POST['Gonorrhea']) == 'gonorrhea_na'){
+    if($_POST['Gonorrhea'] == 'gonorrhea_na'){
         $gon = 'Not Applicable';
-    }else if(isset($_POST['Gonorrhea']) == 'gonorrhea_yes'){
+    }else if($_POST['Gonorrhea'] == 'gonorrhea_yes'){
         $gon = 'Positive';
-    }else if(isset($_POST['Gonorrhea']) == 'gonorrhea_no'){
+    }else if($_POST['Gonorrhea'] == 'gonorrhea_no'){
         $gon = 'Negative';
     }else{
         //send back to page with uncheck fields 
@@ -35,11 +51,11 @@ if (isset($_POST['submit_screening'])){
     }
 
     //check selection for gon
-    if(isset($_POST['Syphilis']) == 'syphilis_na'){
+    if($_POST['Syphilis'] == 'syphilis_na'){
         $syph = 'Not Applicable';
-    }else if(isset($_POST['Syphilis']) == 'syphilis_yes'){
+    }else if($_POST['Syphilis'] == 'syphilis_yes'){
         $syph = 'Positive';
-    }else if(isset($_POST['Syphilis']) == 'syphilis_na'){
+    }else if($_POST['Syphilis'] == 'syphilis_no'){
         $syph = 'Negative';
     }else{
         //send back to page with uncheck fields 
@@ -48,11 +64,11 @@ if (isset($_POST['submit_screening'])){
     }
 
     //check selection for gon
-    if(isset($_POST['HIV']) == 'hiv_na'){
+    if($_POST['HIV'] == 'hiv_na'){
         $hiv = 'Not Applicable';
-    }else if(isset($_POST['HIV']) == 'hiv_yes'){
+    }else if($_POST['HIV'] == 'hiv_yes'){
         $hiv = 'Positive';
-    }else if(isset($_POST['hiv_no']) == 'hiv_no'){
+    }else if($_POST['HIV'] == 'hiv_no'){
         $hiv= 'Negative';
     }else{
         //send back to page with uncheck fields 
@@ -63,6 +79,34 @@ if (isset($_POST['submit_screening'])){
     if($_POST['date'] == ''){
         header("Location: ../newscreening.html?error=nodate");
         exit();
+    }else{
+        $tstDate = $_POST['date'];
+    }
+
+    $sql = 'UPDATE screening SET latest_test = ? WHERE Patient_ID = ?';
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../newscreening.html?error=sqlerrorupdate");
+        exit();
+    }else{
+        $latest = 0;
+        $patient = 1;
+        mysqli_stmt_bind_param($stmt,'ii',$latest,$_SESSION['ID']);
+        mysqli_stmt_execute($stmt);
+    }
+
+    $sql = 'INSERT INTO screening VALUES (null,?,?,?,?,?,?,?)';
+    $stmt2 = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt2,$sql)){
+        header("Location: ../newscreening.html?error=sqlerrorinsert");
+        exit();
+    }else{
+        $latest = 1;
+        $patient = 1;
+        mysqli_stmt_bind_param($stmt2,'isissss',$_SESSION['ID'],
+        $tstDate,$latest,$gon,$chl,$syph,$hiv);
+        mysqli_stmt_execute($stmt2);
+        header("Location: ../home.php");
     }
 
 

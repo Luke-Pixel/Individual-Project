@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST["submit_questions"])){
-   
+    session_start();
     $servername = "localhost";
     $dBUseraneme = "root";
     $dbPassword = "";
@@ -13,73 +13,73 @@ if (isset($_POST["submit_questions"])){
         die("connection failed ".mysqli_connect_error());
     }
 
-    session_start();
+    
     //$username = $_POST [''];
-    $mental = isset($_POST['mental_health_yes']);
-    $pout = isset($_POST['out_yes']);
-    $cutdrink = isset($_POST['cutdrink_yes']);
-    $annoying = isset($_POST['annoying_yes']);
-    $feltbad = isset($_POST['feltbad_yes']);
-    $drinkmorn = isset($_POST['drinkmorn_yes']);
-    $clubdrug = isset($_POST['clubdrug_yes']);
-    $excercise = isset($_POST['excercise_yes']);
-    $smoke = isset($_POST['smoke_yes']);
+    $mental;
+    $pout;
+    $cutdrink;
+    $annoying;
+    $feltbad;
+    $drinkmorn;
+    $clubdrug;
+    $excercise;
+    $smoke;
     //$currentDate = date ('Y/m/d');
 
     //$trubl = 1
 
-    if ($mental == "mental_health_yes"){
-        $mental = true;
+    if ($_POST['mental_health_yes'] == "vmental_health_yes"){
+        $mental = 1;
     }else{
-        $mental = false;
+        $mental = 0;
     }
 
-    if ($out == "out_yes"){
-        $out = true;
+    if ($_POST['out_yes'] == "vout_yes"){
+        $out = 1;
     }else{
-        $out = false;
+        $out = 0;
     }
 
-    if ($cutdrink == "cutdrink_yes"){
-        $cutdrink = true;
+    if ($_POST['cutdrink_yes'] == "vcutdrink_yes"){
+        $cutdrink = 1;
     }else{
-        $cutdrink = false;
+        $cutdrink = 0;
     }
 
-    if ($annoying == "annoying_yes"){
-        $annoying = true;
+    if ($_POST['annoying_yes'] == "vannoying_yes"){
+        $annoying = 1;
     }else{
-        $annoying = false;
+        $annoying = 0;
     }
 
-    if ($feltbad == "feltbad_yes"){
-        $feltbad = true;
+    if ($_POST['feltbad_yes'] == "vfeltbad_yes"){
+        $feltbad = 1;
     }else{
-        $feltbad = false;
+        $feltbad = 0;
     }
 
-    if ($drinkmorn == "drinkmorn_yes"){
-        $drinkmorn = true;
+    if ($_POST['drinkmorn_yes'] == "vdrinkmorn_yes"){
+        $drinkmorn = 1;
     }else{
-        $drinkmorn = false;
+        $drinkmorn = 0;
     }
 
-    if ($clubdrug == "clubdrug_yes"){
-        $clubdrug = true;
+    if ($_POST['clubdrug_yes'] == "vclubdrug_yes"){
+        $clubdrug = 1;
     }else{
-        $clubdrug = false;
+        $clubdrug = 0;
     }
 
-    if ($excercise == "excercise_yes"){
-        $excercise = true;
+    if ($_POST['excercise_yes'] == "vexcercise_yes"){
+        $excercise = 1;
     }else{
-        $excercise = false;
+        $excercise = 0;
     }
 
-    if ($smoke == "smoker_yes"){
-        $clubdrug = true;
+    if ($_POST['smoke_yes'] == "vsmoker_yes"){
+        $smoke = 1;
     }else{
-        $clubdrug = false;
+        $smoke = 0;
     }
 
     $sql = "INSERT INTO Interview (patient_ID, happy, p_out,cut_drink,felt_guilty,drink_morning,club_drugs,smoker,excercise,annoyed)
@@ -89,7 +89,7 @@ if (isset($_POST["submit_questions"])){
         header("Location: ../sighnup.php?error=connectionerrorinsert&email=" .$email);
         exit();
     }else{
-        mysqli_stmt_bind_param($stmt,"iiiiiiiiii",$SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
+        mysqli_stmt_bind_param($stmt,"iiiiiiiiii",$_SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
         mysqli_stmt_execute($stmt);
         header("Location: ../home.php");
     }

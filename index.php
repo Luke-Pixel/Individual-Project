@@ -1,4 +1,10 @@
+<?php
+  // remove all session variables
+  session_unset();
 
+  // destroy the session
+  session_destroy();
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -26,7 +32,7 @@
       <button type="submit" name = "login-submit" class="logbtn">Login</button>
 
       <div class="bottom-text">
-        Don't have account? <a href="sighnup.html">Sign up</a>
+        Don't have account? <a href="sighnup.php">Sign up</a>
       </div>
 
     </form>

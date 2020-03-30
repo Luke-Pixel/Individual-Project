@@ -15,15 +15,14 @@
   
   .sighnup-form{
       
-    width: 360px;
+    
     background: #f1f1f1;
-    height: 1300px;
+    
     padding: 50px 40px;
     border-radius: 10px;
-    position: absolute;
-    left: 50%;
-    top: 65%;
-    transform: translate(-50%,-50%);
+    position: relative;
+    
+    /*transform: translate(-50%,-50%);*/
   }
   
   .login-form h1{
@@ -183,8 +182,64 @@
     padding: 0 5px;
     height: 40px;
   }
-  
 
+  aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+    
+    
+}
+
+.Menu_Bar {
+  width: 40px;
+  cursor: pointer;
+}
+  
+.active {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 3;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .8em;
+  display: block;
+  padding: 1.5em 3em;
+  background-color: rgba(255,255,255,.35);
+  color: #000;
+}
+
+
+
+
+nav {
+  background: #fff;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 1.3em;
+  font-weight: bold;
+}
   
   @media only screen and (min-width: 768px) {
     .sighnup-form{
