@@ -11,7 +11,7 @@ if(!$conn){
     die("connection failed ".mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM HPV WHERE dose3 = ?  AND severity = 1 ";
+$sql = "SELECT * FROM HEP WHERE dose3 = ?  AND severity = 2 ";
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
     exit();
@@ -38,7 +38,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         }
         */
         
-        if ($intdif == 14 || $intdif  == -14){
+        if ($intdif == (30*6)){
             require_once "PHP_Mailer/PHPMailerAutoload.php";
 
             ob_start();
@@ -58,33 +58,9 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->subject = 'Test Email';
             $mail->Body = $body;
             //replace with user email
-            $mail->AddAddress('luke1014@live.co.uk');
+            $mail->AddAddress($row['patient_ID']);
 
             $mail->Send();
-        }else if ($intdif == 7 || $intdif  == -7){
-            // send email for 1 week reminder 
-            require_once "PHP_Mailer/PHPMailerAutoload.php";
-
-            ob_start();
-            include 'hpv_reminder.html';
-            $body = ob_get_clean();
-
-            $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->SMTPAuth = true;
-            $mail->SMTPSecure = 'ssl';
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = '465';
-            $mail->isHTML();
-            $mail->Username = 'mshtest99@gmail.com';
-            $mail->Password = 'TryHard123';
-            $mail->SetFrom('mshtest99@gmail.com');
-            $mail->subject = 'Test Email';
-            $mail->Body = $body;
-            //replace with user email
-            $mail->AddAddress('luke1014@live.co.uk');
-
-            $mail->Send();
-        }
+       
     }
 }

@@ -89,7 +89,7 @@ if (isset($_POST["submit_questions"])){
         header("Location: ../sighnup.php?error=connectionerrorinsert&email=" .$email);
         exit();
     }else{
-        mysqli_stmt_bind_param($stmt,"iiiiiiiiii",$_SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
+        mysqli_stmt_bind_param($stmt,"siiiiiiiii",$_SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
         mysqli_stmt_execute($stmt);
         header("Location: ../home.php");
     }

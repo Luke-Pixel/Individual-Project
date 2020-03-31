@@ -55,16 +55,16 @@ if(!$conn){
                     header("Location: ../sighnup.php?error=userExists");
                     exit();
                 }else{
-                $sql2 = "INSERT INTO `Patient` (`email`, `userPass`, 
+                $sql2 = "INSERT INTO `Patient` (`patient_ID` ,`email`, `userPass`, 
                 `first_name`, `second_name`,`birth`, `address1`,
-                `address2`, `city`,`county`,`post_code`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                `address2`, `city`,`county`,`post_code`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
                 $stmt2 = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt2, $sql2)){
                     header("Location: ../sighnup.php?error=sqlerrorinsert&email=" .$email);
                     exit();
                 }else{
                     $hashedPwd = password_hash($password2, PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt2,"ssssssssss",$email, $password2,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
+                    mysqli_stmt_bind_param($stmt2,"sssssssssss",$email, $email, $password2,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
                     mysqli_stmt_execute($stmt2);    
            
                     
@@ -94,19 +94,19 @@ if(!$conn){
                             }else{
                                 $empty = "";
                                 $priority = 2;
-                                mysqli_stmt_bind_param($stmt,"iissss",$_SESSION['ID'],$priority, 
+                                mysqli_stmt_bind_param($stmt,"sissss",$_SESSION['ID'],$priority, 
                                 $empty, $empty, $empty, $empty);
                                 mysqli_stmt_execute($stmt);
 
-                                $sql3 = "INSERT INTO `HPV` (`patient_ID`,`severity`,`dose1`,`dose2`,`dose3`,`next_dose`) VALUES  (?,?,?,?,?,?)";
+                                $sql3 = "INSERT INTO `hpv` (`patient_ID`,`severity`,`dose1`,`dose2`,`dose3`,`next_dose`) VALUES  (?,?,?,?,?,?)";
                                 $stmt3 = mysqli_stmt_init($conn);
                                 if(!mysqli_stmt_prepare($stmt3,$sql3)){
                                     header("Location: ../sighnup.php?error=hpvCreate" .$email);
                                     exit();
                                 }else{
-                                    mysqli_stmt_bind_param($stmt,"iissss",$_SESSION['ID'],$priority, 
+                                    mysqli_stmt_bind_param($stmt3,"sissss",$_SESSION['ID'],$priority, 
                                     $empty, $empty, $empty, $empty);
-                                    mysqli_stmt_execute($stmt);
+                                    mysqli_stmt_execute($stmt3);
                                 }
                             } 
                         }else{
