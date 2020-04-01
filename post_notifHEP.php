@@ -11,7 +11,7 @@ if(!$conn){
     die("connection failed ".mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM HPV WHERE dose3 = ?  AND severity = 1 ";
+$sql = "SELECT * FROM HEP WHERE dose3 = ?  AND severity = 1 ";
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
     exit();
@@ -26,6 +26,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         $current_date = new DateTime();
         $current_date->format('Y-m-d');
         $difference = $current_date->diff($next_date);
+        $month
         $intdif = $difference->format("%a");
         /*
         $sql2 = "UPDATE HPV SET severity = ?  WHERE patient_ID = ? ";
