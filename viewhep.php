@@ -16,13 +16,13 @@ if(!$conn){
 
 }
 
-$sql = 'SELECT * FROM `hpv` WHERE `patient_ID` = ? ';
+$sql = 'SELECT * FROM `hep` WHERE `patient_ID` = ? ';
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
   header("Location: ../sighnup.php?error=passwordcheck&email=" .$email);
   exit();
 }else{
-  mysqli_stmt_bind_param($stmt,'i',$idtest);
+  mysqli_stmt_bind_param($stmt,'s',$_SESSION['ID']);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
   if($row = mysqli_fetch_assoc($result)){
@@ -45,7 +45,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="viewhep.css">
+    <link rel="stylesheet" href="viewhpv.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
@@ -54,10 +54,10 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     <script>
         $( function() {
         $( "#datepicker" ).datepicker({
-          dateFormat: 'yy-mm-dd', 
-          changeMonth: true,
+          dateFormat: 'yy-mm-dd',
+          changeMonth:true,
           changeYear: true
-          });
+        });
         } );
     </script>
     <script>
@@ -70,86 +70,73 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         $( "#datepicker3" ).datepicker();
         } );
     </script>
-    
-    <aside>
+     <aside>
       <figure>
           <div id="avatar"></div>
-          <figcaption>Johnny Doe</figcaption>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
       </figure>
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
           <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">View STI Screenings</a></li>
-              <li><a href="#">View HPV Vacination</a></li>
-              <li><a href="#">View HEP A&B Vaciniation</a></li>
-              <li><a href="#">Order a Test Kit</a></li>
-              <li><a href="#">Find a Clinic</a></li>
-              <li><a href="#">Resources & Activities</a></li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
+              <li><a href="resources.php">Resources & Activities</a></li>
+              <li><a href="profile.html">Profile</a></li>
+              <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
   </aside>
     </head>
 <body>
 
-   
+    
 
     <form class="form1">
-      <h1>Hep A Status</h1>
-
-      
+      <h1>HEP A & B Status</h1>
         <br>
-
-        <h4>Dose 1: </h4>
-        
+        <h4>Dose 1: <?php echo $dose1 ?> </h4> 
         <br>
-        <h4>Dose 2: </h4>
+        <h4>Dose 2: <?php echo $dose2 ?> </h4>
         <br>
-        <h4>Dose 3: </h4>
+        <h4>Dose 3: <?php echo $dose3 ?> </h4>
         <br>
         <hr>
         <br>
-        <h4>Next Dose: </h4>
+        <h4>Next Dose: <?php echo $next_dose ?> </h4>
         <br>
         <hr>
 
         <br>
         <input  type="button" id="button" class="logbtn" value="Edit" onclick="openModal()">
       <br>
-      
+      <script>
+        function openModal() {
+         document.querySelector('.bg-modal').style.display = 'flex';
+         
+         
+        }
+        </script>
      
 
-      <h1>Hep B Status</h1>
-
       
-        <br>
-
-        <h4>Dose 1: </h4>
-        <br>
-        <h4>Dose 2: </h4>
-        <br>
-        <h4>Dose 3: </h4>
-        <br>
-        <hr>
-        <br>
-        <h4>Next Dose: <?php echo $nextdose; ?></h4>
-        <br>
-        <hr>
-        <br>
-        <input type="button"  id="button" class="logbtn" value="Edit" onclick="openModal()">
-        
     </form>
 
     <div class="bg-modal">
         <div class = modal-content>
             <div class="close" onclick="closeModal()">+</div>
-            
+            <script>
+                function closeModal() {
+                 document.querySelector('.bg-modal').style.display = 'none';
+                }
+                </script>
             <form action="includes/addHEP.php" method = "post">
                 <h4>Dose 1: </h4>
                 <div class = "txtb">
-                    <input type="text" id="datepicker" name = "date1">
+                    <input type="text" name = 'date1' id="datepicker">
                     <span data-placeholder="Date Of Birth"></span>
                   </div>
                 <br>
@@ -165,18 +152,9 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                     <span data-placeholder="Date Of Birth"></span>
                   </div>
                 <br>
+                <button type="submit" name = "hpv-submit" class="logbtn">Login</button>
 
-                 <input href='#' type="submit" id="button" class="logbtn" value="Submit" >
-                 <script>
-                    function openModal() {
-                     document.querySelector('.bg-modal').style.display = 'flex';
-                    }
-                </script>
-                <script>
-                    function closeModal() {
-                     document.querySelector('.bg-modal').style.display = 'none';
-                    }
-                </script>
+                 <input  name = 'hpv-submit2' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
             </form>
         </div>
     </div>
@@ -193,6 +171,19 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
     </script>
 
+<script>
+        
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    
+    </script>
 
 </body>
 </html>

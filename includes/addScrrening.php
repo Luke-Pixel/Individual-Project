@@ -103,10 +103,10 @@ if(!$conn){
     }else{
         $latest = 1;
         $patient = 1;
-        mysqli_stmt_bind_param($stmt2,'isissss',$_SESSION['ID'],
+        mysqli_stmt_bind_param($stmt2,'ssissss',$_SESSION['ID'],
         $tstDate,$latest,$gon,$chl,$syph,$hiv);
         mysqli_stmt_execute($stmt2);
-        header("Location: ../home.php");
+        //header("Location: ../home.php");
     }
 
 

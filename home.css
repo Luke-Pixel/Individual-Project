@@ -10,7 +10,7 @@ body {
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
         min-height: 100vh;
-    background-image: linear-gradient(120deg,#3498db,#8e44ad);
+    background-image: linear-gradient(120deg, #0E7FFF, #0E7FFF);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         background-repeat: no-repeat;
         background-attachment: fixed;

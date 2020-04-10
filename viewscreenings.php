@@ -19,7 +19,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     exit();
 }else{
     $sports = 1;
-    mysqli_stmt_bind_param($stmt,"i", $sports);
+    mysqli_stmt_bind_param($stmt,"s", $_SESSION['ID']);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     

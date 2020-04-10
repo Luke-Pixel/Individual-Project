@@ -14,6 +14,29 @@
         $( "#datepicker" ).datepicker();
         } );
     </script>
+
+<aside>
+        <figure>
+            <div id="avatar"></div>
+            <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+        </figure>
+        <img src="images/menu.svg" class = "Menu_Bar">
+        <nav>
+            <ul>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="viewscreenings.php">View STI Screenings</a></li>
+                <li><a href="newscreening.html">Add Screening Results</a></li>
+                <li><a href="viewhpv.php">View HPV Vacination</a></li>
+                <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+                <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
+                <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
+                <li><a href="resources.php">Resources & Activities</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="index.php">Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+    
 </head>
 <body>
 
@@ -23,7 +46,7 @@
             <br>
             
             <h4>Chlamydia</h4> <br>
-            <fieldset id = "group1">
+            
             <label class = "container">Positive 
                 <input type="radio" 
                 name="Chlamydia" 
@@ -44,11 +67,11 @@
                 value="chlamydia_na" > 
                 <span class = "checkmark"></span><br> 
             </label>
-        </fieldset>
+            <br>
             <hr>
             <br>
             <h4>Gonorrhea</h4> <br>
-            <fieldset id = "group2">
+            
             <label class = "container">Positive 
                 <input type="radio" 
                 name="Gonorrhea" 
@@ -69,7 +92,7 @@
                 value="gonorrhea_na" > 
                 <span class = "checkmark"></span>
             </label>
-        </fieldset>
+        
             <br> 
             <hr>
             <br>
@@ -147,6 +170,19 @@
     
         </script>
     
+    <script>
+        
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    
+    </script>
     
     </body>
     </html>

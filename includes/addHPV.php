@@ -90,7 +90,7 @@ if (isset($_POST['hpv-submit'])){
                             exit();
                         }else{
                             $na = "Not Applicable";
-                            mysqli_stmt_bind_param($stmt,"ssi",$dateEntered,$nextDate,$_SESSION['ID']);
+                            mysqli_stmt_bind_param($stmt,"ssi",$dateString,$na,$_SESSION['ID']);
                             mysqli_stmt_execute($stmt);
                         }
                     }

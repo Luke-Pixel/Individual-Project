@@ -14,21 +14,66 @@
   }
   
   .screening-form{
-    width: 360px;
+    
     background: #f1f1f1;
     
     padding: 50px 40px;
     border-radius: 10px;
-    position: absolute;
-    left: 50%;
-    top: 65%;
-    transform: translate(-50%,-50%);
+    position: relative;
+   
+    
+   
   }
   
   .login-form h1{
     text-align: center;
     margin-bottom: 60px;
   }
+
+  aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+}
+
+.Menu_Bar {
+    width: 40px;
+    cursor: pointer;
+}
+
+
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+nav {
+  background: #fff;
+}
+
+.active {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
   
   .txtb{
     border-bottom: 2px solid #adadad;
@@ -58,6 +103,29 @@
     transition: .5s;
   }
   
+  nav {
+    background: #fff;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 3;
+}
+
+ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .8em;
+  display: block;
+  padding: 1.5em 3em;
+  background-color: rgba(255,255,255,.35);
+  color: #000;
+
+}
+
   .txtb span::after{
     content: '';
     position: absolute;

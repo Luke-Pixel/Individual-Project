@@ -3,7 +3,7 @@
   session_unset();
 
   // destroy the session
-  session_destroy();
+  $_SESSION = array();
 ?>
 
 <!DOCTYPE html>

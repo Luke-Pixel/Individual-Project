@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['hep-submit'])){
+if (isset($_POST['hpv-submit'])){
     $servername = "localhost";
     $dBUseraneme = "root";
     $dbPassword = "";
@@ -42,7 +42,7 @@ if (isset($_POST['hep-submit'])){
                         header("Location: ../viewhpv.php?error=update_dose1");
                         exit();
                     }else{
-                        mysqli_stmt_bind_param($stmt,"ssi",$dateString,$nextDateString,$_SESSION['ID']);
+                        mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
                         mysqli_stmt_execute($stmt);
                     }
 
@@ -65,7 +65,7 @@ if (isset($_POST['hep-submit'])){
                             header("Location: ../viewhpv.php?error=update_dose2");
                             exit();
                         }else{
-                            mysqli_stmt_bind_param($stmt,"ssi",$dateString,$nextDateString,$_SESSION['ID']);
+                            mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
                             mysqli_stmt_execute($stmt);
                         }
                     }
@@ -90,7 +90,7 @@ if (isset($_POST['hep-submit'])){
                             exit();
                         }else{
                             $na = "Not Applicable";
-                            mysqli_stmt_bind_param($stmt,"ssi",$dateEntered,$nextDate,$_SESSION['ID']);
+                            mysqli_stmt_bind_param($stmt,"sss",$dateString,$na,$_SESSION['ID']);
                             mysqli_stmt_execute($stmt);
                         }
                     }
