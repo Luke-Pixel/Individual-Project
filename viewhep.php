@@ -45,6 +45,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="viewhpv.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -96,7 +97,18 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     
 
     <form class="form1">
-      <h1>HEP A & B Status</h1>
+     
+      <h1>Hepatitus A and B Imunisation</h1>
+      <br>
+      <p> Twinrix is used to help 
+        prevent infection from the hepatitis A and B viruses. 
+        Hepatitis A infection can be mild with no symptoms or a severe 
+        illness that can rarely cause liver failure and death. Hepatitis B 
+        infection can cause serious problems including liver failure, persistent 
+        hepatitis B infection, cirrhosis, and liver cancer. Preventing infection with 
+        these viruses can prevent these problems.</p>
+        <br>
+        <p>The vaccine's available from sexual health and HIV clinics.</p>
         <br>
         <h4>Dose 1: <?php echo $dose1 ?> </h4> 
         <br>
@@ -134,26 +146,14 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 }
                 </script>
             <form action="includes/addHEP.php" method = "post">
-                <h4>Dose 1: </h4>
+                <h4>Date Recieved </h4>
                 <div class = "txtb">
                     <input type="text" name = 'date1' id="datepicker">
                     <span data-placeholder="Date Of Birth"></span>
                   </div>
+               
                 <br>
-                <h4>Dose 2: </h4>
-                <div class = "txtb">
-                    <input type="text" id="datepicker2">
-                    <span data-placeholder="Date Of Birth"></span>
-                  </div>
-                <br>
-                <h4>Dose 3: </h4>
-                <div class = "txtb">
-                    <input type="text" id="datepicker3">
-                    <span data-placeholder="Date Of Birth"></span>
-                  </div>
-                <br>
-                <button type="submit" name = "hpv-submit" class="logbtn">Login</button>
-
+                
                  <input  name = 'hpv-submit2' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
             </form>
         </div>

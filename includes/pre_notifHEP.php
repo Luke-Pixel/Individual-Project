@@ -85,6 +85,19 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->AddAddress($row['patient_ID']);
 
             $mail->Send();
+        }else if ($intdif > 14){
+
+            $sql = "UPDATE HEP SET severity = ?  WHERE patient_ID = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                header('Location: ../notification_test.html?error=mysqlerror_connection');
+                exit();
+            }else{
+                $ID = $row['patient_ID']; 
+                $sev = 2;
+                mysqli_stmt_bind_param($stmt,'is', $sev, $ID);
+                mysqli_stmt_execute($stmt);
+            }
         }
     }
 }

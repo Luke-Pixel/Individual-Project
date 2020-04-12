@@ -4,13 +4,14 @@ body, html {
     height: calc(100% - 2em);
     margin: 0;
     font-family: 'Montserrat';
+    background-color: white;
 }
 
 body {
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
         min-height: 100vh;
-    background-image: linear-gradient(120deg, #0E7FFF, #0E7FFF);
+        background-color: #EB3A70;
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -105,7 +106,7 @@ p {
 .cta {
     display: block;
     color: #fff;
-    background: #0E7FFF;
+    background-color: #EF0D50;
     text-decoration: none;
     padding: 8px 50px;
     font-size: 1.2em;
@@ -166,6 +167,9 @@ p {
     outline: none;
     cursor: pointer;
     transition: .5s;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 4px;
     
   }
 

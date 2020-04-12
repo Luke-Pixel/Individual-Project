@@ -32,6 +32,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="viewscreenings.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
@@ -65,7 +66,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 </head>
 <body>
 
-        <form action="includes/interview.php" method="post" class="sighnup-form">
+        <form action="includes/interview.php" method="post" class="project-form">
             <h1>Results</h1> <br>
             <?php
              

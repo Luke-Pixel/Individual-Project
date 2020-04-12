@@ -23,8 +23,10 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     while($row = mysqli_fetch_assoc($result)){
         $next_date_string = $row['next_dose'];
         $next_date = new DateTime ($next_date_string);
+        $next_date->modify('+3month');
         $current_date = new DateTime();
         $current_date->format('Y-m-d');
+        
         $difference = $current_date->diff($next_date);
         $intdif = $difference->format("%a");
         /*
@@ -38,7 +40,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         }
         */
         
-        if ($intdif == (30*6)){
+        if ($intdif == 0){
             require_once "PHP_Mailer/PHPMailerAutoload.php";
 
             ob_start();
@@ -62,5 +64,6 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
             $mail->Send();
        
+    }
     }
 }

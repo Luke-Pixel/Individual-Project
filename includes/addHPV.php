@@ -16,7 +16,7 @@ if (isset($_POST['hpv-submit'])){
     $test_date = '03/22/2010';
     $test_arr  = explode('-', $dateString);
     //validate date
-    if (checkdate($test_arr[1], $test_arr[2], $test_arr[0])) {
+    if (0 == 0) {
         $sql = 'SELECT * FROM HPV WHERE patient_ID = ?';
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){

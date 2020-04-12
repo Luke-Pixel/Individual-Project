@@ -1,21 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
-body, html {
-    height: calc(100% - 2em);
-    margin: 0;
-    font-family: 'Montserrat';
-}
-
-body {
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
-        min-height: 100vh;
-    background-image: linear-gradient(120deg,#3498db,#8e44ad);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    /*background: white;*/
-}
 
 
 
@@ -104,18 +88,6 @@ p {
     line-height: 1.5em;
 }
 
-.cta {
-    display: block;
-    color: #fff;
-    background: #0E7FFF;
-    text-decoration: none;
-    padding: 8px 50px;
-    font-size: 1.2em;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 4px;
-    margin: 2em 0;
-}
 
 .bg-modal{
     display: none;
@@ -153,9 +125,7 @@ p {
         padding: 80px 40px;
         border-radius: 10px;
         position: relative;
-        left: 50%;
-        top: 45%;
-        transform: translate(-50%,-50%);
+        margin: auto;
     
   }
 
@@ -214,50 +184,6 @@ p {
     transition: .5s;
   }
 
-  a {
-    color: red;
-    font-family: helvetica;
-    text-decoration: none;
-    text-transform: uppercase;
-    
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  a:active {
-    color: black;
-  }
-  
-  a:visited {
-    color: purple;
-  }
-
-  .accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-  }
-  
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .active, .accordion:hover {
-    background-color: #ccc;
-  }
-  
-  /* Style the accordion panel. Note: hidden by default */
-  .panel {
-    padding: 0 18px;
-    background-color: white;
-    display: none;
-    overflow: hidden;
-  }
 
 @media only screen and (min-width: 768px) {
 

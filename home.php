@@ -12,82 +12,7 @@ if(!$conn){
     //header("Location: ../index.php?error=mysqlerror_connection");
     die("connection failed ".mysqli_connect_error());
 }
-/*
-$sql = 'SELECT * FROM screening WHERE patient_ID = ? AND latest = ? ';
-$stmt = mysqli_stmt_init($conn);
-if(!mysqli_stmt_prepare($stmt, $sql)){
-  //header("Location: ../index.php?error=mysqlerror_connection");
-  exit();
-}else {
-  $latest = 1;
-  mysqli_stmt_bind_param($stmt,"ii", $_SESSION['ID'], $latest);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  if($row = mysqli_stmt_get_result($stmt)){
-    $chl = $row['chlamydia'];
-    $gon = $row['gonnorea'];
-    $syph = $row['syphilis'];
-    $hiv = $row['hiv'];
-  }else{
-    $chl = "";
-    $gon = "";
-    $syph = "";
-    $hiv = "";
-  }
-}
 
-
-
-$sql = 'SELECT * FROM hep WHERE patient_ID = ?';
-$stmt = mysqli_stmt_init($conn);
-if(!mysqli_stmt_prepare($stmt, $sql)){
-  //header("Location: ../index.php?error=mysqlerror_connection");
-  exit();
-}else {
-  $latest = 1;
-  mysqli_stmt_bind_param($stmt,"i", $_SESSION['ID']);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  if($row = mysqli_stmt_get_result($stmt)){
-    $dose1 = $row['dose1'];
-    $dose2 = $row['dose2'];
-    $dose3 = $row['dose3'];
-    $dose4 = $row['next_dose'];
-    $hep_label = "Add Details";
-  }else{
-    $hep_dose1 = "";
-    $hep_dose2 = "";
-    $hep_dose3 = "";
-    $hep_dose4 = "";
-    $hep_label = "Update Details";
-  }
-}
-   
-$sql = 'SELECT * FROM hpv WHERE patient_ID = ?';
-$stmt = mysqli_stmt_init($conn);
-if(!mysqli_stmt_prepare($stmt, $sql)){
-  //header("Location: ../index.php?error=mysqlerror_connection");
-  exit();
-}else {
-  $latest = 1;
-  mysqli_stmt_bind_param($stmt,"i", $_SESSION['ID']);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  if($row = mysqli_stmt_get_result($stmt)){
-    $hpv_dose1 = $row['dose1'];
-    $hpv_dose2 = $row['dose2'];
-    $hpv_dose3 = $row['dose3'];
-    $hpv_dose4 = $row['next_dose'];
-    $hpv_label = "Add Details";
-  }else{
-    $hpv_dose1 = "";
-    $hpv_dose2 = "";
-    $hpv_dose3 = "";
-    $hpv_dose4 = "";
-    $hpv_label = "Update Details";
-  }
-}
-*/
 ?>
 
 
@@ -109,13 +34,12 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
           <ul>
               <li><a href="home.php">Home</a></li>
               <li><a href="viewscreenings.php">View STI Screenings</a></li>
-              <li><a href="newscreening.html">Add Screening Results</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
               <li><a href="viewhpv.php">View HPV Vacination</a></li>
               <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
               <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
               <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
               <li><a href="resources.php">Resources & Activities</a></li>
-              <li><a href="profile.html">Profile</a></li>
               <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
@@ -167,7 +91,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
             <h4>Gonnorea: <?php echo $row['Gonnorhea'];?> </h4>
             <h4>Syphilis: <?php echo $row['Syphilis'];?> </h4>
             <h4>HIV: <?php echo $row['HIV'];?></h4>
-              <a href="newscreening.html"  class="cta">Add STI Screening results</a>
+              <a href="newscreening.php"  class="cta">Add STI Screening results</a>
               <a href="viewscreenings.php"  class="cta">View More History</a>
           </main>
       </form>
@@ -400,7 +324,6 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                   e.preventDefault();
               });
           })();
-      
       </script>
         </body> 
         <footer>

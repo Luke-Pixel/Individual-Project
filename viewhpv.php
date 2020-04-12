@@ -45,6 +45,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="viewhpv.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -96,8 +97,19 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     
 
     <form class="form1">
-      <h1>HPV Status</h1>
+      <h1>HPV Imunisation</h1>
         <br>
+        <p>The human papillomavirus (HPV) vaccine 
+          is available for men who have 
+          sex with men (MSM) up to and including 45 years of age.</p>
+        <br>
+        <p>The vaccine will help prevent HPV infection, which can 
+          ause genital warts and certain types of cancer. It’s especially 
+          important for those who are living with HIV, and those who've more 
+          than one sexual partner.</p>
+          <br>
+      <p>The vaccine's available from sexual health and HIV clinics.</p>
+      <br>
         <h4>Dose 1: <?php echo $dose1 ?> </h4> 
         <br>
         <h4>Dose 2: <?php echo $dose2 ?> </h4>
@@ -134,25 +146,13 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 }
                 </script>
             <form action="includes/addHPV.php" method = "post">
-                <h4>Dose 1: </h4>
+                <h4>Date Recieved</h4>
                 <div class = "txtb">
                     <input type="text" name = 'date1' id="datepicker">
                     <span data-placeholder="Date Of Birth"></span>
                   </div>
                 <br>
-                <h4>Dose 2: </h4>
-                <div class = "txtb">
-                    <input type="text" id="datepicker2">
-                    <span data-placeholder="Date Of Birth"></span>
-                  </div>
-                <br>
-                <h4>Dose 3: </h4>
-                <div class = "txtb">
-                    <input type="text" id="datepicker3">
-                    <span data-placeholder="Date Of Birth"></span>
-                  </div>
-                <br>
-                <button type="submit" name = "hpv-submit" class="logbtn">Login</button>
+                
 
                  <input  name = 'hpv-submit2' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
             </form>

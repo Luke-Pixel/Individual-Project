@@ -1,9 +1,11 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="newscreening.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
@@ -151,7 +153,7 @@
             <p name = "date_pick">Date of test: <input type="text" id="datepicker" name = "date"></p>
             </div>
             
-            <button type="submit" name = "submit_screening" class="next_btn">Submit</button><br><br>
+            <button type="submit" name = "submit_screening" class="logbtn">Submit</button><br><br>
            
           </div>
     
