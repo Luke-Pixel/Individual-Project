@@ -76,7 +76,7 @@ if (isset($_POST["submit_questions"])){
         $excercise = 0;
     }
 
-    if ($_POST['smoke_yes'] == "vsmoker_yes"){
+    if ($_POST['smoker_yes'] == "vsmoker_yes"){
         $smoke = 1;
     }else{
         $smoke = 0;

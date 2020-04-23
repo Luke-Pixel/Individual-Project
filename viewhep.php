@@ -154,7 +154,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                
                 <br>
                 
-                 <input  name = 'hpv-submit2' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
+                 <input  name = 'hep-submit' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
             </form>
         </div>
     </div>

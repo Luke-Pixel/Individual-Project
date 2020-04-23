@@ -50,14 +50,29 @@ if(!$conn){
 
   <form class="project-form"> 
     <h1>Resources For Gay Men In London</h1>
-    <a href="H_Sport.php" target="_blank" class="cta">Sports</a>
-    <a href="H_Activities.php" target="_blank" class="cta">Activities</a>
-    <a href="H_Social.php" target="_blank" class="cta">Social & Dating</a>
-    <a href="H_Support.php" target="_blank" class="cta">Personal Development</a>
-    <a href="H_Spirituality.php" target="_blank" class="cta">Spirituality</a>
-    <a href="H_Support.php" target="_blank" class="cta">Support</a>
-    <a href="H_Addiction.php" target="_blank" class="cta">Addiction</a>
-    <a href="H_Reading.php" target="_blank" class="cta">Reading</a>
+    <br>
+   
+            <p>The majority of these resources 
+                are specifically addressed to the 
+                gay man, although some of them can also 
+                be an alternative to other members the 
+                community. I want to emphasise that the 
+                purpose of this list is to provide the 
+                biggest possible support, specifically, 
+                for a gay man, particularly vulnerable 
+                to isolation, and victim in many cases of 
+                rejection and homophobia from a very young age.</p>
+  <br>
+                <p>Ignacio Labayen de Inza - April 2019</p> 
+<br>
+    <a href="H_Sport.php"  class="cta">Sports</a>
+    <a href="H_Activities.php" class="cta">Activities</a>
+    <a href="H_Social.php"  class="cta">Social & Dating</a>
+    <a href="H_Personal.php"  class="cta">Personal Development</a>
+    <a href="H_Spiritual.php"  class="cta">Spirituality</a>
+    <a href="H_Support.php"  class="cta">Support</a>
+    <a href="H_Addiction.php"  class="cta">Addiction</a>
+    <a href="H_Reading.php" class="cta">Reading</a>
   </form>
     
            

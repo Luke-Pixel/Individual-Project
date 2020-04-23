@@ -1,10 +1,10 @@
 <?php
+session_start();
 if (isset($_POST['hpv-submit'])){
     $servername = "localhost";
     $dBUseraneme = "root";
     $dbPassword = "";
-    $dBName ="projectdb2";
-    session_start();
+    $dBName ="projectdb2"; 
     $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
     if(!$conn){
@@ -16,6 +16,7 @@ if (isset($_POST['hpv-submit'])){
     $test_date = '03/22/2010';
     $test_arr  = explode('-', $dateString);
     //validate date
+    
     if (0 == 0) {
         $sql = 'SELECT * FROM HPV WHERE patient_ID = ?';
         $stmt = mysqli_stmt_init($conn);
@@ -23,7 +24,7 @@ if (isset($_POST['hpv-submit'])){
             header("Location: ../viewhpv.php?error=selecctHPV");
             exit();
         }else{
-            mysqli_stmt_bind_param($stmt,"i",$_SESSION['ID']);
+            mysqli_stmt_bind_param($stmt,"s",$_SESSION['ID']);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             if($row = mysqli_fetch_assoc($result)){
@@ -42,8 +43,9 @@ if (isset($_POST['hpv-submit'])){
                         header("Location: ../viewhpv.php?error=update_dose1");
                         exit();
                     }else{
-                        mysqli_stmt_bind_param($stmt,"ssi",$dateString,$nextDateString,$_SESSION['ID']);
+                        mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
                         mysqli_stmt_execute($stmt);
+                        header("Location: ../viewhpv.php?error=setdose1");
                     }
 
                 }else if ($dose2 == ""){
@@ -65,7 +67,7 @@ if (isset($_POST['hpv-submit'])){
                             header("Location: ../viewhpv.php?error=update_dose2");
                             exit();
                         }else{
-                            mysqli_stmt_bind_param($stmt,"ssi",$dateString,$nextDateString,$_SESSION['ID']);
+                            mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
                             mysqli_stmt_execute($stmt);
                         }
                     }
@@ -90,7 +92,7 @@ if (isset($_POST['hpv-submit'])){
                             exit();
                         }else{
                             $na = "Not Applicable";
-                            mysqli_stmt_bind_param($stmt,"ssi",$dateString,$na,$_SESSION['ID']);
+                            mysqli_stmt_bind_param($stmt,"sss",$dateString,$na,$_SESSION['ID']);
                             mysqli_stmt_execute($stmt);
                         }
                     }

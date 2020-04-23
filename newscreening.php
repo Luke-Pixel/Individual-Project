@@ -150,7 +150,7 @@
 
 
             <div class = txtb>
-            <p name = "date_pick">Date of test: <input type="text" id="datepicker" name = "date"></p>
+            <p name = "date_pick">Date of test: <input type="text" id="datepicker" name = "date" autocomplete="off"></p>
             </div>
             
             <button type="submit" name = "submit_screening" class="logbtn">Submit</button><br><br>

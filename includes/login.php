@@ -50,11 +50,10 @@ if(!$conn){
                         header("Location: ../index.php?error=mysqlerror_checkques");
                         exit();
                     }else {
-                        mysqli_stmt_bind_param($stmt,"i",$_SESSION["ID"]);
+                        mysqli_stmt_bind_param($stmt,"s",$_SESSION["ID"]);
                         mysqli_stmt_execute($stmt);    
-                        mysqli_stmt_store_result($stmt); 
-                        $result = mysqli_stmt_get_result($stmt);
-                        if($row = mysqli_fetch_assoc($result)){
+                        $result2 = mysqli_stmt_get_result($stmt);
+                        if($row = mysqli_fetch_assoc($result2)){
                             header("Location: ../home.php");    
                         }else{
                             header("Location: ../interview.php");

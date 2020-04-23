@@ -1,10 +1,10 @@
 <?php
-if (isset($_POST['hpv-submit'])){
+    session_start();
+if (isset($_POST['hep-submit'])){
     $servername = "localhost";
     $dBUseraneme = "root";
     $dbPassword = "";
     $dBName ="projectdb2";
-    session_start();
     $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
     if(!$conn){
@@ -16,14 +16,14 @@ if (isset($_POST['hpv-submit'])){
     $test_date = '03/22/2010';
     $test_arr  = explode('-', $dateString);
     //validate date
-    if (checkdate($test_arr[1], $test_arr[2], $test_arr[0])) {
+    if (0==0) {
         $sql = 'SELECT * FROM HEP WHERE patient_ID = ?';
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("Location: ../viewhpv.php?error=selecctHPV");
+            header("Location: ../viewhep.php?error=seleccthep");
             exit();
         }else{
-            mysqli_stmt_bind_param($stmt,"i",$_SESSION['ID']);
+            mysqli_stmt_bind_param($stmt,"s",$_SESSION['ID']);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             if($row = mysqli_fetch_assoc($result)){
@@ -39,7 +39,7 @@ if (isset($_POST['hpv-submit'])){
                     WHERE patient_ID = ?';
                     $stmt = mysqli_stmt_init($conn);
                     if(!mysqli_stmt_prepare($stmt,$sql)){
-                        header("Location: ../viewhpv.php?error=update_dose1");
+                        header("Location: ../viewhep.php?error=update_dose1");
                         exit();
                     }else{
                         mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
@@ -52,7 +52,7 @@ if (isset($_POST['hpv-submit'])){
                     $firstDate = new DateTime($dose1);
                     if($dose1 > $dateEntered){
                         //date entered is before dose 1
-                        header("Location: ../viewhpv.php?error=checking_dates1");
+                        header("Location: ../viewhep.php?error=checking_dates1");
                         exit();
                     }else {
                         $nextDate = $dateEntered;
@@ -62,7 +62,7 @@ if (isset($_POST['hpv-submit'])){
                     WHERE patient_ID = ?';
                         $stmt = mysqli_stmt_init($conn);
                         if(!mysqli_stmt_prepare($stmt,$sql)){
-                            header("Location: ../viewhpv.php?error=update_dose2");
+                            header("Location: ../viewhep.php?error=update_dose2");
                             exit();
                         }else{
                             mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
@@ -76,7 +76,7 @@ if (isset($_POST['hpv-submit'])){
                     $firstDate = new DateTime($dose2);
                     if($dose2 > $dateEntered){
                         //date entered is before dose 1
-                        header("Location: ../viewhpv.php?error=checking_dates2");
+                        header("Location: ../viewhep.php?error=checking_dates2");
                         exit();
                     }else {
                         $nextDate = $dateEntered;
@@ -86,7 +86,7 @@ if (isset($_POST['hpv-submit'])){
                     WHERE patient_ID = ?';
                         $stmt = mysqli_stmt_init($conn);
                         if(!mysqli_stmt_prepare($stmt,$sql)){
-                            header("Location: ../viewhpv.php?error=update_dose3");
+                            header("Location: ../viewhep.php?error=update_dose3");
                             exit();
                         }else{
                             $na = "Not Applicable";
@@ -98,9 +98,9 @@ if (isset($_POST['hpv-submit'])){
             }
         }
     }else{
-        header("Location: ../viewhpv.php?error=dateerror");
+        header("Location: ../viewhep.php?error=dateerror");
         exit(); 
     }
-    header("Location: ../viewhpv.php?error=execution_over".$_SESSION['ID']);
+    header("Location: ../viewhep.php?error=execution_over".$_SESSION['ID']);
         exit();
 }

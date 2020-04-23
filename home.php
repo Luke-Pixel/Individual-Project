@@ -37,9 +37,9 @@ if(!$conn){
               <li><a href="newscreening.php">Add Screening Results</a></li>
               <li><a href="viewhpv.php">View HPV Vacination</a></li>
               <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
-              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
-              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
-              <li><a href="resources.php">Resources & Activities</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
               <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
@@ -72,7 +72,8 @@ if(!$conn){
 
           <main>
               <h2>Screening History</h2>
-              <p>Add ypur STI screening results for a full history of all your STI screens</p>
+              <p>Add ypur STI screening results for a 
+                full history of all your STI results, Well notify you when its time to test.</p>
               <?php
                 $chl = 'NA';
                 $gon = 'NA';
@@ -86,11 +87,11 @@ if(!$conn){
                   
                // }
               ?>
-              <h3>Last Test</h3>
-            <h4>Chlamydia:<?php echo $row['Chlamydia'];?></h4>
-            <h4>Gonnorea: <?php echo $row['Gonnorhea'];?> </h4>
-            <h4>Syphilis: <?php echo $row['Syphilis'];?> </h4>
-            <h4>HIV: <?php echo $row['HIV'];?></h4>
+            <h3>Last Test</h3>
+            <h4>Chlamydia:    <?php echo $row['Chlamydia'];?></h4>
+            <h4>Gonnorea:     <?php echo $row['Gonnorhea'];?> </h4>
+            <h4>Syphilis:     <?php echo $row['Syphilis'];?> </h4>
+            <h4>HIV:          <?php echo $row['HIV'];?></h4>
               <a href="newscreening.php"  class="cta">Add STI Screening results</a>
               <a href="viewscreenings.php"  class="cta">View More History</a>
           </main>
@@ -108,7 +109,7 @@ if(!$conn){
         </main>
     </form>
 
-    <form class = "form2" >
+    <form class = "home_1" >
             <main>
     
                 <h2>Find a Clinic</h2>
@@ -177,7 +178,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     
             <br>
             <a href="viewhpv.php"  class="cta">Edit</a>
-            <input  type="button" id="button" class="logbtn" value="Edit" onclick="openModal()">
+            
           <br>
           <script>
             function openModal() {
@@ -232,7 +233,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             <hr>
             <br>
             <a href="viewhep.php"  class="cta">Edit</a>
-            <input  type="button" id="button" class="logbtn" value="Edit" onclick="openModal()">
+            
           <br>
           
          
@@ -244,6 +245,9 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         <form class = "home_1">
           <main>
           <h1>Smokefree</h1>
+          <a href="https://www.tht.org.uk/" target="_blank">
+          <img src = "images/smokfree.jpeg" class = "SHL_Logo">
+          </a>
           <p>Free, proven support to help you quit! Join the 
             millions of people who have used Smokefree support to help them stop smoking. 
             From email and text, to our free app and lots of other support, 
@@ -253,24 +257,36 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
         <form class = "home_1">
           <main>
-          <h1>FRANK</h1>
-          <img src = "images/frank.svg" class = "SHL_Logo">
-          <p>Find out everything you need to know about drugs, their effects and the law. Talk to Frank for facts, 
-            support and advice on drugs and alcohol today.</p>
+          <h1>Drug Addiction </h1>
+          <a href="https://www.tht.org.uk/" target="_blank">
+          <img src = "images/drug.jpg" class = "SHL_Logo">
+          </a>
+          <p><strong>If you need treatment for drug addiction, you're entitled to NHS care in the
+             same way as anyone else who has a health problem.</strong></p>
+
+          <p>With the right help and support, it's possible for you to get drug free and stay that way.</p>
           </main>
         </form>
 
         <form class = "home_1">
           <main>
           <h1>Support for people living with HIV</h1>
-    
+          <a href="https://www.tht.org.uk/" target="_blank">
+          <img src = "images/THT.jpg" class = "SHL_Logo">
+          </a>
+          <p>Terrence Higgins Trust is a British charity that campaigns on and provides services relating to 
+            HIV and sexual health. In particular, the charity aims to end the transmission of HIV in the UK; 
+            to support and empower people living with HIV; to eradicate stigma and discrimination around HIV; 
+            and to promote good sexual health</p>
         </main>
         </form>
 
         <form class = "home_1">
           <main>
           <h1>NHS Eat Well</h1>
-
+          <a href="https://www.nhs.uk/live-well/eat-well/" target="_blank">
+          <img src = "images/eat.png" class = "SHL_Logo" >
+          </a>
           <p><strong> A healthy, balanced diet is an important part of maintaining good health, and can help you feel your best.</p></strong>
           <p>This means eating a wide variety of foods in the right proportions, and consuming the right amount 
             of food and drink to achieve and maintain a healthy body weight.</p>

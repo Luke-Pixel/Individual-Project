@@ -31,9 +31,11 @@ aside {
 }
 
 .SHL_Logo {
+    display: block;
     width: 340px;
     cursor: pointer;
     padding: .8em 3em;
+    margin: auto;
 }
 
 .Home_2{
@@ -41,9 +43,11 @@ aside {
     position: relative;
 }
 
-.Home_1{
-    padding: .0em 2em;
+.home_1{
+    
     position: relative;
+    max-width: 500px;
+    margin: auto;
 }
 
 
@@ -68,6 +72,8 @@ nav {
     left: 0;
     top: 0;
     height: 100%;
+    z-index: 5;
+    max-width: 250px;
 }
 
 ul {
@@ -178,7 +184,7 @@ p {
   }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 5768px) {
 
     /*body {
         display: grid;

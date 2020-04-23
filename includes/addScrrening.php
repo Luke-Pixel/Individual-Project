@@ -15,7 +15,6 @@ $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 if(!$conn){
     header("Location: ../index.html?error=mysqlerror_connection");
     die("connection failed ".mysqli_connect_error());
-
 }
 
     $chl;
@@ -91,7 +90,7 @@ if(!$conn){
     }else{
         $latest = 0;
         $patient = 1;
-        mysqli_stmt_bind_param($stmt,'ii',$latest,$_SESSION['ID']);
+        mysqli_stmt_bind_param($stmt,'is',$latest,$_SESSION['ID']);
         mysqli_stmt_execute($stmt);
     }
 
@@ -109,6 +108,6 @@ if(!$conn){
         //header("Location: ../home.php");
     }
 
-
+    header("Location: ../viewscreenings.php");
     
 }

@@ -43,7 +43,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             require_once "PHP_Mailer/PHPMailerAutoload.php";
 
             ob_start();
-            include 'hpv_reminder.html';
+            include 'hep_reminder_2.html';
             $body = ob_get_clean();
 
             $mail = new PHPMailer(); 
@@ -56,7 +56,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->Username = 'mshtest99@gmail.com';
             $mail->Password = 'TryHard123';
             $mail->SetFrom('mshtest99@gmail.com');
-            $mail->subject = 'Test Email';
+            $mail->Subject = 'Time For Clinc!';
             $mail->Body = $body;
             //replace with user email
             $mail->AddAddress($row['patient_ID']);

@@ -35,11 +35,11 @@
             <input type="submit" name="sighnup-submit" class="logbtn" value="HEP AB 2">
         </form>   
 
-        <form>
+        <form action="includes/pre_notifHPV.php" method="post" class="sighnup-form3"> 
             <input type="submit" name="sighnup-submit" class="logbtn" value="HPV 1">
         </form>   
 
-        <form>
+        <form action="includes/post_notifHPV.php" method="post" class="sighnup-form4">
             <input type="submit" name="sighnup-submit" class="logbtn" value="HPV 2">
         </form>   
 
@@ -51,4 +51,39 @@
             <input type="submit" name="sighnup-submit" class="logbtn" value="Screening 2">
         </form>   
 
+        
+
+         
+          
+          <form action="includes/add_activity.php" method="post" class="sighnup-form6">
+          
+            <div class="txtb">
+                <input type="text" name = "url">
+                <span data-placeholder="URL"></span>
+              </div>
+
+              <div class="txtb">
+                <input type="text" name = "name">
+                <span data-placeholder="Name"></span>
+              </div>
+
+              <label for="cars">Choose Category:</label>
+          <select id="cat" name = "cats">
+            <option value="Sports">Sports</option>
+            <option value="Activities">Activities</option>
+            <option value="Social">Social</option>
+            <option value="Personal Development">Personal Development </option>
+            <option value="Spiritality">Spiritality</option>
+            <option value="Support">Support</option>
+            <option value="Addiction">Addiction</option>
+            <option value="Reading">Reading</option>
+          </select>
+            
+
+          <button type="submit" name = "login-submit" class="logbtn">Submit</button>
+          </form>
+          <br>
+          <form action = 'includes/send_user_data.php' method = 'post'>
+          <button type="submit" name = "dash" class="logbtn" >Submit</button>
+          </form>
     </body>

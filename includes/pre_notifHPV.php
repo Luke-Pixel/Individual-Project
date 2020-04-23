@@ -1,3 +1,4 @@
+
 <?php
 $servername = "localhost";
 $dBUseraneme = "root";
@@ -26,7 +27,8 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         $current_date = new DateTime();
         $current_date->format('Y-m-d');
         $difference = $current_date->diff($next_date);
-        $intdif = $difference->format("%a");
+        $intdif = $difference->format("%R%a");
+        
         /*
         $sql2 = "UPDATE HPV SET severity = ?  WHERE patient_ID = ? ";
         $stmt2 = mysqli_stmt_init($conn);
@@ -38,11 +40,11 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         }
         */
         
-        if ($intdif == 14 || $intdif  == -14){
+        if ($intdif  == +14){
             require_once "PHP_Mailer/PHPMailerAutoload.php";
 
             ob_start();
-            include 'hpv_reminder.html';
+            include 'hpv_reminder_2.html';
             $body = ob_get_clean();
 
             $mail = new PHPMailer(); 
@@ -55,13 +57,14 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->Username = 'mshtest99@gmail.com';
             $mail->Password = 'TryHard123';
             $mail->SetFrom('mshtest99@gmail.com');
-            $mail->subject = 'Test Email';
+            $mail->Subject = 'Time For Clinc!';
             $mail->Body = $body;
             //replace with user email
             $mail->AddAddress($row['patient_ID']);
 
             $mail->Send();
-        }else if ($intdif == 7 || $intdif  == -7){
+            header('Location: ../test.html?error=end'. $intdif);
+        }else if ($intdif == -14 ){
             // send email for 1 week reminder 
             require_once "PHP_Mailer/PHPMailerAutoload.php";
 
@@ -79,13 +82,13 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->Username = 'mshtest99@gmail.com';
             $mail->Password = 'TryHard123';
             $mail->SetFrom('mshtest99@gmail.com');
-            $mail->subject = 'Test Email';
+            $mail->Subject = 'Time For Clinc!';
             $mail->Body = $body;
             //replace with user email
             $mail->AddAddress($row['patient_ID']);
 
             $mail->Send();
-        }else if ($intdif > 14){
+        }else if ($intdif > -14){
 
             $sql = "UPDATE HPV SET severity = ?  WHERE patient_ID = ?";
             $stmt = mysqli_stmt_init($conn);
@@ -101,3 +104,5 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         }
     }
 }
+
+?>

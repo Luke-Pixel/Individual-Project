@@ -146,7 +146,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 }
                 </script>
             <form action="includes/addHPV.php" method = "post">
-                <h4>Date Recieved</h4>
+                <h4>Date Recieve</h4>
                 <div class = "txtb">
                     <input type="text" name = 'date1' id="datepicker">
                     <span data-placeholder="Date Of Birth"></span>
@@ -154,7 +154,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 <br>
                 
 
-                 <input  name = 'hpv-submit2' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
+                 <input  name = 'hpv-submit' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
             </form>
         </div>
     </div>

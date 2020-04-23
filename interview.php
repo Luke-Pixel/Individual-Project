@@ -6,6 +6,9 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    
+    
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="interview.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
   </head>
@@ -17,8 +20,8 @@
         
         <label class = "container">Have you been diagnosed with a mental health condition, eg Depression & Anxiety
           <input type="checkbox" 
-          name="mental_helath_yes" 
-          value="vmental_helath_yes" > 
+          name="mental_health_yes" 
+          value="vmental_health_yes" > 
           <span class = "checkmark"></span><br> <br>
       </label>
 
@@ -88,7 +91,7 @@
           <span class = "checkmark"></span><br> <br>
       </label>
 
-      <button type="submit" name = "submit_questions" class="next_btn">Next</button>
+      <button type="submit" name = "submit_questions" class="logbtn">Next</button>
 
     </form>
 

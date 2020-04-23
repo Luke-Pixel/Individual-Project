@@ -20,7 +20,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     header("Location: ../signup.php?error=mysqlerror_connection");
     exit();
 }else{
-    $sports = "sport";
+    $sports = "Addiction";
     mysqli_stmt_bind_param($stmt,"s", $sports);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -65,7 +65,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     <div id="avatar"></div>
     
     <form class = "form1">
-        <h1 href="#profile" class="btn"><i class="far fa-futbol"></i> Sports Activities</h1>
+        <h1 href="#profile" class="btn"><i class="fas fa-tablets"></i> Addiction Help</h1>
         <br>
         <?php while ($row = $result->fetch_assoc()): ?>
             <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> <br> <hr>
