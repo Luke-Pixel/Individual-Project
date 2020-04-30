@@ -46,15 +46,15 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
       </figure>
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
-          <ul>
-          <li><a href="home.php">Home</a></li>
+      <ul>
+              <li><a href="home.php">Home</a></li>
               <li><a href="viewscreenings.php">View STI Screenings</a></li>
               <li><a href="newscreening.php">Add Screening Results</a></li>
               <li><a href="viewhpv.php">View HPV Vacination</a></li>
               <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
-              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
-              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
-              <li><a href="resources.php">Resources & Activities</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
               <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>

@@ -180,3 +180,7 @@ aside {
     grid-template-columns: auto 40px;
     padding: 2em;
 }
+
+.msg{
+  color: red;
+}

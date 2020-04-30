@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+//database connection
 $dose1t = "12-09-2019";
 $idtest = 1;
 $servername = "localhost";
@@ -15,7 +15,7 @@ if(!$conn){
     die("connection failed ".mysqli_connect_error());
 
 }
-
+// select all vaccination records fro hep
 $sql = 'SELECT * FROM `hep` WHERE `patient_ID` = ? ';
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -61,16 +61,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         });
         } );
     </script>
-    <script>
-        $( function() {
-        $( "#datepicker2" ).datepicker();
-        } );
-    </script>
-    <script>
-        $( function() {
-        $( "#datepicker3" ).datepicker();
-        } );
-    </script>
+    
      <aside>
       <figure>
           <div id="avatar"></div>
@@ -78,15 +69,15 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
       </figure>
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
-          <ul>
+      <ul>
               <li><a href="home.php">Home</a></li>
               <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
               <li><a href="viewhpv.php">View HPV Vacination</a></li>
               <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
-              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
-              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
-              <li><a href="resources.php">Resources & Activities</a></li>
-              <li><a href="profile.html">Profile</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
               <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
@@ -97,7 +88,6 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     
 
     <form class="form1">
-     
       <h1>Hepatitus A and B Imunisation</h1>
       <br>
       <p> Twinrix is used to help 
@@ -110,6 +100,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         <br>
         <p>The vaccine's available from sexual health and HIV clinics.</p>
         <br>
+        <!-- display users vaccine records -->
         <h4>Dose 1: <?php echo $dose1 ?> </h4> 
         <br>
         <h4>Dose 2: <?php echo $dose2 ?> </h4>
@@ -136,7 +127,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
       
     </form>
-
+        <!-- modal menu displayed when user updates records-->
     <div class="bg-modal">
         <div class = modal-content>
             <div class="close" onclick="closeModal()">+</div>
@@ -148,7 +139,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             <form action="includes/addHEP.php" method = "post">
                 <h4>Date Recieved </h4>
                 <div class = "txtb">
-                    <input type="text" name = 'date1' id="datepicker">
+                    <input type="text" name = 'date1' id="datepicker" autocomplete = "off">
                     <span data-placeholder="Date Of Birth"></span>
                   </div>
                

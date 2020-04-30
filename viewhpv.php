@@ -1,8 +1,6 @@
 <?php
 session_start();
-
-$dose1t = "12-09-2019";
-$idtest = 1;
+//database connection 
 $servername = "localhost";
 $dBUseraneme = "root";
 $dbPassword = "";
@@ -16,6 +14,7 @@ if(!$conn){
 
 }
 
+//retrieve all hpv vaccine data from user
 $sql = 'SELECT * FROM `hpv` WHERE `patient_ID` = ? ';
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -61,16 +60,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         });
         } );
     </script>
-    <script>
-        $( function() {
-        $( "#datepicker2" ).datepicker();
-        } );
-    </script>
-    <script>
-        $( function() {
-        $( "#datepicker3" ).datepicker();
-        } );
-    </script>
+  
      <aside>
       <figure>
           <div id="avatar"></div>
@@ -78,15 +68,15 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
       </figure>
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
-          <ul>
+      <ul>
               <li><a href="home.php">Home</a></li>
               <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
               <li><a href="viewhpv.php">View HPV Vacination</a></li>
               <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
-              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
-              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
-              <li><a href="resources.php">Resources & Activities</a></li>
-              <li><a href="profile.html">Profile</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
               <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
@@ -110,6 +100,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
           <br>
       <p>The vaccine's available from sexual health and HIV clinics.</p>
       <br>
+      <!-- display retrieved vaccine data-->
         <h4>Dose 1: <?php echo $dose1 ?> </h4> 
         <br>
         <h4>Dose 2: <?php echo $dose2 ?> </h4>
@@ -136,7 +127,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
       
     </form>
-
+        <!-- modal menu opened when user updates vaccine records-->
     <div class="bg-modal">
         <div class = modal-content>
             <div class="close" onclick="closeModal()">+</div>
@@ -148,7 +139,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             <form action="includes/addHPV.php" method = "post">
                 <h4>Date Recieve</h4>
                 <div class = "txtb">
-                    <input type="text" name = 'date1' id="datepicker">
+                    <input type="text" name = 'date1' id="datepicker" autocomplete = "off">
                     <span data-placeholder="Date Of Birth"></span>
                   </div>
                 <br>
@@ -171,8 +162,8 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
     </script>
 
-<script>
-        
+<!--script to display and hide navigational panel on click-->
+<script>      
         (function() {
             var menu = document.querySelector('ul'),
                 menulink = document.querySelector('img');
@@ -182,7 +173,6 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 e.preventDefault();
             });
         })();
-    
     </script>
 
 </body>

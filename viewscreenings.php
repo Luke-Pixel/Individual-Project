@@ -1,5 +1,6 @@
 <?php
 session_start();
+//DB connection 
 $servername = "localhost";
 $dBUseraneme = "root";
 $dbPassword = "";
@@ -12,6 +13,7 @@ if(!$conn){
     die("connection failed ".mysqli_connect_error());
 }
 
+// select screeneing result data for user 
 $sql = "SELECT * FROM screening WHERE `patient_ID` = ?";
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -38,6 +40,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Script for JQuery DatePickert-->
     <script>
         $( function() {
         $( "#datepicker" ).datepicker();
@@ -50,29 +53,25 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
       </figure>
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
-          <ul>
-              <li><a href="home.html">Home</a></li>
-              <li><a href="viewscreenings.html">View STI Screenings</a></li>
-              <li><a href="viewhpv.html">View HPV Vacination</a></li>
-              <li><a href="viewhep.html">View HEP A&B Vaciniation</a></li>
-              <li><a href="https://www.shl.uk/">Order a Test Kit</a></li>
-              <li><a href="https://sxt.org.uk/service">Find a Clinic</a></li>
-              <li><a href="resources.php">Resources & Activities</a></li>
-              <li><a href="profile.html">Profile</a></li>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
               <li><a href="index.php">Logout</a></li>
           </ul>
       </nav>
   </aside>
 </head>
 <body>
-
+        
+        <!-- display results from query-->
         <form action="includes/interview.php" method="post" class="project-form">
             <h1>Results</h1> <br>
-            <?php
-             
-              
-          
-            ?>
             <?php while ($row = $result->fetch_assoc()): ?>
             <hr>
             <br>
@@ -85,29 +84,12 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
              <h4>HIV: <?php echo $row['HIV'] ?></h4>
              <br>
       <?php endwhile; ?>
-              
-                      
-            
             <hr>            
-           
-    
-    
         </form>
     
-        <script type="text/javascript">
-        $(".txtb input").on("focus",function(){
-          $(this).addClass("focus");
-        });
-    
-        $(".txtb input").on("blur",function(){
-          if($(this).val() == "")
-          $(this).removeClass("focus");
-        });
-    
-        </script>
-
+       
+<!-- Script to display and hide navigational menu-->
 <script>
-        
         (function() {
             var menu = document.querySelector('ul'),
                 menulink = document.querySelector('img');
@@ -117,7 +99,6 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 e.preventDefault();
             });
         })();
-    
     </script>
     
     

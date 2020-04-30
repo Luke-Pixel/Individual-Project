@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- testing file used to test automated features -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -27,8 +28,9 @@
   
   </head>
 <body>
+ 
         <form action="includes/pre_notifHEP.php" method="post" class="sighnup-form1">
-            <input type="submit" name="sighnup-submit" class="logbtn" value="HEP AB 1">
+            <input type="submit" name="sighnup-submit1" class="logbtn" value="HEP AB 1">
         </form>   
         
         <form action="includes/post_notifHEP.php" method="post" class="sighnup-form2">
@@ -47,8 +49,8 @@
             <input type="submit" name="sighnup-submit" class="logbtn" value="Screening 1">
         </form>   
 
-        <form>
-            <input type="submit" name="sighnup-submit" class="logbtn" value="Screening 2">
+        <form action="includes/send_user_data.php" method="post" class="sighnup-form6">
+            <input type="submit" name="sighnup-submit" class="logbtn" value="Send User Report">
         </form>   
 
         
@@ -81,9 +83,8 @@
             
 
           <button type="submit" name = "login-submit" class="logbtn">Submit</button>
-          </form>
-          <br>
-          <form action = 'includes/send_user_data.php' method = 'post'>
-          <button type="submit" name = "dash" class="logbtn" >Submit</button>
-          </form>
+          
+
+        </form>
+        
     </body>

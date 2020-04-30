@@ -22,6 +22,8 @@
 
     <form action="includes/sighnup.php" method="post" class="sighnup-form">
       <h1>Sign up</h1>
+      <br>
+      <h4 class='msg'>Passwords do not match </h4>
 
       <div class="txtb">
         <input type="text" name="mail">
@@ -99,7 +101,7 @@
       </div>
 
     </form>
-      <!-- script to animate textfields-->
+
     <script type="text/javascript">
     $(".txtb input").on("focus",function(){
       $(this).addClass("focus");

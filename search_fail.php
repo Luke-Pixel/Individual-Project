@@ -47,37 +47,28 @@ if(!$conn){
   </head>
   <body>
 
-  <form class="project-form"> 
-    <h1>Resources For Gay Men In London</h1>
-    <br>
-   
-            <p>The majority of these resources 
-                are specifically addressed to the 
-                gay man, although some of them can also 
-                be an alternative to other members the 
-                community. I want to emphasise that the 
-                purpose of this list is to provide the 
-                biggest possible support, specifically, 
-                for a gay man, particularly vulnerable 
-                to isolation, and victim in many cases of 
-                rejection and homophobia from a very young age.</p>
-  <br>
-                <p>Ignacio Labayen de Inza - April 2019</p> 
+    <form class="project-form" action="includes/search.php" method="post"> 
+        <h1>Search</h1>
+        <br>
+        <h4 class="msg"> No user found </h4>
+        <br>
+        <h4>Email: </h4>
+            <br>
+            <div class = "txtb">
+                <input type="text" name = 's_email'  >
+                <span data-placeholder="Email"></span>
+            </div>
+            
 <br>
-    <a href="H_Sport.php"  class="cta">Sports</a>
-    <a href="H_Activities.php" class="cta">Activities</a>
-    <a href="H_Social.php"  class="cta">Social & Dating</a>
-    <a href="H_Personal.php"  class="cta">Personal Development</a>
-    <a href="H_Spiritual.php"  class="cta">Spirituality</a>
-    <a href="H_Support.php"  class="cta">Support</a>
-    <a href="H_Addiction.php"  class="cta">Addiction</a>
-    <a href="H_Reading.php" class="cta">Reading</a>
+<button type="submit" name = "login-submit" class="logbtn">Search</button>
+   
+    
   </form>
     
            
   </body>
+  <!-- script to open and hde navigational menu-->
   <script>
-        
           (function() {
               var menu = document.querySelector('ul'),
                   menulink = document.querySelector('img');
@@ -87,6 +78,22 @@ if(!$conn){
                   e.preventDefault();
               });
           })();
-      
       </script>
+
+<!-- script to animate text field on click-->
+<script type="text/javascript">
+$(".txtb input").on("focus",function(){
+  $(this).addClass("focus");
+});
+
+$(".txtb input").on("blur",function(){
+  if($(this).val() == "")
+  $(this).removeClass("focus");
+});
+</script>
+</form>
+
+
+
+
 </html>

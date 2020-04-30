@@ -13,32 +13,40 @@ if(!$conn){
     die("connection failed ".mysqli_connect_error());
 
 }
-
+    //retrieve email and password entered 
     $mailuid = $_POST["email"];
     $password = $_POST ["pass"];
-
+    //if either or both fields are left empty, return error 
     if (empty ($mailuid) || empty($password)){
-        header("Location: ../index.php?error=emptyfields");
+        header("Location: ../login_missing.php");
         exit();
     }else {
+        //select from databse where ID is equal to entered email
         $sql = 'SELECT * FROM patient WHERE email = ? ';
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header("Location: ../index.php?error=mysqlerror_connection");
             exit();
         }else {
+            //bind parameters and execute statement 
             mysqli_stmt_bind_param($stmt,"s", $mailuid);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
+            //if user found, retrieve stored password 
             if($row = mysqli_fetch_assoc($result)){
                 $storedpass = $row ['userPass'];
+
+                //previous code for hashed password 
                 //$pwdCheck = password_verify($password, $storedpass );
+
+                //check stored password and entered password match 
                 $pwdCheck = $password == $storedpass;
                 if($pwdCheck == false){
-                    header("Location: ../index.php?error=wrongpass" .$password );
+                    //if wrong password return error 
+                    header("Location: ../login_wrongpass.php" );
                     exit();
                 }else if($pwdCheck == true){
-                    //log user in
+                    //log user in and start session 
                     session_start();
                     $_SESSION["ID"] = $row['patient_ID'];
                     $_SESSION["fNmae"] = $row['first_name'];
@@ -54,8 +62,10 @@ if(!$conn){
                         mysqli_stmt_execute($stmt);    
                         $result2 = mysqli_stmt_get_result($stmt);
                         if($row = mysqli_fetch_assoc($result2)){
+                            //send user to home page 
                             header("Location: ../home.php");    
                         }else{
+                            //send user to questions page if not completed 
                             header("Location: ../interview.php");
                         }
                     
@@ -67,7 +77,7 @@ if(!$conn){
                     exit();
                 }
             }else{
-                header("Location: ../index.php?error=noemail");
+                header("Location: ../login_wrongpass.php" );
                 exit();
             }
         }

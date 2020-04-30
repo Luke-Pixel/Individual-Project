@@ -8,7 +8,20 @@
     box-sizing: border-box;
   }
   
-
+  body, html {
+    height: calc(100% + 9em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+  }
+body {
+        
+  min-height: 150vh;
+  background-color: #EB3A70;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
   
   .screening-form{
     background: #f1f1f1;

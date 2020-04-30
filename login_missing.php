@@ -19,7 +19,7 @@
 
     <form action="includes/login.php" method = "post" class="login-form">
       <h1>Login</h1>
-
+    <h4 class='msg'>Enter email and password</h4>
       <div class="txtb">
         <input type="text" name = "email">
         <span data-placeholder="Username"></span>
@@ -37,7 +37,7 @@
       </div>
 
     </form>
-    <!-- Script to animate textbox placeholder -->
+    <!-- script to animate text field -->
     <script type="text/javascript">
     $(".txtb input").on("focus",function(){
       $(this).addClass("focus");

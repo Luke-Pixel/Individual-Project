@@ -157,9 +157,9 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 $message .= '<form>';
                 $message .= '<h1>Monthly User Dashboard <i class="fas fa-syringe"></i></h1>';
                 $message .= '<br>';
-                $message .= 'The below data presents the details of all users:';
+                $message .= 'Percaentage of users who:';
                 $message .= '<br><br>';
-                $message .= 'Users with diagnoed with a mental health condition: ' .$p_happy;
+                $message .= 'diagnoed with a mental health condition: ' .$p_happy;
                 $message .= '<br><br>';
                 $message .= 'Out to family and friends: ' .$p_out;
                 $message .= '<br><br>';

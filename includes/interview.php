@@ -14,7 +14,7 @@ if (isset($_POST["submit_questions"])){
     }
 
     
-    //$username = $_POST [''];
+    //variables for user selections 
     $mental;
     $pout;
     $cutdrink;
@@ -26,8 +26,7 @@ if (isset($_POST["submit_questions"])){
     $smoke;
     //$currentDate = date ('Y/m/d');
 
-    //$trubl = 1
-
+    //post checkboxes to rerieve user selection 
     if ($_POST['mental_health_yes'] == "vmental_health_yes"){
         $mental = 1;
     }else{
@@ -82,6 +81,7 @@ if (isset($_POST["submit_questions"])){
         $smoke = 0;
     }
 
+    //sql statement to insert user selection int db
     $sql = "INSERT INTO Interview (patient_ID, happy, p_out,cut_drink,felt_guilty,drink_morning,club_drugs,smoker,excercise,annoyed)
      VALUES (?,?,?,?,?,?,?,?,?,?)";
     $stmt = mysqli_stmt_init($conn);
@@ -89,6 +89,7 @@ if (isset($_POST["submit_questions"])){
         header("Location: ../sighnup.php?error=connectionerrorinsert&email=" .$email);
         exit();
     }else{
+        //bind parameters and execute sql
         mysqli_stmt_bind_param($stmt,"siiiiiiiii",$_SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
         mysqli_stmt_execute($stmt);
         header("Location: ../home.php");

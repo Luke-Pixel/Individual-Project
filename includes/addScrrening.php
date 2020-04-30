@@ -13,10 +13,11 @@ $dBName ="projectdb2";
 $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
 if(!$conn){
-    header("Location: ../index.html?error=mysqlerror_connection");
+    header("Location: ../index.php?error=mysqlerror_connection");
     die("connection failed ".mysqli_connect_error());
 }
 
+    //variables to store entries 
     $chl;
     $gon;
     $syph;
@@ -32,7 +33,7 @@ if(!$conn){
         $chl = 'Negative';
     }else{
         //send back to page with uncheck fields 
-        header("Location: ../newscreening.html?error=nochlselect");
+        header("Location: ../newscreening.php?error=nochlselect");
         exit();
     }
 
@@ -45,11 +46,11 @@ if(!$conn){
         $gon = 'Negative';
     }else{
         //send back to page with uncheck fields 
-        header("Location: ../newscreening.html?error=nogonselect");
+        header("Location: ../newscreening.php?error=nogonselect");
         exit();
     }
 
-    //check selection for gon
+    //check selection for syph
     if($_POST['Syphilis'] == 'syphilis_na'){
         $syph = 'Not Applicable';
     }else if($_POST['Syphilis'] == 'syphilis_yes'){
@@ -58,11 +59,11 @@ if(!$conn){
         $syph = 'Negative';
     }else{
         //send back to page with uncheck fields 
-        header("Location: ../newscreening.html?error=nosyphselect");
+        header("Location: ../newscreening.php?error=nosyphselect");
         exit();
     }
 
-    //check selection for gon
+    //check selection for hiv
     if($_POST['HIV'] == 'hiv_na'){
         $hiv = 'Not Applicable';
     }else if($_POST['HIV'] == 'hiv_yes'){
@@ -71,41 +72,45 @@ if(!$conn){
         $hiv= 'Negative';
     }else{
         //send back to page with uncheck fields 
-        header("Location: ../newscreening.html?error=nohivselect");
+        header("Location: ../newscreening.php?error=nohivselect");
         exit();
     }
 
+    //retrieve date entered by user 
+    //check if no date entered 
     if($_POST['date'] == ''){
-        header("Location: ../newscreening.html?error=nodate");
+        header("Location: ../newscreening.php?error=nodate");
         exit();
     }else{
+        //set variable for date entered 
         $tstDate = $_POST['date'];
     }
 
+    //sql statement to be executed,update all pre existing old records 
     $sql = 'UPDATE screening SET latest_test = ? WHERE Patient_ID = ?';
     $stmt = mysqli_stmt_init($conn);
+    //if sql error return error page
     if(!mysqli_stmt_prepare($stmt,$sql)){
-        header("Location: ../newscreening.html?error=sqlerrorupdate");
+        header("Location: ../newscreening.php?error=sqlerrorupdate");
         exit();
     }else{
+        //bind parameters and execute statement 
         $latest = 0;
-        $patient = 1;
         mysqli_stmt_bind_param($stmt,'is',$latest,$_SESSION['ID']);
         mysqli_stmt_execute($stmt);
     }
-
+    //add new record for new resutls entered 
     $sql = 'INSERT INTO screening VALUES (null,?,?,?,?,?,?,?)';
     $stmt2 = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt2,$sql)){
-        header("Location: ../newscreening.html?error=sqlerrorinsert");
+        header("Location: ../newscreening.php?error=sqlerrorinsert");
         exit();
     }else{
         $latest = 1;
-        $patient = 1;
+        //bind parameters and execute statement 
         mysqli_stmt_bind_param($stmt2,'ssissss',$_SESSION['ID'],
         $tstDate,$latest,$gon,$chl,$syph,$hiv);
         mysqli_stmt_execute($stmt2);
-        //header("Location: ../home.php");
     }
 
     header("Location: ../viewscreenings.php");

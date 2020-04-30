@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+//server connection 
 $servername = "localhost";
 $dBUseraneme = "root";
 $dbPassword = "";
@@ -9,7 +9,6 @@ $dBName ="projectdb2";
 $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
 if(!$conn){
-    //header("Location: ../index.php?error=mysqlerror_connection");
     die("connection failed ".mysqli_connect_error());
 }
 
@@ -31,6 +30,7 @@ if(!$conn){
       </figure>
       <img src="images/menu.svg" class = "Menu_Bar">
       <nav>
+        <!-- Navigational menu, displayed on icon click-->
           <ul>
               <li><a href="home.php">Home</a></li>
               <li><a href="viewscreenings.php">View STI Screenings</a></li>
@@ -41,6 +41,7 @@ if(!$conn){
               <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
               <li><a href="activities_menu.php">Resources & Activities</a></li>
               <li><a href="index.php">Logout</a></li>
+              <li><a href="search.php">Search</a></li>
           </ul>
       </nav>
   </aside>
@@ -52,7 +53,7 @@ if(!$conn){
         
         <form class = "home_1" >
         <?php
-
+        //select users latest screening data 
         $sql = "SELECT * FROM screening WHERE `patient_ID` = ?";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -79,14 +80,8 @@ if(!$conn){
                 $gon = 'NA';
                 $syph = 'NA';
                 $hiv = 'NA';
-                $sql = 'SELECT * from screening Where latest = true';
-                //$result = mysqli_query($conn,$sql);
-                //$resultCheck = mysqli_num_rows($result);
-               // if ($resultCheck > 0){
-                  //test found 
-                  
-               // }
               ?>
+              
             <h3>Last Test</h3>
             <h4>Chlamydia:    <?php echo $row['Chlamydia'];?></h4>
             <h4>Gonnorea:     <?php echo $row['Gonnorhea'];?> </h4>
@@ -138,6 +133,7 @@ if(!$conn){
           <main>
 
 <?php
+ // retrieve user data for hpv vaccinatins and siplay on page 
           $sql = 'SELECT * FROM `hpv` WHERE `patient_ID` = ? ';
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -161,13 +157,11 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 }
 
 ?>
-
+            
           <h1>HPV Status</h1>
             <br>
             <h4>Dose 1: <?php  echo $dose1?> </h4> 
-            <br>
             <h4>Dose 2: <?php echo $dose2 ?> </h4>
-            <br>
             <h4>Dose 3: <?php echo $dose3 ?> </h4>
             <br>
             <hr>
@@ -180,21 +174,15 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             <a href="viewhpv.php"  class="cta">Edit</a>
             
           <br>
-          <script>
-            function openModal() {
-             document.querySelector('.bg-modal').style.display = 'flex';
-             
-             
-            }
-            </script>
+          <!--  -->
          
-    
           </main>
         </form>
 
         <form class = "home_1">
           <main>
           <?php
+              // retrieve user data for hep vaccinatins and siplay on page 
                $sql = 'SELECT * FROM `hep` WHERE `patient_ID` = ? ';
                $stmt = mysqli_stmt_init($conn);
                if(!mysqli_stmt_prepare($stmt,$sql)){
@@ -221,9 +209,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
           <h1>Hep A&B Status</h1>
             <br>  
             <h4>Dose 1: <?php echo $dose1 ?> </h4>         
-            <br>
             <h4>Dose 2: <?php echo $dose2 ?> </h4>
-            <br>
             <h4>Dose 3: <?php echo $dose3 ?> </h4>
             <br>
             <hr>
@@ -241,7 +227,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
          
           </main>
         </form>
-
+         <!-- forms to provide main resources requested by client -->
         <form class = "home_1">
           <main>
           <h1>Smokefree</h1>
@@ -296,39 +282,10 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         </form>
 
     
-        <div class="bg-modal">
-            <div class = modal-content>
-                <div class="close" onclick="closeModal()">+</div>
-                <script>
-                    function closeModal() {
-                     document.querySelector('.bg-modal').style.display = 'none';
-                    }
-                    </script>
-                <form>
-                    <h4>Dose 1: </h4>
-                    <div class = "txtb">
-                        <input type="text" id="datepicker">
-                        <span data-placeholder="Date Of Birth"></span>
-                      </div>
-                    <br>
-                    <h4>Dose 2: </h4>
-                    <div class = "txtb">
-                        <input type="text" id="datepicker2">
-                        <span data-placeholder="Date Of Birth"></span>
-                      </div>
-                    <br>
-                    <h4>Dose 3: </h4>
-                    <div class = "txtb">
-                        <input type="text" id="datepicker3">
-                        <span data-placeholder="Date Of Birth"></span>
-                      </div>
-                    <br>
-    
-                     <input href='#' type="submit" id="button" class="logbtn" value="Edit" onclick="openModal()">
-                </form>
-            </div>
+        
         </div>
         </main>
+        <!-- Script to open and close navigation meni  -->
         <script>
         
           (function() {
