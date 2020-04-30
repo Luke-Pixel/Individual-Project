@@ -63,5 +63,6 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->Send();
        
     }
+    header('Location: ../test.html?error=end'. $intdif);
 }
 }

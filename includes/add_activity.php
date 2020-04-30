@@ -127,5 +127,6 @@
     }
 }
     }else{
-        header('test.php');
+        header('Location: ../test.html?error=end');
     }
+    header('Location: ../test.html?error=end');

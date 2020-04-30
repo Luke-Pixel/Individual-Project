@@ -6,7 +6,7 @@
     $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
 
     if(!$conn){
-        header("Location: ../index.html?error=mysqlerror_connection");
+        header("Location: ../index.php?error=mysqlerror_connection");
         die("connection failed ".mysqli_connect_error());
     }
 
@@ -107,8 +107,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
 
     require_once "PHP_Mailer/PHPMailerAutoload.php";
 
-            ob_start();
-            include 'hep_reminder_2.html';
+            
             
 
             $message = "<!DOCTYPE html>";
@@ -126,64 +125,65 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             
             
             $message .= '*{';
-                $message .= 'margin: 0;';
-                $message .= 'padding: 0;';
-                $message .= 'text-decoration: none;';
-                $message .= 'font-family: montserrat;';
-                $message .= 'box-sizing: border-box;';
-                $message .= '}';
+            $message .= 'margin: 0;';
+            $message .= 'padding: 0;';
+            $message .= 'text-decoration: none;';
+            $message .= 'font-family: montserrat;';
+            $message .= 'box-sizing: border-box;';
+            $message .= '}';
               
-                $message .= 'body{';
-                    $message .= 'min-height: 100vh;';
-                    $message .= 'background-color: #EB3A70;';
-                    $message .= '}';
+            $message .= 'body{';
+            $message .= 'min-height: 100vh;';
+            $message .= 'background-color: #EB3A70;';
+            $message .= '}';
             
-                    $message .= 'form{';
-                        $message .= 'width: 360px;';
-                        $message .= 'background: #f1f1f1;';
+            $message .= 'form{';
+            $message .= 'width: 360px;';
+            $message .= 'background: #f1f1f1;';
                 
-                        $message .= 'padding: 80px 40px;';
-                        $message .= 'border-radius: 10px;';
-                        $message .= 'position: absolute;';
-                        $message .= 'left: 50%;';
-                        $message .= 'top: 50%;';
-                        $message .= 'transform: translate(-50%,-50%);';
-                        $message .= '}';
+            $message .= 'padding: 80px 40px;';
+            $message .= 'border-radius: 10px;';
+            $message .= 'position: absolute;';
+            $message .= 'left: 50%;';
+            $message .= 'top: 50%;';
+            $message .= 'transform: translate(-50%,-50%);';
+            $message .= '}';
             
-                        $message .= '.fas{';
-                            $message .= 'color: #EB3A70;';
-                            $message .= '}';
-                            $message .= '</style>';
-                $message .= '<form>';
-                $message .= '<h1>Monthly User Dashboard <i class="fas fa-syringe"></i></h1>';
-                $message .= '<br>';
-                $message .= 'Percaentage of users who:';
-                $message .= '<br><br>';
-                $message .= 'diagnoed with a mental health condition: ' .$p_happy;
-                $message .= '<br><br>';
-                $message .= 'Out to family and friends: ' .$p_out;
-                $message .= '<br><br>';
-                $message .= 'Want to cut down on drinking: ' .$p_cut;
-                $message .= '<br><br>';
-                $message .= 'Take club drugs: ' .$p_drug;
-                $message .= '<br><br>';
-                $message .= 'Are a smoker: ' .$p_smoker;
-                $message .= '<br><br>';
-                $message .= 'Excercise regualrly: ' .$p_excercise ;
-                $message .= '<br><br>';
-                $message .= 'Positive Test Results seen in the last 3 months:';
-                $message .= '<br>';
-                $message .= 'Chlamydia: ' .$chly; 
-                $message .= '<br>';
-                $message .= 'Gonnorhea: ' .$gon;
-                $message .= '<br>';
-                $message .= 'Syphillis: ' .$syph;
-                $message .= '<br>';
-                $message .= 'HIV: ' .$hiv;
-                $message .= '</form>';
+            $message .= '.fas{';
+            $message .= 'color: #EB3A70;';
+            $message .= '}';
+            $message .= '</style>';
+            $message .= '<form>';
+            $message .= '<h1>Monthly User Dashboard <i class="fas fa-syringe"></i></h1>';
+            $message .= '<br>';
+            $message .= 'Percaentage of users who:';
+            $message .= '<br><br>';
+            $message .= 'Diagnoed with a mental health condition: ' .$p_happy;
+            $message .= '<br><br>';
+            $message .= 'Out to family and friends: ' .$p_out;
+            $message .= '<br><br>';
+            $message .= 'Want to cut down on drinking: ' .$p_cut;
+            $message .= '<br><br>';
+            $message .= 'Take club drugs: ' .$p_drug;
+            $message .= '<br><br>';
+            $message .= 'Are a smoker: ' .$p_smoker;
+            $message .= '<br><br>';
+            $message .= 'Excercise regualrly: ' .$p_excercise ;
+            $message .= '<br><br>';
+            $message .= 'Positive Test Results seen in the last 3 months:';
+            $message .= '<br>';
+            $message .= '<br>';
+            $message .= 'Chlamydia: ' .$chly; 
+            $message .= '<br>';
+            $message .= 'Gonnorhea: ' .$gon;
+            $message .= '<br>';
+            $message .= 'Syphillis: ' .$syph;
+            $message .= '<br>';
+            $message .= 'HIV: ' .$hiv;
+            $message .= '</form>';
                 
                 
-                $message .= '</body>';
+            $message .= '</body>';
 
 
              
@@ -204,7 +204,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->Username = 'mshtest99@gmail.com';
             $mail->Password = 'TryHard123';
             $mail->SetFrom('mshtest99@gmail.com');
-            $mail->Subject = 'Time For Clinc!';
+            $mail->Subject = 'Monthly User Report';
             
             //replace with user email
             $mail->AddAddress('lukeool76@gmail.com');
@@ -212,4 +212,5 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
             $mail->Send();
 
     }
+    header('Location: ../test.html?error=end');
 }

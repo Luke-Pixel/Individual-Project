@@ -137,7 +137,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
                 }
                 </script>
             <form action="includes/addHPV.php" method = "post">
-                <h4>Date Recieve</h4>
+                <h4>Date Recieved</h4>
                 <div class = "txtb">
                     <input type="text" name = 'date1' id="datepicker" autocomplete = "off">
                     <span data-placeholder="Date Of Birth"></span>
