@@ -231,7 +231,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         <form class = "home_1">
           <main>
           <h1>Smokefree</h1>
-          <a href="https://www.tht.org.uk/" target="_blank">
+          <a href="https://www.nhs.uk/smokefree" target="_blank">
           <img src = "images/smokfree.jpeg" class = "SHL_Logo">
           </a>
           <p>Free, proven support to help you quit! Join the 
@@ -244,7 +244,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         <form class = "home_1">
           <main>
           <h1>Drug Addiction </h1>
-          <a href="https://www.tht.org.uk/" target="_blank">
+          <a href="https://www.nhs.uk/live-well/healthy-body/drug-addiction-getting-help/" target="_blank">
           <img src = "images/drug.jpg" class = "SHL_Logo">
           </a>
           <p><strong>If you need treatment for drug addiction, you're entitled to NHS care in the

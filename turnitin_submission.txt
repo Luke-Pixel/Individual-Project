@@ -1,0 +1,7262 @@
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+  <body>
+
+  <form class="project-form"> 
+    <h1>Resources For Gay Men In London</h1>
+    <br>
+   
+            <p>The majority of these resources 
+                are specifically addressed to the 
+                gay man, although some of them can also 
+                be an alternative to other members the 
+                community. I want to emphasise that the 
+                purpose of this list is to provide the 
+                biggest possible support, specifically, 
+                for a gay man, particularly vulnerable 
+                to isolation, and victim in many cases of 
+                rejection and homophobia from a very young age.</p>
+  <br>
+                <p>Ignacio Labayen de Inza - April 2019</p> 
+<br>
+    <a href="H_Sport.php"  class="cta">Sports</a>
+    <a href="H_Activities.php" class="cta">Activities</a>
+    <a href="H_Social.php"  class="cta">Social & Dating</a>
+    <a href="H_Personal.php"  class="cta">Personal Development</a>
+    <a href="H_Spiritual.php"  class="cta">Spirituality</a>
+    <a href="H_Support.php"  class="cta">Support</a>
+    <a href="H_Addiction.php"  class="cta">Addiction</a>
+    <a href="H_Reading.php" class="cta">Reading</a>
+  </form>
+    
+           
+  </body>
+  <script>
+        
+          (function() {
+              var menu = document.querySelector('ul'),
+                  menulink = document.querySelector('img');
+              
+              menulink.addEventListener('click', function(e) {
+                  menu.classList.toggle('active');
+                  e.preventDefault();
+              });
+          })();
+      
+      </script>
+</html>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+
+
+
+aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+}
+
+.Menu_Bar {
+    width: 40px;
+    cursor: pointer;
+}
+
+.SHL_Logo {
+    width: 340px;
+    cursor: pointer;
+    padding: .8em 3em;
+}
+
+.Home_2{
+    padding: .0em 5em;
+    position: relative;
+}
+
+.Home_1{
+    padding: .0em 5em;
+    position: relative;
+}
+
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+nav {
+    background: #fff;
+}
+
+.active {
+    position: absolute;
+    display: block;
+    background: #fff;
+    width: 50%;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+ul {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .8em;
+    display: block;
+    padding: 1.5em 3em;
+    background-color: rgba(255,255,255,.35);
+    color: #000;
+}
+
+main {
+    background: #fff;
+    padding: 1em 1.4em;
+}
+
+.header1 {
+    color:black;
+    font-size: 3em;
+    margin-top: 2em;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+
+.bg-modal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position : absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+  width: 300px;
+  background-color: white;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  
+}
+
+.close{
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 42px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.form1{
+    width: 360px;
+        background: #f1f1f1;
+        
+        padding: 80px 40px;
+        border-radius: 10px;
+        position: relative;
+        margin: auto;
+    
+  }
+
+  .logbtn{
+    
+    width: 49%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+    position: relative;
+  }
+
+  .logbtn:hover{
+    background-position: right;
+  }
+
+   .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(120deg,#3498db,#8e44ad);
+    transition: .5s;
+  }
+
+
+@media only screen and (min-width: 5768px) {
+
+    /*body {
+        display: grid;
+        grid-template-columns: 20% auto;
+        padding: 2em;
+    }*/
+
+    .Home_2{
+        /*padding: .3em 5em;*/
+        float: left ;
+    
+    }
+    
+    .Home_1{
+       /* padding: .0em 5em;*/
+        float: right;
+   
+    }
+    
+
+    aside {
+        background: #DCE1F6;
+        grid-template-columns: auto;
+        grid-template-rows: 20% auto;
+        padding: 0;
+    }
+
+    main {
+        padding: 2em;
+        background:rgb(255, 255, 255) ;
+        background-size: 70%;
+    }
+
+    #avatar {
+        border-radius: 50%;
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        margin: 2em auto 1em auto;
+    }
+
+    figcaption {
+        text-align: center;
+        color: #000;
+    }
+
+    ul {
+        display: block;
+        margin-top: 2em;
+        position: relative !important;
+        background: none !important;
+        width: 100% !important;
+    }
+
+    ul li a:hover {
+        background-color: #fff;
+    }
+
+    nav {
+        background: none;
+    }
+
+    .cta {
+        display: inline-block;
+        font-size: 1.3em;
+        padding: .8em 3em;
+    }
+
+   .header1 {
+        color:black;
+        font-size: 3em;
+        margin-left: 1em;
+       
+        
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .bg-modal{
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        position : absolute;
+        top: 0;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .modal-content{
+      width: 300px;
+      background-color: white;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      
+    }
+  
+    .close{
+        position: absolute;
+        top: 0;
+        right: 14px;
+        font-size: 42px;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+
+    .form1{
+        width: 360px;
+        background: #f1f1f1;
+        
+        padding: 80px 40px;
+        border-radius: 10px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    list-style: none;
+    text-decoration: none;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(120deg,#3498db,#8e44ad);
+    transition: .5s;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+ 
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+   
+
+  .middle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .menu{
+    width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .item{
+    border-top: 1px solid #2980b9;
+    overflow: hidden;
+  }
+  .btn{
+    display: block;
+    padding: 16px 20px;
+    background: #3498db;
+    color: white;
+    position: relative;
+  }
+  .btn:before{
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background:#3498db;
+    left: 20px;
+    bottom: -7px;
+    transform: rotate(45deg);
+  }
+  .btn i{
+    margin-right: 10px;
+  }
+  .smenu{
+    background: #333;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    max-height: 0;
+  }
+  .smenu a{
+    display: block;
+    padding: 16px 26px;
+    color: white;
+    font-size: 14px;
+    margin: 4px 0;
+    position: relative;
+  }
+  .smenu a:before{
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background: #3498db;
+    left: 0;
+    top: 0;
+    transition: 0.3s;
+    opacity: 0;
+  }
+  .smenu a:hover:before{
+    opacity: 1;
+  }
+  .item:target .smenu{
+    max-height: 10em;
+  }
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, html {
+    height: calc(100% - 2em);
+    margin: 0;
+    font-family: 'Montserrat';
+}
+
+body {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
+        min-height: 100vh;
+    background-image: linear-gradient(120deg,#3498db,#8e44ad);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    /*background: white;*/
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+  }
+
+aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+}
+
+.Menu_Bar {
+    width: 40px;
+    cursor: pointer;
+}
+
+.SHL_Logo {
+    width: 340px;
+    cursor: pointer;
+    padding: .8em 3em;
+}
+
+.Home_2{
+    padding: .0em 5em;
+    position: relative;
+}
+
+.Home_1{
+    padding: .0em 5em;
+    position: relative;
+}
+
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+nav {
+    background: #fff;
+}
+
+.active {
+    position: absolute;
+    display: block;
+    background: #fff;
+    width: 50%;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+ul {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .8em;
+    display: block;
+    padding: 1.5em 3em;
+    background-color: rgba(255,255,255,.35);
+    color: #000;
+}
+
+main {
+    background: #fff;
+    padding: 1em 1.4em;
+}
+
+.header1 {
+    color:black;
+    font-size: 3em;
+    margin-top: 2em;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+.cta {
+    display: block;
+    color: #fff;
+    background: #0E7FFF;
+    text-decoration: none;
+    padding: 8px 50px;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    margin: 2em 0;
+}
+
+.bg-modal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position : absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+  width: 300px;
+  background-color: white;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  
+}
+
+.close{
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 42px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.form1{
+    width: 360px;
+        background: #f1f1f1;
+        
+        padding: 80px 40px;
+        border-radius: 10px;
+        position: relative;
+        left: 50%;
+        top: 580px;
+        transform: translate(-50%,-50%);
+    
+  }
+
+  .logbtn{
+    
+    width: 49%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+    position: relative;
+  }
+
+  .logbtn:hover{
+    background-position: right;
+  }
+
+   .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(120deg,#3498db,#8e44ad);
+    transition: .5s;
+  }
+
+  a {
+    color: red;
+    font-family: helvetica;
+    text-decoration: none;
+    text-transform: uppercase;
+    
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: black;
+  }
+  
+  a:visited {
+    color: purple;
+  }
+
+@media only screen and (min-width: 768px) {
+
+    /*body {
+        display: grid;
+        grid-template-columns: 20% auto;
+        padding: 2em;
+    }*/
+
+    .Home_2{
+        /*padding: .3em 5em;*/
+        float: left ;
+    
+    }
+    
+    .Home_1{
+       /* padding: .0em 5em;*/
+        float: right;
+   
+    }
+    
+
+    aside {
+        background: #DCE1F6;
+        grid-template-columns: auto;
+        grid-template-rows: 20% auto;
+        padding: 0;
+    }
+
+    main {
+        padding: 2em;
+        background:rgb(255, 255, 255) ;
+        background-size: 70%;
+    }
+
+    #avatar {
+        border-radius: 50%;
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        margin: 2em auto 1em auto;
+    }
+
+    figcaption {
+        text-align: center;
+        color: #000;
+    }
+
+    ul {
+        display: block;
+        margin-top: 2em;
+        position: relative !important;
+        background: none !important;
+        width: 100% !important;
+    }
+
+    ul li a:hover {
+        background-color: #fff;
+    }
+
+    nav {
+        background: none;
+    }
+
+    .cta {
+        display: inline-block;
+        font-size: 1.3em;
+        padding: .8em 3em;
+    }
+
+   .header1 {
+        color:black;
+        font-size: 3em;
+        margin-left: 1em;
+       
+        
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .bg-modal{
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        position : absolute;
+        top: 0;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .modal-content{
+      width: 300px;
+      background-color: white;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      
+    }
+  
+    .close{
+        position: absolute;
+        top: 0;
+        right: 14px;
+        font-size: 42px;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+
+    .form1{
+        width: 360px;
+        background: #f1f1f1;
+        
+        padding: 80px 40px;
+        border-radius: 10px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+
+}
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Activities";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-bowling-ball"></i> Activities</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Addiction";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-tablets"></i> Addiction Help</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a>
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Personal Development";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-university"></i> Personal Development</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Reading";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-book"></i> Reading</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Social";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-user-friends"></i> Social Activities</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Spiritality";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-pray"></i> Spirituality & Religion</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Sports";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="far fa-futbol"></i> Sports Activities</h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM patient_rersources WHERE `category` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = "Support";
+    mysqli_stmt_bind_param($stmt,"s", $sports);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          
+      <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+    <div id="avatar"></div>
+    
+    <form class = "form1">
+        <h1 href="#profile" class="btn"><i class="fas fa-question-circle"></i> Support & Advice </h1>
+        <br>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> <br> <hr>
+            <?php $count++; ?>
+        <?php endwhile; ?>    
+    </form>
+
+    <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+ 
+</body>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, html {
+    height: calc(100% - 2em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+}
+
+body {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4a00fb+0,e600ff+100 */
+        min-height: 100vh;
+        background-color: #EB3A70;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: auto;
+    /*background: white;*/
+}
+
+aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+}
+
+.Menu_Bar {
+    width: 40px;
+    cursor: pointer;
+}
+
+.SHL_Logo {
+    display: block;
+    width: 340px;
+    cursor: pointer;
+    padding: .8em 3em;
+    margin: auto;
+}
+
+.Home_2{
+    padding: .0em 5em;
+    position: relative;
+}
+
+.home_1{
+    
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+}
+
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+nav {
+    background: #fff;
+}
+
+.active {
+    position: absolute;
+    display: block;
+    background: #fff;
+    width: 50%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 5;
+    max-width: 250px;
+}
+
+ul {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .8em;
+    display: block;
+    padding: 1.5em 3em;
+    background-color: rgba(255,255,255,.35);
+    color: #000;
+}
+
+main {
+    background: #fff;
+    padding: 1em 1.4em;
+}
+
+.header1 {
+    color:black;
+    font-size: 3em;
+    margin-top: 2em;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+.cta {
+    display: block;
+    color: #fff;
+    background-color: #EF0D50;
+    text-decoration: none;
+    padding: 8px 50px;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    margin: 2em 0;
+}
+
+.bg-modal{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position : absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+  width: 300px;
+  background-color: white;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  
+}
+
+.close{
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 42px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.form1{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    
+    
+    
+  }
+
+  .logbtn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 4px;
+    
+  }
+
+  .logbtn:hover{
+    background-position: right;
+  }
+
+  textarea{
+      width:450px;
+      margin: auto;
+      font-size: large;
+  }
+
+
+@media only screen and (min-width: 5768px) {
+
+    /*body {
+        display: grid;
+        grid-template-columns: 20% auto;
+        padding: 2em;
+    }*/
+
+    .Home_2{
+        /*padding: .3em 5em;*/
+        float: left ;
+    
+    }
+    
+    .Home_1{
+       /* padding: .0em 5em;*/
+        float: right;
+   
+    }
+    
+
+    aside {
+        background: #DCE1F6;
+        grid-template-columns: auto;
+        grid-template-rows: 20% auto;
+        padding: 0;
+    }
+
+    main {
+        padding: 2em;
+        background:rgb(255, 255, 255) ;
+        background-size: 70%;
+    }
+
+    #avatar {
+        border-radius: 50%;
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        margin: 2em auto 1em auto;
+    }
+
+    figcaption {
+        text-align: center;
+        color: #000;
+    }
+
+    ul {
+        display: block;
+        margin-top: 2em;
+        position: relative !important;
+        background: none !important;
+        width: 100% !important;
+    }
+
+    ul li a:hover {
+        background-color: #fff;
+    }
+
+    nav {
+        background: none;
+    }
+
+    .cta {
+        display: inline-block;
+        font-size: 1.3em;
+        padding: .8em 3em;
+    }
+
+   .header1 {
+        color:black;
+        font-size: 3em;
+        margin-left: 1em;
+       
+        
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .bg-modal{
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+        position : absolute;
+        top: 0;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .modal-content{
+      width: 300px;
+      background-color: white;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      
+    }
+  
+    .close{
+        position: absolute;
+        top: 0;
+        right: 14px;
+        font-size: 42px;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+
+    .form1{
+        width: 360px;
+        background: #f1f1f1;
+        
+        padding: 80px 40px;
+        border-radius: 10px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+
+}
+<?php
+  // remove all session variables
+  session_unset();
+
+  // destroy the session
+  $_SESSION = array();
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+<body>
+
+    <form action="includes/login.php" method = "post" class="login-form">
+      <h1>Login</h1>
+
+      <div class="txtb">
+        <input type="text" name = "email">
+        <span data-placeholder="Username"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <button type="submit" name = "login-submit" class="logbtn">Login</button>
+
+      <div class="bottom-text">
+        Don't have account? <a href="sighnup.php">Sign up</a>
+      </div>
+
+    </form>
+    <!-- Script to animate textbox placeholder -->
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: calc(100% + 9em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+}
+body {
+        
+  min-height: 100vh;
+  background-color: #EB3A70;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+  .sighnup-form{
+    width: 400px;
+    background: white;
+    
+    padding: 50px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 580px;
+    transform: translate(-50%,-50%);
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+ 
+  
+ 
+  
+  .next_btn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  /* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(238, 238, 238);
+    outline-style: dott ed;
+    outline: black;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #EF0D50;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  @media only screen and (min-width: 768px) {
+    .sighnup-form{
+      width: 660px;
+      background: #f1f1f1;
+      height: 880px;
+      padding: 50px 40px;
+      border-radius: 10px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+  <?php
+  session_start();
+?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="interview.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+<body>
+
+    <form action="includes/interview.php" method="post" class="sighnup-form">
+        <h1>Tell us about yourself <?php echo $_SESSION["fNmae"]; ?> </h1> <br>
+        <h4>Mental Health</h4>  <br>
+        
+        <label class = "container">Have you been diagnosed with a mental health condition, eg Depression & Anxiety
+          <input type="checkbox" 
+          name="mental_health_yes" 
+          value="vmental_health_yes" > 
+          <span class = "checkmark"></span><br> <br>
+      </label>
+
+      <label class = "container">Are you out to family & Friends
+          <input type="checkbox" 
+          name="out_yes" 
+          value="vout_yes" > 
+          <span class = "checkmark"></span><br> <br>
+      </label>
+
+        
+        
+        <h4>Alcohol & Drugs</h4> <br>
+        
+        <label class = "container">I have felt I should cut down on my drinking
+            <input type="checkbox" 
+            name="cutdrink_yes" 
+            value="vcutdrink_yes" > 
+            <span class = "checkmark"></span><br> <br>
+        </label>
+
+        <label class = "container">I have been annoyed by people criticising my drinking
+            <input type="checkbox" 
+            name="annoying_yes" 
+            value="vannoying_yes" > 
+            <span class = "checkmark"></span><br> <br>
+        </label>
+
+        <label class = "container">I have felt bad or guilty about my drinking
+            <input type="checkbox" 
+            name="feltbad_yes" 
+            value="vfeltbad_yes" > 
+            <span class = "checkmark"></span><br> <br>
+        </label>
+
+        <label class = "container">I have had a drink first thing in the morning to get rid of a hangover or steady my nerves
+            <input type="checkbox" 
+            name="drinkmorn_yes" 
+            value="vdrinkmorn_yes" > 
+            <span class = "checkmark"></span><br> <br>
+        </label>
+
+        <label class = "container">I take club drugs
+            <input type="checkbox" 
+            name="clubdrug_yes" 
+            value="vclubdrug_yes" > 
+            <span class = "checkmark"></span><br> <br>
+        </label>
+        
+        
+
+        <h4>HIV</h4>
+
+        <h4>Excercise & Health</h4><br>
+
+        <label class = "container">I Excercise regularly
+          <input type="checkbox" 
+          name="excercise_yes" 
+          value="vexcercise_yes" > 
+          <span class = "checkmark"></span><br> <br>
+      </label>
+
+      <label class = "container">I am a smoker
+          <input type="checkbox" 
+          name="smoker_yes" 
+          value="vsmoker_yes" > 
+          <span class = "checkmark"></span><br> <br>
+      </label>
+
+      <button type="submit" name = "submit_questions" class="logbtn">Next</button>
+
+    </form>
+
+    
+
+</body>
+</html>
+<?php
+  // remove all session variables
+  session_unset();
+
+  // destroy the session
+  $_SESSION = array();
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+<body>
+
+    <form action="includes/login.php" method = "post" class="login-form">
+      <h1>Login</h1>
+    <h4 class='msg'>Enter email and password</h4>
+      <div class="txtb">
+        <input type="text" name = "email">
+        <span data-placeholder="Username"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <button type="submit" name = "login-submit" class="logbtn">Login</button>
+
+      <div class="bottom-text">
+        Don't have account? <a href="sighnup.php">Sign up</a>
+      </div>
+
+    </form>
+    <!-- script to animate text field -->
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+<?php
+  // remove all session variables
+  session_unset();
+
+  // destroy the session
+  $_SESSION = array();
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+<body>
+
+    <form action="includes/login.php" method = "post" class="login-form">
+      <h1>Login</h1>
+    <h4 class='msg'>Wrong email or password </h4>
+      <div class="txtb">
+        <input type="text" name = "email">
+        <span data-placeholder="Username"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <button type="submit" name = "login-submit" class="logbtn">Login</button>
+
+      <div class="bottom-text">
+        Don't have account? <a href="sighnup.php">Sign up</a>
+      </div>
+
+    </form>
+
+    <!-- script to animate text field -->
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    background-color: #EB3A70;
+  }
+  
+  .login-form{
+    width: 360px;
+    background: #f1f1f1;
+    height: 580px;
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(120deg,#3498db,#8e44ad);
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+ 
+  
+ 
+  .logbtn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, html {
+    height: calc(100% + 5em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+}
+
+body {
+        
+        min-height: 100vh;
+        background-color: #EB3A70;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    
+}
+
+.project-form{
+    
+    background: #f1f1f1;
+    width: 400px;
+    padding: 50px 40px;
+    border-radius: 10px;
+    position: relative;
+    margin: auto;
+   
+  }
+  
+
+.cta {
+    display: block;
+    color: #fff;
+    background-color: #EF0D50;
+    text-decoration: none;
+    padding: 8px 50px;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    margin: 2em 0;
+}
+
+.cta:hover {
+    background-color: #E5BACE;
+    
+}
+
+.logbtn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: #EF0D50;
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 4px;
+    
+  }
+
+   /* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #EF0D50;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+
+
+  figure {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+nav {
+    background: #fff;
+}
+
+.active {
+    position: absolute;
+    display: block;
+    background: #fff;
+    width: 50%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 3;
+}
+
+ul {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .8em;
+    display: block;
+    padding: 1.5em 3em;
+    background-color: rgba(255,255,255,.35);
+    color: #000;
+}
+aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+}
+
+.msg{
+  color: red;
+}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: calc(100% + 9em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+  }
+body {
+        
+  min-height: 150vh;
+  background-color: #EB3A70;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+  
+  .screening-form{
+    background: #f1f1f1;
+    width: 400px;
+    padding: 50px 40px;
+    border-radius: 10px;
+    margin: auto;
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+}
+
+.Menu_Bar {
+    width: 40px;
+    cursor: pointer;
+}
+
+
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+nav {
+  background: #fff;
+}
+
+.active {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  nav {
+    background: #fff;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 3;
+}
+
+ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .8em;
+  display: block;
+  padding: 1.5em 3em;
+  background-color: rgba(255,255,255,.35);
+  color: #000;
+
+}
+
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+  .focus + span::after{
+    width: 100%;
+  }
+  
+  .next_btn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+  }
+  
+  .next_btn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+ 
+
+   .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  @media only screen and (min-width: 768px) {
+    .sighnup-form{
+      width: 660px;
+      background: #f1f1f1;
+      height: 880px;
+      padding: 50px 40px;
+      border-radius: 10px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+<?php session_start() ?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="newscreening.css">
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+
+<aside>
+        <figure>
+            <div id="avatar"></div>
+            <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+        </figure>
+        <img src="images/menu.svg" class = "Menu_Bar">
+        <nav>
+        <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+        </nav>
+    </aside>
+    
+</head>
+<body>
+
+        <form action="includes/addScrrening.php" method="post" class="screening-form">
+            <h1>Add new STI Results</h1> <br>
+            <hr>
+            <br>
+            
+            <h4>Chlamydia</h4> <br>
+            
+            <label class = "container">Positive 
+                <input type="radio" 
+                name="Chlamydia" 
+                value="chlamydia_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="radio" 
+                name="Chlamydia" 
+                value="chlamydia_no" > 
+                <span class = "checkmark"></span><br> 
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="radio" 
+                name="Chlamydia" 
+                value="chlamydia_na" > 
+                <span class = "checkmark"></span><br> 
+            </label>
+            <br>
+            <hr>
+            <br>
+            <h4>Gonorrhea</h4> <br>
+            
+            <label class = "container">Positive 
+                <input type="radio" 
+                name="Gonorrhea" 
+                value="gonorrhea_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="radio" 
+                name="Gonorrhea" 
+                value="gonorrhea_no" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="radio" 
+                name="Gonorrhea" 
+                value="gonorrhea_na" > 
+                <span class = "checkmark"></span>
+            </label>
+        
+            <br> 
+            <hr>
+            <br>
+            <h4>Syphilis</h4> 
+            <br>
+            
+            <label class = "container">Positive 
+                <input type="radio" 
+                name="Syphilis" 
+                value="syphilis_yes" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="radio" 
+                name="Syphilis" 
+                value="syphilis_no" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="radio" 
+                name="Syphilis" 
+                value="syphilis_na" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br> 
+            <hr>
+            <br>
+            <h4>HIV</h4> <br>
+            
+            <label class = "container">Positive 
+                <input type="radio" 
+                name="HIV" 
+                value="hiv_yes" > 
+                <span class = "checkmark"></span>
+                
+            </label>
+            <br>
+            <label class = "container">Negative
+                <input type="radio" 
+                name="HIV" 
+                value="hiv_no" > 
+                <span class = "checkmark"></span>
+            </label>
+            <br>
+            <label class = "container">Not Applicable 
+                <input type="radio" 
+                name="HIV" 
+                value="hiv_na" > 
+                <span class = "checkmark"></span><br> 
+            </label>
+
+
+            <div class = txtb>
+            <p name = "date_pick">Date of test: <input type="text" id="datepicker" name = "date" autocomplete="off"></p>
+            </div>
+            
+            <button type="submit" name = "submit_screening" class="logbtn">Submit</button><br><br>
+           
+          </div>
+    
+    
+        </form>
+    
+        
+    
+    <script>
+        
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    
+    </script>
+    
+    </body>
+    </html>
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-image: linear-gradient(120deg,#3498db,#8e44ad);
+  }
+  
+  .sighnup-form{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+  .focus + span::after{
+    width: 100%;
+  }
+  
+  .logbtn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+  }
+  
+  .logbtn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="registerpatient.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+    </head>
+<body>
+
+    <form action="includes/sighnup.php" method="post" class="sighnup-form">
+      <h1>Sign up</h1>
+
+      <div class="txtb">
+        <input type="text" name="name1">
+        <span data-placeholder="First Name"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name2">
+        <span data-placeholder="Second Name"></span>
+      </div>
+
+    
+
+      <div class = "txtb">
+        <input type="text" id="datepicker" name = "DOB"> 
+        <span data-placeholder="Date Of Birth"></span>
+      </div>
+
+      
+      <hr>
+      <br>
+      <h4>Address</h4>
+      
+
+      <div class="txtb">
+        <input type="text" name="address1">
+        <span data-placeholder="Address 1"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="address2">
+        <span data-placeholder="Address 2"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="city">
+        <span data-placeholder="City"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="county">
+        <span data-placeholder="County"></span>
+      </div>
+
+
+      <div class="txtb">
+        <input type="text" name="postcode">
+        <span data-placeholder="Post Code"></span>
+      </div>
+
+
+
+
+      <input type="submit" name="sighnup-submit" class="logbtn" value="Continue">
+
+      
+
+    </form>
+
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+
+<?php
+session_start();
+$count = 0;
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+  <body>
+
+    <form class="project-form" action="includes/search.php" method="post"> 
+        <h1>Search</h1>
+        <br>
+        <h4 class="msg"> No user found </h4>
+        <br>
+        <h4>Email: </h4>
+            <br>
+            <div class = "txtb">
+                <input type="text" name = 's_email'  >
+                <span data-placeholder="Email"></span>
+            </div>
+            
+<br>
+<button type="submit" name = "login-submit" class="logbtn">Search</button>
+   
+    
+  </form>
+    
+           
+  </body>
+  <!-- script to open and hde navigational menu-->
+  <script>
+          (function() {
+              var menu = document.querySelector('ul'),
+                  menulink = document.querySelector('img');
+              
+              menulink.addEventListener('click', function(e) {
+                  menu.classList.toggle('active');
+                  e.preventDefault();
+              });
+          })();
+      </script>
+
+<!-- script to animate text field on click-->
+<script type="text/javascript">
+$(".txtb input").on("focus",function(){
+  $(this).addClass("focus");
+});
+
+$(".txtb input").on("blur",function(){
+  if($(this).val() == "")
+  $(this).removeClass("focus");
+});
+</script>
+</form>
+
+
+
+
+</html>
+
+<?php
+session_start();
+//database connection 
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="activities2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+  <body>
+
+    <form class="project-form" action="includes/search.php" method="post"> 
+        <h1>Search</h1>
+            <br>
+            <h4>Email: </h4>
+            <div class = "txtb">
+                <input type="text" name = 's_email'  >
+                <span data-placeholder="Email"></span>
+            </div>
+            
+        
+<br>
+<button type="submit" name = "login-submit" class="logbtn">Search</button>
+  
+    
+  </form>
+    
+           
+  </body>
+  <!--Script to show and hide navigational menu-->
+  <script>
+          (function() {
+              var menu = document.querySelector('ul'),
+                  menulink = document.querySelector('img');
+              
+              menulink.addEventListener('click', function(e) {
+                  menu.classList.toggle('active');
+                  e.preventDefault();
+              });
+          })();
+      </script>
+<!-- script to animate textfield-->
+<script type="text/javascript">
+$(".txtb input").on("focus",function(){
+  $(this).addClass("focus");
+});
+
+$(".txtb input").on("blur",function(){
+  if($(this).val() == "")
+  $(this).removeClass("focus");
+});
+</script>
+</form>
+
+
+
+
+</html>
+
+<?php
+session_start();
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    //header("Location: ../index.php?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM Patient WHERE email = ?   ";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    
+    mysqli_stmt_bind_param($stmt,'s',$_SESSION['s_email']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+}
+
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+          <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+  
+  </head>
+<body>
+
+        
+    <form class = "home_1">
+       
+        <main>
+
+        <h1> <?php echo $row['first_name']." " .$row['second_name'] ?></h1>
+            <p> <?php echo $row['email'] ?></p>
+            <p> <?php echo $row['address1'] ?></p> 
+                  
+            <p> <?php echo $row['county'] ?></p>  
+            <p> <?php echo $row['post_code'] ?></p>  
+            <h4> <?php echo 'DOB: '.$row['birth'] ?></h4>        
+            <hr>
+<?php
+//retrieve all of the users hpv vaccination details and display
+          $sql = 'SELECT * FROM `hpv` WHERE `patient_ID` = ? ';
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+  header("Location: ../sighnup.php?error=passwordcheck&email=" .$email);
+  exit();
+}else{
+  mysqli_stmt_bind_param($stmt,'s',$_SESSION['s_email']);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  if($row = mysqli_fetch_assoc($result)){
+    $dose1 = $row['dose1'];
+    $dose2 = $row['dose2'];
+    $dose3 = $row['dose3'];
+    $next_dose = $row['next_dose']; 
+  }else{
+    $dose1 = 'NA';
+    $dose2 = 'NA';
+    $dose3 = 'NA';
+    $next_dose = $_SESSION['s_email']; 
+  }
+}
+?>
+          <h2>HPV Status</h2>
+           
+            <h4>Dose 1: <?php  echo $dose1?> </h4> 
+            
+            <h4>Dose 2: <?php echo $dose2 ?> </h4>
+            
+            <h4>Dose 3: <?php echo $dose3 ?> </h4>
+            
+            <hr>
+            
+            <h4>Next Dose: <?php echo $next_dose ?> </h4>
+            
+            <hr>
+    
+            
+            
+         
+          
+         
+    
+          </main>
+        </form>
+
+        <form class = "home_1" action="includes/message_user.php" method="post">
+          <main>
+          <?php
+          //retrieve all of the users hep vaccination details and display
+               $sql = 'SELECT * FROM `hep` WHERE `patient_ID` = ? ';
+               $stmt = mysqli_stmt_init($conn);
+               if(!mysqli_stmt_prepare($stmt,$sql)){
+                 header("Location: ../sighnup.php?error=passwordcheck&email=" .$email);
+                 exit();
+               }else{
+                 mysqli_stmt_bind_param($stmt,'s',$_SESSION['s_email']);
+                 mysqli_stmt_execute($stmt);
+                 $result = mysqli_stmt_get_result($stmt);
+                 if($row = mysqli_fetch_assoc($result)){
+                   $dose1 = $row['dose1'];
+                   $dose2 = $row['dose2'];
+                   $dose3 = $row['dose3'];
+                   $next_dose = $row['next_dose']; 
+                 }else{
+                   $dose1 = 'NA';
+                   $dose2 = 'NA';
+                   $dose3 = 'NA';
+                   $next_dose = 'NA'; 
+                 }
+               }
+               
+              ?>
+          <h2>Hep A&B Status</h2>
+            
+            <h4>Dose 1: <?php echo $dose1 ?> </h4>         
+            
+            <h4>Dose 2: <?php echo $dose2 ?> </h4>
+            
+            <h4>Dose 3: <?php echo $dose3 ?> </h4>
+            
+            <hr>
+            
+            <h4>Next Dose: <?php echo $next_dose?> </h4>
+            
+            <hr>
+            <br>
+           
+            
+          <br>
+          <!-- allows user to send patient message -->
+<h1>Contact</h1>
+<textarea id="message_box" rows="14" cols="50" name="email_text" data-placeholder='Text Here'>
+Enter Message Here...
+</textarea>
+<br>
+<br>
+<button type="submit" name = "login-submit" class="logbtn">Message User </button>
+<br>
+          <?php
+          //retrieve all of the users screening result details and display
+          $sql = "SELECT * FROM screening WHERE `patient_ID` = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../signup.php?error=mysqlerror_connection");
+        exit();
+    }else{
+        $sports = 1;
+        mysqli_stmt_bind_param($stmt,"s", $_SESSION['s_email']);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    
+    }
+?>
+
+
+            <?php while ($row = $result->fetch_assoc()): ?>
+            <hr>
+           
+            <h4>TST#<?php echo $row['screening_ID'] ?></h4>
+                     
+             Date: <?php echo $row['date_tested'] ?> <br>
+             <h4>Chlamydia: <?php echo $row['Chlamydia'] ?> </h4>
+             <h4>Gonnorea: <?php echo $row['Gonnorhea'] ?> </h4>
+             <h4>Syphilis: <?php echo $row['Syphilis'] ?> </h4>
+             <h4>HIV: <?php echo $row['HIV'] ?></h4>
+            
+      <?php endwhile; ?>
+         
+    <!-- script to display and hide naviagational menu -->
+      <script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+          </main>
+        </form>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="sighnup.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+  </head>
+<body>
+
+    <form action="includes/sighnup.php" method="post" class="sighnup-form">
+      <h1>Sign up</h1>
+      <br>
+      <h4 class='msg'>Email invalid </h4>
+
+      <div class="txtb">
+        <input type="text" name="mail">
+        <span data-placeholder="Email"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name1">
+        <span data-placeholder="First Name"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name2">
+        <span data-placeholder="Surname"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name="pass1">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass2">
+        <span data-placeholder="Confirm Password"></span>
+      </div>
+
+      
+     
+
+    
+
+      <div class = "txtb">
+        <input type="text" id="datepicker" name = "DOB"> 
+        <span data-placeholder="Date Of Birth"></span>
+      </div>
+
+      
+      <hr>
+      <br>
+      <h4>Address</h4>
+      
+
+      <div class="txtb">
+        <input type="text" name="address1">
+        <span data-placeholder="Address 1"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="address2">
+        <span data-placeholder="Address 2"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="city">
+        <span data-placeholder="City"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="county">
+        <span data-placeholder="County"></span>
+      </div>
+
+
+      <div class="txtb">
+        <input type="text" name="postcode">
+        <span data-placeholder="Post Code"></span>
+      </div>
+
+
+
+      <input type="submit" name="sighnup-submit" class="logbtn" value="Sign Up">
+
+      <div class="bottom-text">
+        Have an account? <a href="#">Log in</a>
+      </div>
+
+    </form>
+
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="sighnup.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+  </head>
+<body>
+
+    <form action="includes/sighnup.php" method="post" class="sighnup-form">
+      <h1>Sign up</h1>
+      <br>
+      <h4 class='msg'>Required fields empty </h4>
+
+      <div class="txtb">
+        <input type="text" name="mail">
+        <span data-placeholder="Email"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name1">
+        <span data-placeholder="First Name"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name2">
+        <span data-placeholder="Surname"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name="pass1">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass2">
+        <span data-placeholder="Confirm Password"></span>
+      </div>
+
+      
+     
+
+    
+
+      <div class = "txtb">
+        <input type="text" id="datepicker" name = "DOB"> 
+        <span data-placeholder="Date Of Birth"></span>
+      </div>
+
+      
+      <hr>
+      <br>
+      <h4>Address</h4>
+      
+
+      <div class="txtb">
+        <input type="text" name="address1">
+        <span data-placeholder="Address 1"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="address2">
+        <span data-placeholder="Address 2"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="city">
+        <span data-placeholder="City"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="county">
+        <span data-placeholder="County"></span>
+      </div>
+
+
+      <div class="txtb">
+        <input type="text" name="postcode">
+        <span data-placeholder="Post Code"></span>
+      </div>
+
+
+
+      <input type="submit" name="sighnup-submit" class="logbtn" value="Sign Up">
+
+      <div class="bottom-text">
+        Have an account? <a href="#">Log in</a>
+      </div>
+
+    </form>
+
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="sighnup.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+  </head>
+<body>
+
+    <form action="includes/sighnup.php" method="post" class="sighnup-form">
+      <h1>Sign up</h1>
+      <br>
+      <h4 class='msg'>Passwords do not match </h4>
+
+      <div class="txtb">
+        <input type="text" name="mail">
+        <span data-placeholder="Email"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name1">
+        <span data-placeholder="First Name"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name2">
+        <span data-placeholder="Surname"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name="pass1">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass2">
+        <span data-placeholder="Confirm Password"></span>
+      </div>
+
+      
+     
+
+    
+
+      <div class = "txtb">
+        <input type="text" id="datepicker" name = "DOB"> 
+        <span data-placeholder="Date Of Birth"></span>
+      </div>
+
+      
+      <hr>
+      <br>
+      <h4>Address</h4>
+      
+
+      <div class="txtb">
+        <input type="text" name="address1">
+        <span data-placeholder="Address 1"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="address2">
+        <span data-placeholder="Address 2"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="city">
+        <span data-placeholder="City"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="county">
+        <span data-placeholder="County"></span>
+      </div>
+
+
+      <div class="txtb">
+        <input type="text" name="postcode">
+        <span data-placeholder="Post Code"></span>
+      </div>
+
+
+
+      <input type="submit" name="sighnup-submit" class="logbtn" value="Sign Up">
+
+      <div class="bottom-text">
+        Have an account? <a href="#">Log in</a>
+      </div>
+
+    </form>
+
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: calc(100% + 9em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+}
+body {
+        
+  min-height: 100vh;
+  background-color: #EB3A70;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a00fb', endColorstr='#e600ff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+  
+  .sighnup-form{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: relative;
+    left: 50%;
+    top: 680px;
+    transform: translate(-50%,-50%);
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+  .focus + span::after{
+    width: 100%;
+  }
+  
+  .logbtn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+  }
+  
+  .logbtn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="sighnup.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+  </head>
+<body>
+
+    <form action="includes/sighnup.php" method="post" class="sighnup-form">
+      <h1>Sign up</h1>
+
+      <div class="txtb">
+        <input type="text" name="mail">
+        <span data-placeholder="Email"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name1">
+        <span data-placeholder="First Name"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="name2">
+        <span data-placeholder="Surname"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name="pass1">
+        <span data-placeholder="Password"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="password" name = "pass2">
+        <span data-placeholder="Confirm Password"></span>
+      </div>
+
+      
+     
+
+    
+
+      <div class = "txtb">
+        <input type="text" id="datepicker" name = "DOB"> 
+        <span data-placeholder="Date Of Birth"></span>
+      </div>
+
+      
+      <hr>
+      <br>
+      <h4>Address</h4>
+      
+
+      <div class="txtb">
+        <input type="text" name="address1">
+        <span data-placeholder="Address 1"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="address2">
+        <span data-placeholder="Address 2"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="city">
+        <span data-placeholder="City"></span>
+      </div>
+
+      <div class="txtb">
+        <input type="text" name="county">
+        <span data-placeholder="County"></span>
+      </div>
+
+
+      <div class="txtb">
+        <input type="text" name="postcode">
+        <span data-placeholder="Post Code"></span>
+      </div>
+
+
+
+      <input type="submit" name="sighnup-submit" class="logbtn" value="Sign Up">
+
+      <div class="bottom-text">
+        Have an account? <a href="#">Log in</a>
+      </div>
+
+    </form>
+      <!-- script to animate textfields-->
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+
+</body>
+</html>
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-image: linear-gradient(120deg,#3498db,#8e44ad);
+  }
+  
+  .form1{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 480px;
+    transform: translate(-50%,-50%);
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  ul {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .8em;
+    display: block;
+    padding: 1.5em 3em;
+    background-color: rgba(255,255,255,.35);
+    color: #000;
+  }
+  
+  main {
+    background: #fff;
+    padding: 1em 1.4em;
+  }
+  
+  .header1 {
+    color:black;
+    font-size: 3em;
+    margin-top: 2em;
+  }
+  
+  aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+  }
+  
+  p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+  .focus + span::after{
+    width: 100%;
+  }
+  
+  .logbtn{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+  }
+  
+  .Menu_Bar {
+    width: 40px;
+    cursor: pointer;
+}
+  .logbtn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .bg-modal{
+      display: none;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      position : absolute;
+      top: 0;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .modal-content{
+    width: 300px;
+    background-color: white;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    
+  }
+
+  .close{
+      position: absolute;
+      top: 0;
+      right: 14px;
+      font-size: 42px;
+      transform: rotate(45deg);
+      cursor: pointer;
+  }
+<?php
+session_start();
+//database connection
+$dose1t = "12-09-2019";
+$idtest = 1;
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+
+}
+// select all vaccination records fro hep
+$sql = 'SELECT * FROM `hep` WHERE `patient_ID` = ? ';
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+  header("Location: ../sighnup.php?error=passwordcheck&email=" .$email);
+  exit();
+}else{
+  mysqli_stmt_bind_param($stmt,'s',$_SESSION['ID']);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  if($row = mysqli_fetch_assoc($result)){
+    $dose1 = $row['dose1'];
+    $dose2 = $row['dose2'];
+    $dose3 = $row['dose3'];
+    $next_dose = $row['next_dose']; 
+  }else{
+    $dose1 = 'NA';
+    $dose2 = 'NA';
+    $dose3 = 'NA';
+    $next_dose = 'NA'; 
+  }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="viewhpv.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker({
+          dateFormat: 'yy-mm-dd',
+          changeMonth:true,
+          changeYear: true
+        });
+        } );
+    </script>
+    
+     <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+    </head>
+<body>
+
+    
+
+    <form class="form1">
+      <h1>Hepatitus A and B Imunisation</h1>
+      <br>
+      <p> Twinrix is used to help 
+        prevent infection from the hepatitis A and B viruses. 
+        Hepatitis A infection can be mild with no symptoms or a severe 
+        illness that can rarely cause liver failure and death. Hepatitis B 
+        infection can cause serious problems including liver failure, persistent 
+        hepatitis B infection, cirrhosis, and liver cancer. Preventing infection with 
+        these viruses can prevent these problems.</p>
+        <br>
+        <p>The vaccine's available from sexual health and HIV clinics.</p>
+        <br>
+        <!-- display users vaccine records -->
+        <h4>Dose 1: <?php echo $dose1 ?> </h4> 
+        <br>
+        <h4>Dose 2: <?php echo $dose2 ?> </h4>
+        <br>
+        <h4>Dose 3: <?php echo $dose3 ?> </h4>
+        <br>
+        <hr>
+        <br>
+        <h4>Next Dose: <?php echo $next_dose ?> </h4>
+        <br>
+        <hr>
+
+        <br>
+        <input  type="button" id="button" class="logbtn" value="Edit" onclick="openModal()">
+      <br>
+      <script>
+        function openModal() {
+         document.querySelector('.bg-modal').style.display = 'flex';
+         
+         
+        }
+        </script>
+     
+
+      
+    </form>
+        <!-- modal menu displayed when user updates records-->
+    <div class="bg-modal">
+        <div class = modal-content>
+            <div class="close" onclick="closeModal()">+</div>
+            <script>
+                function closeModal() {
+                 document.querySelector('.bg-modal').style.display = 'none';
+                }
+                </script>
+            <form action="includes/addHEP.php" method = "post">
+                <h4>Date Recieved </h4>
+                <div class = "txtb">
+                    <input type="text" name = 'date1' id="datepicker" autocomplete = "off">
+                    <span data-placeholder="Date Of Birth"></span>
+                  </div>
+               
+                <br>
+                
+                 <input  name = 'hep-submit' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
+            </form>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+<script>
+        
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    
+    </script>
+
+</body>
+</html>
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+ 
+  
+  .form1{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    
+    margin: auto;
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+  .focus + span::after{
+    width: 100%;
+  }
+  
+  
+  .logbtn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+nav {
+  background: #fff;
+}
+
+.active {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 3;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .8em;
+  display: block;
+  padding: 1.5em 3em;
+  background-color: rgba(255,255,255,.35);
+  color: #000;
+}
+
+main {
+  background: #fff;
+  padding: 1em 1.4em;
+}
+
+.header1 {
+  color:black;
+  font-size: 3em;
+  margin-top: 2em;
+}
+
+aside {
+  color: #fff;
+  display: grid;
+  grid-template-columns: auto 40px;
+  padding: 2em;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+.cta {
+  display: block;
+  color: #fff;
+  background: #0E7FFF;
+  text-decoration: none;
+  padding: 8px 50px;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 4px;
+  margin: 2em 0;
+}
+
+  .bg-modal{
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      
+      position : absolute;
+      top: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      
+  }
+
+
+  .modal-content{
+    width: 300px;
+    
+    background-color: white;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+
+  }
+
+  .close{
+      position: absolute;
+      top: 0;
+      right: 14px;
+      font-size: 42px;
+      transform: rotate(45deg);
+      cursor: pointer;
+  }
+
+<?php
+session_start();
+//database connection 
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+
+}
+
+//retrieve all hpv vaccine data from user
+$sql = 'SELECT * FROM `hpv` WHERE `patient_ID` = ? ';
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+  header("Location: ../sighnup.php?error=passwordcheck&email=" .$email);
+  exit();
+}else{
+  mysqli_stmt_bind_param($stmt,'s',$_SESSION['ID']);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  if($row = mysqli_fetch_assoc($result)){
+    $dose1 = $row['dose1'];
+    $dose2 = $row['dose2'];
+    $dose3 = $row['dose3'];
+    $next_dose = $row['next_dose']; 
+  }else{
+    $dose1 = 'NA';
+    $dose2 = 'NA';
+    $dose3 = 'NA';
+    $next_dose = 'NA'; 
+  }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="viewhpv.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker({
+          dateFormat: 'yy-mm-dd',
+          changeMonth:true,
+          changeYear: true
+        });
+        } );
+    </script>
+  
+     <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+    </head>
+<body>
+
+    
+
+    <form class="form1">
+      <h1>HPV Imunisation</h1>
+        <br>
+        <p>The human papillomavirus (HPV) vaccine 
+          is available for men who have 
+          sex with men (MSM) up to and including 45 years of age.</p>
+        <br>
+        <p>The vaccine will help prevent HPV infection, which can 
+          ause genital warts and certain types of cancer. It’s especially 
+          important for those who are living with HIV, and those who've more 
+          than one sexual partner.</p>
+          <br>
+      <p>The vaccine's available from sexual health and HIV clinics.</p>
+      <br>
+      <!-- display retrieved vaccine data-->
+        <h4>Dose 1: <?php echo $dose1 ?> </h4> 
+        <br>
+        <h4>Dose 2: <?php echo $dose2 ?> </h4>
+        <br>
+        <h4>Dose 3: <?php echo $dose3 ?> </h4>
+        <br>
+        <hr>
+        <br>
+        <h4>Next Dose: <?php echo $next_dose ?> </h4>
+        <br>
+        <hr>
+
+        <br>
+        <input  type="button" id="button" class="logbtn" value="Edit" onclick="openModal()">
+      <br>
+      <script>
+        function openModal() {
+         document.querySelector('.bg-modal').style.display = 'flex';
+         
+         
+        }
+        </script>
+     
+
+      
+    </form>
+        <!-- modal menu opened when user updates vaccine records-->
+    <div class="bg-modal">
+        <div class = modal-content>
+            <div class="close" onclick="closeModal()">+</div>
+            <script>
+                function closeModal() {
+                 document.querySelector('.bg-modal').style.display = 'none';
+                }
+                </script>
+            <form action="includes/addHPV.php" method = "post">
+                <h4>Date Recieved</h4>
+                <div class = "txtb">
+                    <input type="text" name = 'date1' id="datepicker" autocomplete = "off">
+                    <span data-placeholder="Date Of Birth"></span>
+                  </div>
+                <br>
+                
+
+                 <input  name = 'hpv-submit' type="submit" id="button" class="logbtn" value="Update" onclick="openModal()">
+            </form>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+    $(".txtb input").on("focus",function(){
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur",function(){
+      if($(this).val() == "")
+      $(this).removeClass("focus");
+    });
+
+    </script>
+
+<!--script to display and hide navigational panel on click-->
+<script>      
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+
+</body>
+<footer>
+  
+</footer>
+</html>
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+
+  .sighnup-form{
+    background: #f1f1f1;
+    padding: 50px 40px;
+    border-radius: 10px;
+    position: relative;
+    
+    /*transform: translate(-50%,-50%);*/
+  }
+  
+  .login-form h1{
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+  
+  .txtb span::before{
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: .5s;
+  }
+  
+  .txtb span::after{
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    /*background: linear-gradient(120deg,#3498db,#8e44ad);*/
+    transition: .5s;
+  }
+  
+  .focus + span::before{
+    top: -5px;
+  }
+  .focus + span::after{
+    width: 100%;
+  }
+  
+  .next_btn{
+    display: inline-block;
+    offset-position: left;
+    width: 20%;
+    height: 30px;
+    border: none;
+    background: linear-gradient(120deg,#3498db,#8e44ad,#3498db);
+    background-size: 200%;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+  }
+  
+  .next_btn:hover{
+    background-position: right;
+  }
+  
+  .bottom-text{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  /* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+   .txtb{
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+  }
+  
+  .txtb input{
+    font-size: 15px;
+    color: #333;
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+
+  aside {
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto 40px;
+    padding: 2em;
+    
+    
+}
+
+.Menu_Bar {
+  width: 40px;
+  cursor: pointer;
+}
+  
+.active {
+  position: absolute;
+  display: block;
+  background: #fff;
+  width: 50%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 3;
+}
+
+ul {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: .8em;
+  display: block;
+  padding: 1.5em 3em;
+  background-color: rgba(255,255,255,.35);
+  color: #000;
+}
+
+
+
+
+nav {
+  background: #fff;
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+  
+  @media only screen and (min-width: 768px) {
+    .sighnup-form{
+      width: 660px;
+      background: #f1f1f1;
+      height: 880px;
+      padding: 50px 40px;
+      border-radius: 10px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+<?php
+session_start();
+//DB connection 
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+// select screeneing result data for user 
+$sql = "SELECT * FROM screening WHERE `patient_ID` = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../signup.php?error=mysqlerror_connection");
+    exit();
+}else{
+    $sports = 1;
+    mysqli_stmt_bind_param($stmt,"s", $_SESSION['ID']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="viewscreenings.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Script for JQuery DatePickert-->
+    <script>
+        $( function() {
+        $( "#datepicker" ).datepicker();
+        } );
+    </script>
+    <aside>
+      <figure>
+          <div id="avatar"></div>
+          <figcaption> <?php echo $_SESSION["fNmae"]; echo " "; echo $_SESSION["sName"];   ?></figcaption>
+      </figure>
+      <img src="images/menu.svg" class = "Menu_Bar">
+      <nav>
+      <ul>
+              <li><a href="home.php">Home</a></li>
+              <li><a href="viewscreenings.php">View STI Screenings</a></li>
+              <li><a href="newscreening.php">Add Screening Results</a></li>
+              <li><a href="viewhpv.php">View HPV Vacination</a></li>
+              <li><a href="viewhep.php">View HEP A&B Vaciniation</a></li>
+              <li><a href="https://www.shl.uk/" target="_blank">Order a Test Kit</a></li>
+              <li><a href="https://sxt.org.uk/service" target="_blank">Find a Clinic</a></li>
+              <li><a href="activities_menu.php">Resources & Activities</a></li>
+              <li><a href="index.php">Logout</a></li>
+          </ul>
+      </nav>
+  </aside>
+</head>
+<body>
+        
+        <!-- display results from query-->
+        <form action="includes/interview.php" method="post" class="project-form">
+            <h1>Results</h1> <br>
+            <?php while ($row = $result->fetch_assoc()): ?>
+            <hr>
+            <br>
+            <h4>TST#<?php echo $row['screening_ID'] ?></h4>
+            <br>          
+             Date: <?php echo $row['date_tested'] ?> <br>
+             <h4>Chlamydia: <?php echo $row['Chlamydia'] ?> </h4>
+             <h4>Gonnorea: <?php echo $row['Gonnorhea'] ?> </h4>
+             <h4>Syphilis: <?php echo $row['Syphilis'] ?> </h4>
+             <h4>HIV: <?php echo $row['HIV'] ?></h4>
+             <br>
+      <?php endwhile; ?>
+            <hr>            
+        </form>
+    
+       
+<!-- Script to display and hide navigational menu-->
+<script>
+        (function() {
+            var menu = document.querySelector('ul'),
+                menulink = document.querySelector('img');
+            
+            menulink.addEventListener('click', function(e) {
+                menu.classList.toggle('active');
+                e.preventDefault();
+            });
+        })();
+    </script>
+    
+    
+    </body>
+    </html>
+
+<?php
+    // location of DB
+    $servername = "localhost";
+    // username to authernticate 
+    $dBUseraneme = "root";
+    // password for DB, no password required
+    $dbPassword = "";
+    // name of DB to connect too 
+    $dBName ="projectdb2";
+    //connection to server using credentials 
+    $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+    if(!$conn){
+        //if connection failed go to login page  
+        header("Location: ../index.html?error=mysqlerror_connection");
+        die("connection failed ".mysqli_connect_error());
+    }
+    // retrieve entereed url 
+    $URL = $_POST['url'];
+    //validate entry is a URL 
+    if (filter_var($URL, FILTER_VALIDATE_URL) !== false){
+        //check for chosen category 
+        if($_POST['cats'] == "Sports"){
+            //SQL statement to insert row 
+            $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+            //intitate prepared tataement 
+            $stmt = mysqli_stmt_init($conn);  
+            //check if statement is valid 
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                //return error for sql failure
+                header("Location: ../test.html?error=stmt_invalid" .$url);
+                exit();
+            //otherwise 
+            }else{
+                //retrieve name and category entered 
+                $categ = $_POST['cats'];
+                $name = $_POST['name'];
+                //bid paremeters to prepared statement and execute 
+                mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+                mysqli_stmt_execute($stmt);
+        }
+        //Code repeated for all categories 
+    }else if($_POST['cats'] == "Activities"){
+        $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+        $stmt = mysqli_stmt_init($conn);  
+        if(!mysqli_stmt_prepare($stmt,$sql)){
+            header("Location: ../sighnup.php?error=hepCreate" .$email);
+            exit();
+        }else{
+            $categ = $_POST['cats'];
+            $name = $_POST['name'];
+            mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+            mysqli_stmt_execute($stmt);
+    }
+
+    }else if($_POST['cats'] == "Personal Development"){
+        $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+        $stmt = mysqli_stmt_init($conn);  
+        if(!mysqli_stmt_prepare($stmt,$sql)){
+            header("Location: ../sighnup.php?error=hepCreate" .$email);
+            exit();
+        }else{
+            $categ = $_POST['cats'];
+            $name = $_POST['name'];
+            mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+            mysqli_stmt_execute($stmt);
+    }
+}else if($_POST['cats'] == "Social"){
+    $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+    $stmt = mysqli_stmt_init($conn);  
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../sighnup.php?error=hepCreate" .$email);
+        exit();
+    }else{
+        $categ = $_POST['cats'];
+        $name = $_POST['name'];
+        mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+        mysqli_stmt_execute($stmt);
+    }
+}else if($_POST['cats'] == "Spiritality"){
+    $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+    $stmt = mysqli_stmt_init($conn);  
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../sighnup.php?error=hepCreate" .$email);
+        exit();
+    }else{
+        $categ = $_POST['cats'];
+        $name = $_POST['name'];
+        mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+        mysqli_stmt_execute($stmt);
+    }
+}else if($_POST['cats'] == "Support"){
+    $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+    $stmt = mysqli_stmt_init($conn);  
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../sighnup.php?error=hepCreate" .$email);
+        exit();
+    }else{
+        $categ = $_POST['cats'];
+        $name = $_POST['name'];
+        mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+        mysqli_stmt_execute($stmt);
+    }
+}else if($_POST['cats'] == "Addiction"){
+    $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+    $stmt = mysqli_stmt_init($conn);  
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../sighnup.php?error=hepCreate" .$email);
+        exit();
+    }else{
+        $categ = $_POST['cats'];
+        $name = $_POST['name'];
+        mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+        mysqli_stmt_execute($stmt);
+    }
+}else if($_POST['cats'] == "Reading"){
+    $sql = "INSERT INTO `Patient_rersources` (`category`,`activity`,`url`) VALUES  (?,?,?)";
+    $stmt = mysqli_stmt_init($conn);  
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../sighnup.php?error=hepCreate" .$email);
+        exit();
+    }else{
+        $categ = $_POST['cats'];
+        $name = $_POST['name'];
+        mysqli_stmt_bind_param($stmt,"sss", $categ,$name,$URL); 
+        mysqli_stmt_execute($stmt);
+    }
+}
+    }else{
+        header('Location: ../test.html?error=end');
+    }
+    header('Location: ../test.html?error=end');
+
+<?php
+    session_start();
+    //check button has been pressed 
+if (isset($_POST['hep-submit'])){
+    //
+    $servername = "localhost";
+    $dBUseraneme = "root";
+    $dbPassword = "";
+    $dBName ="projectdb2";
+    $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+    $severity = 1;
+    if(!$conn){
+        header("Location: ../index.html?error=mysqlerror_connection");
+        die("connection failed ".mysqli_connect_error());
+    }
+    // retrieve date from dataset 
+    $dateString = $_POST['date1'];
+    // retrieve date from dataset 
+    $dateEntered = new DateTime($_POST['date1']);
+    $test_date = '03/22/2010';
+    $test_arr  = explode('-', $dateString);
+    //validate date
+    if (0==0) {
+        // SQL statement to select data from user profile
+        $sql = 'SELECT * FROM HEP WHERE patient_ID = ?';
+        // initialise prepared ststement 
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            // if sql error occurs reolad with error 
+            header("Location: ../viewhep.php?error=seleccthep");
+            exit();
+        }else{
+            //bind parameters to prepared statement
+            mysqli_stmt_bind_param($stmt,"s",$_SESSION['ID']);
+            mysqli_stmt_execute($stmt);
+            //store result of query 
+            $result = mysqli_stmt_get_result($stmt);
+            //if row is found in result 
+            if($row = mysqli_fetch_assoc($result)){
+                $dose1 = $row['dose1'];
+                $dose2 = $row['dose2'];
+                $dose3 = $row['dose3'];
+                //if users first entered dose 
+                if ($dose1 == ""){
+                    
+                    $nextDate = $dateEntered;
+                    //add 1 month to date 
+                    $nextDate->modify('+1 month');
+                    //format date 
+                    $nextDateString = $nextDate->format('Y-m-d');
+                    //update row with new datat
+                    $sql = 'UPDATE HEP SET  dose1 = ? , next_dose = ?, severity = ?
+                    WHERE patient_ID = ?';
+                    $stmt = mysqli_stmt_init($conn);
+                    if(!mysqli_stmt_prepare($stmt,$sql)){
+                        header("Location: ../viewhep.php?error=update_dose1");
+                        exit();
+                    }else{
+                        //execute statement 
+                        mysqli_stmt_bind_param($stmt,"ssis",$dateString,$nextDateString,$severity,$_SESSION['ID']);
+                        mysqli_stmt_execute($stmt);
+                    }
+                    //repeated for 2nd and 3rd dose 
+                }else if ($dose2 == ""){
+                    //add second dose
+                    //check new date is after old
+                    $firstDate = new DateTime($dose1);
+                    if($dose1 > $dateEntered){
+                        //date entered is before dose 1
+                        header("Location: ../viewhep.php?error=checking_dates1");
+                        exit();
+                    }else {
+                        $nextDate = $dateEntered;
+                        $nextDate->modify('+1 month');
+                        $nextDateString = $nextDate->format('Y-m-d');
+                        $sql = 'UPDATE HEP SET  dose2 = ? , next_dose = ?, severity = ?
+                    WHERE patient_ID = ?';
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt,$sql)){
+                            header("Location: ../viewhep.php?error=update_dose2");
+                            exit();
+                        }else{
+
+                            mysqli_stmt_bind_param($stmt,"ssis",$dateString,$nextDateString,$severity,$_SESSION['ID']);
+                            mysqli_stmt_execute($stmt);
+                        }
+                    }
+ 
+                }else if($dose3 == ""){
+                    //add third dose 
+                    //check new date is after old
+                    $firstDate = new DateTime($dose2);
+                    if($dose2 > $dateEntered){
+                        //date entered is before dose 1
+                        header("Location: ../viewhep.php?error=checking_dates2");
+                        exit();
+                    }else {
+                        $nextDate = $dateEntered;
+                        $nextDate->modify('+1 month');
+                        $nextDateString = $nextDate->format('Y-m-d');
+                        $sql = 'UPDATE HEP SET  dose3 = ? , next_dose = ?, severity = ?
+                    WHERE patient_ID = ?';
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt,$sql)){
+                            header("Location: ../viewhep.php?error=update_dose3");
+                            exit();
+                        }else{
+                            $na = "Not Applicable";
+                            mysqli_stmt_bind_param($stmt,"ssis",$dateString,$na,$severity,$_SESSION['ID']);
+                            mysqli_stmt_execute($stmt);
+                        }
+                    }
+                }
+            }
+        }
+    }else{
+        header("Location: ../viewhep.php?error=dateerror");
+        exit(); 
+    }
+    header("Location: ../viewhep.php?error=execution_over".$_SESSION['ID']);
+        exit();
+}
+
+<?php
+session_start();
+if (isset($_POST['hpv-submit'])){
+    $servername = "localhost";
+    $dBUseraneme = "root";
+    $dbPassword = "";
+    $dBName ="projectdb2"; 
+    $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+    if(!$conn){
+        header("Location: ../index.html?error=mysqlerror_connection");
+        die("connection failed ".mysqli_connect_error());
+    }
+    // retrieve date from dataset 
+    $dateString = $_POST['date1'];
+    // retrieve date from dataset 
+    $dateEntered = new DateTime($_POST['date1']);
+    $test_date = '03/22/2010';
+    $test_arr  = explode('-', $dateString);
+    //validate date
+    
+    if (0 == 0) {
+        // SQL statement to select data from user profile
+        $sql = 'SELECT * FROM HPV WHERE patient_ID = ?';
+        // initialise prepared ststement 
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            // if sql error occurs reolad with error 
+            header("Location: ../viewhpv.php?error=selecctHPV");
+            exit();
+        }else{
+            //bind parameters to prepared statement
+            mysqli_stmt_bind_param($stmt,"s",$_SESSION['ID']);
+            mysqli_stmt_execute($stmt);
+            //store result of query 
+            $result = mysqli_stmt_get_result($stmt);
+            if($row = mysqli_fetch_assoc($result)){
+                $dose1 = $row['dose1'];
+                $dose2 = $row['dose2'];
+                $dose3 = $row['dose3'];
+                //if users first entered dose 
+                if ($dose1 == ""){
+                    //add first dose 
+                    $nextDate = $dateEntered;
+                    //add 1 month to date 
+                    $nextDate->modify('+1 month');
+                    //format date 
+                    $nextDateString = $nextDate->format('Y-m-d');
+                    //update row with new data
+                    $sql = 'UPDATE HPV SET  dose1 = ? , next_dose = ? 
+                    WHERE patient_ID = ?';
+                    $stmt = mysqli_stmt_init($conn);
+                    if(!mysqli_stmt_prepare($stmt,$sql)){
+                        header("Location: ../viewhpv.php?error=update_dose1");
+                        exit();
+                    }else{
+                        //execute statement 
+                        mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
+                        mysqli_stmt_execute($stmt);
+                        header("Location: ../viewhpv.php?error=setdose1");
+                    }
+                //repeated for 2nd and 3rd dose 
+                }else if ($dose2 == ""){
+                    //add second dose
+                    //check new date is after old
+                    $firstDate = new DateTime($dose1);
+                    if($dose1 > $dateEntered){
+                        //date entered is before dose 1
+                        header("Location: ../viewhpv.php?error=checking_dates1");
+                        exit();
+                    }else {
+                        $nextDate = $dateEntered;
+                        $nextDate->modify('+1 month');
+                        $nextDateString = $nextDate->format('Y-m-d');
+                        $sql = 'UPDATE HPV SET  dose2 = ? , next_dose = ? 
+                    WHERE patient_ID = ?';
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt,$sql)){
+                            header("Location: ../viewhpv.php?error=update_dose2");
+                            exit();
+                        }else{
+                            mysqli_stmt_bind_param($stmt,"sss",$dateString,$nextDateString,$_SESSION['ID']);
+                            mysqli_stmt_execute($stmt);
+                        }
+                    }
+ 
+                }else if($dose3 == ""){
+                    //add third dose 
+                    //check new date is after old
+                    $firstDate = new DateTime($dose2);
+                    if($dose2 > $dateEntered){
+                        //date entered is before dose 1
+                        header("Location: ../viewhpv.php?error=checking_dates2");
+                        exit();
+                    }else {
+                        $nextDate = $dateEntered;
+                        $nextDate->modify('+1 month');
+                        $nextDateString = $nextDate->format('Y-m-d');
+                        $sql = 'UPDATE HPV SET  dose3 = ? , next_dose = ? 
+                    WHERE patient_ID = ?';
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt,$sql)){
+                            header("Location: ../viewhpv.php?error=update_dose3");
+                            exit();
+                        }else{
+                            $na = "Not Applicable";
+                            mysqli_stmt_bind_param($stmt,"sss",$dateString,$na,$_SESSION['ID']);
+                            mysqli_stmt_execute($stmt);
+                        }
+                    }
+                }
+            }
+        }
+    }else{
+        header("Location: ../viewhpv.php?error=dateerror");
+        exit(); 
+    }
+    header("Location: ../viewhpv.php?error=execution_over".$_SESSION['ID']);
+        exit();
+}
+
+<?php
+
+session_start();
+
+if (isset($_POST['submit_screening'])){
+     
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.php?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+    //variables to store entries 
+    $chl;
+    $gon;
+    $syph;
+    $hiv;
+    $tstDate;
+    
+    //check selection for chlym
+    if($_POST['Chlamydia'] == 'chlamydia_na'){
+        $chl  = 'Not Applicable';
+    }else if($_POST['Chlamydia'] == 'chlamydia_yes'){
+        $chl = 'Positive';
+    }else if($_POST['Chlamydia'] == 'chlamydia_no'){
+        $chl = 'Negative';
+    }else{
+        //send back to page with uncheck fields 
+        header("Location: ../newscreening.php?error=nochlselect");
+        exit();
+    }
+
+    //check selection for gon
+    if($_POST['Gonorrhea'] == 'gonorrhea_na'){
+        $gon = 'Not Applicable';
+    }else if($_POST['Gonorrhea'] == 'gonorrhea_yes'){
+        $gon = 'Positive';
+    }else if($_POST['Gonorrhea'] == 'gonorrhea_no'){
+        $gon = 'Negative';
+    }else{
+        //send back to page with uncheck fields 
+        header("Location: ../newscreening.php?error=nogonselect");
+        exit();
+    }
+
+    //check selection for syph
+    if($_POST['Syphilis'] == 'syphilis_na'){
+        $syph = 'Not Applicable';
+    }else if($_POST['Syphilis'] == 'syphilis_yes'){
+        $syph = 'Positive';
+    }else if($_POST['Syphilis'] == 'syphilis_no'){
+        $syph = 'Negative';
+    }else{
+        //send back to page with uncheck fields 
+        header("Location: ../newscreening.php?error=nosyphselect");
+        exit();
+    }
+
+    //check selection for hiv
+    if($_POST['HIV'] == 'hiv_na'){
+        $hiv = 'Not Applicable';
+    }else if($_POST['HIV'] == 'hiv_yes'){
+        $hiv = 'Positive';
+    }else if($_POST['HIV'] == 'hiv_no'){
+        $hiv= 'Negative';
+    }else{
+        //send back to page with uncheck fields 
+        header("Location: ../newscreening.php?error=nohivselect");
+        exit();
+    }
+
+    //retrieve date entered by user 
+    //check if no date entered 
+    if($_POST['date'] == ''){
+        header("Location: ../newscreening.php?error=nodate");
+        exit();
+    }else{
+        //set variable for date entered 
+        $tstDate = $_POST['date'];
+    }
+
+    //sql statement to be executed,update all pre existing old records 
+    $sql = 'UPDATE screening SET latest_test = ? WHERE Patient_ID = ?';
+    $stmt = mysqli_stmt_init($conn);
+    //if sql error return error page
+    if(!mysqli_stmt_prepare($stmt,$sql)){
+        header("Location: ../newscreening.php?error=sqlerrorupdate");
+        exit();
+    }else{
+        //bind parameters and execute statement 
+        $latest = 0;
+        mysqli_stmt_bind_param($stmt,'is',$latest,$_SESSION['ID']);
+        mysqli_stmt_execute($stmt);
+    }
+    //add new record for new resutls entered 
+    $sql = 'INSERT INTO screening VALUES (null,?,?,?,?,?,?,?)';
+    $stmt2 = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt2,$sql)){
+        header("Location: ../newscreening.php?error=sqlerrorinsert");
+        exit();
+    }else{
+        $latest = 1;
+        //bind parameters and execute statement 
+        mysqli_stmt_bind_param($stmt2,'ssissss',$_SESSION['ID'],
+        $tstDate,$latest,$gon,$chl,$syph,$hiv);
+        mysqli_stmt_execute($stmt2);
+    }
+
+    header("Location: ../viewscreenings.php");
+    
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-color: #EB3A70;
+  }
+
+  form{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .fas{
+    color: #EB3A70;
+  }
+  </style>
+  <form>
+      <h1>Hi There! <i class="fas fa-syringe"></i></h1>
+    <br>
+      Our records show you are due to recieve a booster dose of Twinrix for Hepatitus A & B. If you have already recieved this at a clinic please update your profile so we can let you know when to return again. 
+      To find a clinic near you <a href="https://sxt.org.uk/service">click here</a>      
+  </form>
+    
+    
+</body>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-color: #EB3A70;
+  }
+
+  form{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .fas{
+    color: #EB3A70;
+  }
+  </style>
+  <form>
+      <h1>Hi There! <i class="fas fa-syringe"></i></h1>
+    <br>
+      Our records show you are due to recieve a booster dose of Twinnrix for Hepatitus A & B in 2 weeks, to find a clinic near you <a href="https://sxt.org.uk/service">click here</a>      
+  </form>
+    
+    
+</body>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-color: #EB3A70;
+  }
+
+  form{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .fas{
+    color: #EB3A70;
+  }
+  </style>
+  <form>
+      <h1>Hi There! <i class="fas fa-syringe"></i></h1>
+    <br>
+      Our records show you are due to recieve a booster dose of Garsadil for HPV. If you have already recieved this at a clinic please update your profile so we can let you know when to return again. 
+      To find a clinic near you <a href="https://sxt.org.uk/service">click here</a>      
+  </form>
+    
+    
+</body>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-color: #EB3A70;
+  }
+
+  form{
+    width: 360px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .fas{
+    color: #EB3A70;
+  }
+  </style>
+  <form>
+      <h1>Hi There! <i class="fas fa-syringe"></i></h1>
+    <br>
+      Our records show you are due to recieve a booster dose of Garsadil for HPV, to find a clinic near you <a href="https://sxt.org.uk/service">click here</a>      
+  </form>
+    
+    
+</body>
+
+<?php
+if (isset($_POST["submit_questions"])){
+    session_start();
+    $servername = "localhost";
+    $dBUseraneme = "root";
+    $dbPassword = "";
+    $dBName ="projectdb2";
+
+    $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+    if(!$conn){
+        header("Location: ../index.html?error=mysqlerror_connection");
+        die("connection failed ".mysqli_connect_error());
+    }
+
+    
+    //variables for user selections 
+    $mental;
+    $pout;
+    $cutdrink;
+    $annoying;
+    $feltbad;
+    $drinkmorn;
+    $clubdrug;
+    $excercise;
+    $smoke;
+    //$currentDate = date ('Y/m/d');
+
+    //post checkboxes to rerieve user selection 
+    if ($_POST['mental_health_yes'] == "vmental_health_yes"){
+        $mental = 1;
+    }else{
+        $mental = 0;
+    }
+
+    if ($_POST['out_yes'] == "vout_yes"){
+        $out = 1;
+    }else{
+        $out = 0;
+    }
+
+    if ($_POST['cutdrink_yes'] == "vcutdrink_yes"){
+        $cutdrink = 1;
+    }else{
+        $cutdrink = 0;
+    }
+
+    if ($_POST['annoying_yes'] == "vannoying_yes"){
+        $annoying = 1;
+    }else{
+        $annoying = 0;
+    }
+
+    if ($_POST['feltbad_yes'] == "vfeltbad_yes"){
+        $feltbad = 1;
+    }else{
+        $feltbad = 0;
+    }
+
+    if ($_POST['drinkmorn_yes'] == "vdrinkmorn_yes"){
+        $drinkmorn = 1;
+    }else{
+        $drinkmorn = 0;
+    }
+
+    if ($_POST['clubdrug_yes'] == "vclubdrug_yes"){
+        $clubdrug = 1;
+    }else{
+        $clubdrug = 0;
+    }
+
+    if ($_POST['excercise_yes'] == "vexcercise_yes"){
+        $excercise = 1;
+    }else{
+        $excercise = 0;
+    }
+
+    if ($_POST['smoker_yes'] == "vsmoker_yes"){
+        $smoke = 1;
+    }else{
+        $smoke = 0;
+    }
+
+    //sql statement to insert user selection int db
+    $sql = "INSERT INTO Interview (patient_ID, happy, p_out,cut_drink,felt_guilty,drink_morning,club_drugs,smoker,excercise,annoyed)
+     VALUES (?,?,?,?,?,?,?,?,?,?)";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("Location: ../sighnup.php?error=connectionerrorinsert&email=" .$email);
+        exit();
+    }else{
+        //bind parameters and execute sql
+        mysqli_stmt_bind_param($stmt,"siiiiiiiii",$_SESSION["ID"], $mental, $out, $cutdrink, $feltbad, $drinkmorn, $clubdrug,$smoke,$excercise,$annoying);
+        mysqli_stmt_execute($stmt);
+        header("Location: ../home.php");
+    }
+}
+        
+
+
+
+
+
+
+<?php
+
+if (isset($_POST['login-submit'])){
+    $servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+
+}
+    //retrieve email and password entered 
+    $mailuid = $_POST["email"];
+    $password = $_POST ["pass"];
+    //if either or both fields are left empty, return error 
+    if (empty ($mailuid) || empty($password)){
+        header("Location: ../login_missing.php");
+        exit();
+    }else {
+        //select from databse where ID is equal to entered email
+        $sql = 'SELECT * FROM patient WHERE email = ? ';
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ../index.php?error=mysqlerror_connection");
+            exit();
+        }else {
+            //bind parameters and execute statement 
+            mysqli_stmt_bind_param($stmt,"s", $mailuid);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            //if user found, retrieve stored password 
+            if($row = mysqli_fetch_assoc($result)){
+                $storedpass = $row ['userPass'];
+
+                //previous code for hashed password 
+                //$pwdCheck = password_verify($password, $storedpass );
+
+                //check stored password and entered password match 
+                $pwdCheck = $password == $storedpass;
+                if($pwdCheck == false){
+                    //if wrong password return error 
+                    header("Location: ../login_wrongpass.php" );
+                    exit();
+                }else if($pwdCheck == true){
+                    //log user in and start session 
+                    session_start();
+                    $_SESSION["ID"] = $row['patient_ID'];
+                    $_SESSION["fNmae"] = $row['first_name'];
+                    $_SESSION["sName"] = $row ['second_name']; 
+
+                    $sql = 'SELECT * FROM interview WHERE patient_ID = ? ';
+                    $stmt = mysqli_stmt_init($conn);
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        header("Location: ../index.php?error=mysqlerror_checkques");
+                        exit();
+                    }else {
+                        mysqli_stmt_bind_param($stmt,"s",$_SESSION["ID"]);
+                        mysqli_stmt_execute($stmt);    
+                        $result2 = mysqli_stmt_get_result($stmt);
+                        if($row = mysqli_fetch_assoc($result2)){
+                            //send user to home page 
+                            header("Location: ../home.php");    
+                        }else{
+                            //send user to questions page if not completed 
+                            header("Location: ../interview.php");
+                        }
+                    
+                    }
+
+                    //header("Location: ../index.php?errorlogin=success");
+                }else{
+                    header("Location: ../index.php?error=verpass");
+                    exit();
+                }
+            }else{
+                header("Location: ../login_wrongpass.php" );
+                exit();
+            }
+        }
+    }
+}else {
+    header("Location: ../index.php");
+    exit();
+}
+
+<?php
+session_start();
+require_once "PHP_Mailer/PHPMailerAutoload.php";
+
+$body = $_POST['email_text'];
+$email_to_send = $_SESSION['s_email'];
+//send email 
+$mail = new PHPMailer(); 
+$mail->isSMTP();
+$mail->SMTPAuth = true;
+$mail->SMTPSecure = 'ssl';
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = '465';
+//$mail->isHTML();
+$mail->Username = 'mshtest99@gmail.com';
+$mail->Password = 'TryHard123';
+$mail->SetFrom('mshtest99@gmail.com');
+$mail->Subject = 'NHS no reply';
+$mail->Body = $body;
+//replace with user email
+$mail->AddAddress($email_to_send);
+
+$mail->Send();
+
+header("Location: ../searched_user.php");
+
+<?php
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+//sql to select all of users latest tetst 
+$sql = 'SELECT * FROM Screening where latest_test = ? ';
+$stmt = mysqli_stmt_init($conn);
+//create new DateTime obbject with current date
+$currentDate = new DateTime();
+$currentDate->format('Y-m-d');
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header('Location: ../notification_test.html?error=mysqlerror_connection');
+    exit();
+
+}else{
+    //bind parameters and execute sql
+    $param = 1;
+    mysqli_stmt_bind_param($stmt,"i",$param);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    //iterate through all rows retrieved 
+    while ($row = mysqli_fetch_assoc($result)){
+        $testDate = new DateTime($row['date_tested']);
+        $testDate->modify('+3month');
+
+        //store difference with last test date + 3 months and curent date 
+        $difference = $currentDate->diff($testDate);
+        $intdif = $difference->format("%a");
+        //if dates match then send reminder email 
+        if($intdif == 0){
+            // send email forreminder
+            //require PHP Mailer Library  
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+            //Read content of reminder email 
+            ob_start();
+            include 'screening_notif.html';
+            $body = ob_get_clean();
+
+            //send email 
+            $mail = new PHPMailer(); 
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time To Get Tested';
+            $mail->Body = $body;
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+        }
+    }
+
+}
+
+<?php
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+session_start();
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+//sql stattement to retrieve all records for users 
+$sql = "SELECT * FROM HEP WHERE dose3 = ?  AND severity = 2 ";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    //bind parameters and execute statement 
+    $empty = "";
+    mysqli_stmt_bind_param($stmt,'s',$empty);
+    mysqli_stmt_execute($stmt);
+    //store result retrieved 
+    $result = mysqli_stmt_get_result($stmt);
+    //iterate through all rows
+    while($row = mysqli_fetch_assoc($result)){
+        //retrieve next required date for user
+        $next_date_string = $row['next_dose'];
+        $next_date = new DateTime ($next_date_string);
+        //create DateTime object with current date 
+        $current_date = new DateTime();
+        //add 3 months to users required next date 
+        $next_date->modify('+3month');
+        $current_date->format('Y-m-d');
+        //calculate difference between dates 
+        $difference = $current_date->diff($next_date);
+        $intdif = $difference->format("%a");
+     
+        //if no difference found between dates, send email to user 
+        if ($intdif == 0 ){
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+            //read html file content for email 
+            ob_start();
+            include 'hep_reminder_2.html';
+            $body = ob_get_clean();
+
+            //send email 
+            $mail = new PHPMailer(); 
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time For Clinc!';
+            $mail->Body = $body;
+            //replace with user email
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+       
+    }
+    header('Location: ../test.html?error=end'. $intdif);
+}
+}
+
+<?php
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+//sql stattement to retrieve all records for users 
+$sql = "SELECT * FROM HPV WHERE dose3 = ?  AND severity = 2 ";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    //bind parameters and execute statement 
+    $empty = "";
+    mysqli_stmt_bind_param($stmt,'s',$empty);
+    mysqli_stmt_execute($stmt);
+     //store result retrieved 
+    $result = mysqli_stmt_get_result($stmt);
+    //iterate through all rows
+    while($row = mysqli_fetch_assoc($result)){
+        //retrieve next required date for user
+        $next_date_string = $row['next_dose'];
+        $next_date = new DateTime ($next_date_string);
+         //add 3 months to users required next date 
+        $next_date->modify('+3month');
+        //create DateTime object with current date 
+        $current_date = new DateTime();
+        $current_date->format('Y-m-d');
+        //calculate difference between dates 
+        $difference = $current_date->diff($next_date);
+        $intdif = $difference->format("%a");
+        
+        //if no difference found between dates, send email to user 
+        if ($intdif == 0){
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+            //read html file content for email 
+            ob_start();
+            include 'hpv_reminder_2.html';
+            $body = ob_get_clean();
+            //send email 
+            $mail = new PHPMailer(); 
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time For Clinc!';
+            $mail->Body = $body;
+            //replace with user email
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+       
+    }
+    header('Location: ../test.html?error=end'. $intdif);
+    }
+}
+
+
+<?php
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+//sql stattement to retrieve all records for users 
+$sql = "SELECT * FROM HEP WHERE dose3 = ?  AND severity = 1 ";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    //bind parameters and execute statement 
+    $empty = "";
+    mysqli_stmt_bind_param($stmt,'s',$empty);
+    mysqli_stmt_execute($stmt);
+    //store result retrieved 
+    $result = mysqli_stmt_get_result($stmt);
+    //iterate through all records 
+    while($row = mysqli_fetch_assoc($result)){
+        //retrieve next required date for user
+        $next_date_string = $row['next_dose'];
+        $next_date = new DateTime ($next_date_string);
+        //create DateTime object with current date 
+        $current_date = new DateTime();
+        $current_date->format('Y-m-d');
+        //calculate difference between dates
+        $difference = $current_date->diff($next_date);
+        $intdif = $difference->format("%R%a");
+    
+        //if difference is between 2 weeks send an email to user 
+        if ($intdif  == +14){
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+
+            ob_start();
+            include 'hep_reminder_2.html';
+            $body = ob_get_clean();
+
+            $mail = new PHPMailer(); 
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time For Clinc!';
+            $mail->Body = $body;
+            
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+            header('Location: ../test.html?error=end'. $intdif);
+        }else if ($intdif == -14 ){
+            // send email for 2 week reminder 
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+
+            ob_start();
+            include 'hep_reminder.html';
+            $body = ob_get_clean();
+
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time For Clinc!';
+            $mail->Body = $body;
+            
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+
+            // if more than 14 days have past then set priority to 2
+        }else if ($intdif > +14){
+
+            $sql = "UPDATE HEP SET severity = ?  WHERE patient_ID = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                //header('Location: ../notification_test.html?error=mysqlerror_connection');
+                exit();
+            }else{
+                $ID = $row['patient_ID']; 
+                $sev = 2;
+                mysqli_stmt_bind_param($stmt,'is', $sev, $ID);
+                mysqli_stmt_execute($stmt);
+                header('Location: /test.html?error=done' .$intdif);
+            }
+        }
+    }
+    
+}
+header('Location: ../test.html?error=end'. $intdif);
+?>
+
+
+<?php
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+}
+
+//sql stattement to retrieve all records for users 
+$sql = "SELECT * FROM HPV WHERE dose3 = ?  AND severity = 1 ";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    //bind parameters and execute statement 
+    $empty = "";
+    mysqli_stmt_bind_param($stmt,'s',$empty);
+    mysqli_stmt_execute($stmt);
+    //store result retrieved 
+    $result = mysqli_stmt_get_result($stmt);
+    //iterate through all records 
+    while($row = mysqli_fetch_assoc($result)){
+        //retrieve next required date for user
+        $next_date_string = $row['next_dose'];
+        $next_date = new DateTime ($next_date_string);
+        //create DateTime object with current date 
+        $current_date = new DateTime();
+        $current_date->format('Y-m-d');
+        //calculate difference between dates
+        $difference = $current_date->diff($next_date);
+        $intdif = $difference->format("%R%a");
+       
+        //if difference is between 2 weeks send an email to user 
+        if ($intdif  == +14){
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+
+            ob_start();
+            include 'hpv_reminder_2.html';
+            $body = ob_get_clean();
+
+            $mail = new PHPMailer(); 
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time For Clinc!';
+            $mail->Body = $body;
+            
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+            header('Location: ../test.html?error=end'. $intdif);
+        }else if ($intdif == -14 ){
+            // send email for 2 week reminder 
+            require_once "PHP_Mailer/PHPMailerAutoload.php";
+
+            ob_start();
+            include 'hpv_reminder.html';
+            $body = ob_get_clean();
+
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Time For Clinc!';
+            $mail->Body = $body;
+            
+            $mail->AddAddress($row['patient_ID']);
+
+            $mail->Send();
+            header('Location: ../test.html?error=end'. $intdif);
+
+            // if more than 14 days have past then set priority to 2
+        }else if ($intdif < -14){
+
+            $sql = "UPDATE HPV SET severity = ?  WHERE patient_ID = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt,$sql)){
+                header('Location: ../notification_test.html?error=mysqlerror_connection');
+                exit();
+            }else{
+                $ID = $row['patient_ID']; 
+                $sev = 2;
+                mysqli_stmt_bind_param($stmt,'is', $sev, $ID);
+                mysqli_stmt_execute($stmt);
+                header('Location: ../test.html?error=end'. $intdif);
+            }
+        }else {
+            header('Location: ../test.html?error=end'. $intdif);
+        }
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  </head>
+<body>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+    body, html {
+    height: calc(100% - 2em);
+    margin: 0;
+    font-family: 'Montserrat';
+    background-color: white;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: montserrat;
+    box-sizing: border-box;
+  }
+  
+  body{
+    min-height: 100vh;
+    background-color: #EB3A70;
+  }
+
+  form{
+    width: 460px;
+    background: #f1f1f1;
+    
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .fas{
+    color: #EB3A70;
+  }
+  </style>
+  <form>
+      <h1>Time to test! <i class="fas fa-vial"></i></h1>
+        <br>
+      It is reccomended to test for sexaully transmitted infections every 3 months,
+      to order a self testing kit for free visit or you can find a clinic near you with 
+
+       
+  </form>
+    
+    
+</body>
+
+<?php
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="projectdb2";
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+session_start();
+$_SESSION ['s_email'] = $_POST['s_email'];
+
+$sql = " SELECT * FROM Patient WHERE email  = ?";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    header("Location: ../search_results.php");
+}else{
+    mysqli_stmt_bind_param($stmt,"s",$_SESSION['s_email']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if($row = mysqli_fetch_assoc($result)){
+        header("Location: ../searched_user.php");
+    }else{
+        header("Location: ../search_fail.php");
+    }
+}
+
+<?php
+    $servername = "localhost";
+    $dBUseraneme = "root";
+    $dbPassword = "";
+    $dBName ="projectdb2";
+    $conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+    if(!$conn){
+        header("Location: ../index.php?error=mysqlerror_connection");
+        die("connection failed ".mysqli_connect_error());
+    }
+
+    $happy = 0;
+    $out = 0;
+    $cut = 0;
+    $guilt = 0;
+    $morn = 0;
+    $drug = 0;
+    $smoker = 0;
+    $excercise = 0;
+    $anoy = 0;
+    $count = 0;
+$sql = "SELECT * FROM Interview";
+$stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    $empty = "";
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    while($row = mysqli_fetch_assoc($result)){
+        if($row['happy'] == 1){
+            $happy++;
+        }
+        if($row['p_out'] == 1){
+            $out++;
+        }
+        if($row['cut_drink'] == 1){
+            $cut++;
+        }
+        if($row['felt_guilty'] == 1){
+            $guilt++;
+        }
+        if($row['drink_morning'] == 1){
+            $morn++;
+        }
+        if($row['club_drugs'] == 1){
+            $happy++;
+        }
+        if($row['smoker'] == 1){
+            $smoker++;
+        }
+        if($row['excercise'] == 1){
+            $excercise++;
+        }
+        if($row['annoyed'] == 1){
+            $anoy++;
+        }
+        $count++;
+    }
+    $p_happy = ($happy*100)/$count;
+    $p_out = ($out*100)/$count;;
+    $p_cut = ($cut*100)/$count;
+    $p_guilt = ($guilt*100)/$count;
+    $p_morn = ($morn*100)/$count;
+    $p_drug = ($drug*100)/$count;;
+    $p_smoker = ($smoker*100)/$count;;
+    $p_excercise = ($excercise*100)/$count;
+    $p_anoy = ($anoy*100)/$count;
+    
+
+    $gon = 0;
+    $chly = 0;
+    $syph = 0;
+    $hiv = 0;
+
+    $today_dt = new DateTime();
+    $today_dt->format('Y-m-d');
+    $today_dt->modify('-3month');
+    $sql = "SELECT * FROM Screening";
+    $stmt = mysqli_stmt_init($conn);
+if(!mysqli_stmt_prepare($stmt,$sql)){
+    exit();
+}else{
+    $empty = "";
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    while($row = mysqli_fetch_assoc($result)){
+        
+        $test_dt = new DateTime($row['date_tested']);
+        $test_dt->format('Y-m-d');
+        if($today_dt < $test_dt){
+            if($row['Gonnorhea'] == 'Positive'){
+                $gon++;
+            }
+            if($row['Chlamydia'] == 'Positive'){
+                $chly++;
+            }
+            if($row['Syphilis'] == 'Positive'){
+                $syph++;
+            }
+            if($row['HIV'] == 'Positive'){
+                $hiv++;
+            }
+        }
+    }
+
+    require_once "PHP_Mailer/PHPMailerAutoload.php";
+
+            
+            
+
+            $message = "<!DOCTYPE html>";
+            $message .= '<html lang="en" dir="ltr">';
+            $message .=   '<head>';
+            $message .= '<meta charset="utf-8">';
+            $message .= '<title></title>';
+                
+            $message .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>';
+            $message .= '<script src="https://kit.fontawesome.com/f52176a8e0.js" crossorigin="anonymous"></script>';
+            $message .= '</head>';
+            $message .= '<body>';
+            $message .= '<style>';
+            $message .= '@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");';
+            
+            
+            $message .= '*{';
+            $message .= 'margin: 0;';
+            $message .= 'padding: 0;';
+            $message .= 'text-decoration: none;';
+            $message .= 'font-family: montserrat;';
+            $message .= 'box-sizing: border-box;';
+            $message .= '}';
+              
+            $message .= 'body{';
+            $message .= 'min-height: 100vh;';
+            $message .= 'background-color: #EB3A70;';
+            $message .= '}';
+            
+            $message .= 'form{';
+            $message .= 'width: 360px;';
+            $message .= 'background: #f1f1f1;';
+                
+            $message .= 'padding: 80px 40px;';
+            $message .= 'border-radius: 10px;';
+            $message .= 'position: absolute;';
+            $message .= 'left: 50%;';
+            $message .= 'top: 50%;';
+            $message .= 'transform: translate(-50%,-50%);';
+            $message .= '}';
+            
+            $message .= '.fas{';
+            $message .= 'color: #EB3A70;';
+            $message .= '}';
+            $message .= '</style>';
+            $message .= '<form>';
+            $message .= '<h1>Monthly User Dashboard <i class="fas fa-syringe"></i></h1>';
+            $message .= '<br>';
+            $message .= 'Percaentage of users who:';
+            $message .= '<br><br>';
+            $message .= 'Diagnoed with a mental health condition: ' .$p_happy;
+            $message .= '<br><br>';
+            $message .= 'Out to family and friends: ' .$p_out;
+            $message .= '<br><br>';
+            $message .= 'Want to cut down on drinking: ' .$p_cut;
+            $message .= '<br><br>';
+            $message .= 'Take club drugs: ' .$p_drug;
+            $message .= '<br><br>';
+            $message .= 'Are a smoker: ' .$p_smoker;
+            $message .= '<br><br>';
+            $message .= 'Excercise regualrly: ' .$p_excercise ;
+            $message .= '<br><br>';
+            $message .= 'Positive Test Results seen in the last 3 months:';
+            $message .= '<br>';
+            $message .= '<br>';
+            $message .= 'Chlamydia: ' .$chly; 
+            $message .= '<br>';
+            $message .= 'Gonnorhea: ' .$gon;
+            $message .= '<br>';
+            $message .= 'Syphillis: ' .$syph;
+            $message .= '<br>';
+            $message .= 'HIV: ' .$hiv;
+            $message .= '</form>';
+                
+                
+            $message .= '</body>';
+
+
+             
+
+    
+    
+            
+
+            $mail = new PHPMailer(); 
+            $mail->Body = $message;
+            $mail->isHTML(true);
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'mshtest99@gmail.com';
+            $mail->Password = 'TryHard123';
+            $mail->SetFrom('mshtest99@gmail.com');
+            $mail->Subject = 'Monthly User Report';
+            
+            //replace with user email
+            $mail->AddAddress('lukeool76@gmail.com');
+
+            $mail->Send();
+
+    }
+    header('Location: ../test.html?error=end');
+}
+
+<?php
+
+if (isset($_POST['sighnup-submit'])){
+    
+
+$servername = "localhost";
+$dBUseraneme = "root";
+$dbPassword = "";
+$dBName ="ProjectDB2";
+
+$conn = mysqli_connect($servername, $dBUseraneme, $dbPassword, $dBName);
+
+if(!$conn){
+    header("Location: ../index.html?error=mysqlerror_connection");
+    die("connection failed ".mysqli_connect_error());
+    exit();
+}
+
+    //retrieve entry from all fields by the user
+    $email = $_POST['mail'];
+    $password = $_POST['pass1'];
+    $password2 = $_POST['pass2'];
+    $name1 = $_POST['name1'];
+    $name2 = $_POST['name2'];
+    $birth = $_POST['DOB'];
+    $address1 = $_POST['address1'];
+    $address2 = $_POST['address2'];
+    $city = $_POST['city'];
+    $county = $_POST['county'];
+    $postcode = $_POST['postcode'];
+
+    //check if any fields have been lft empty by the user and return error 
+    if (empty($email)||empty($password)||empty($password2)||empty($name1)||
+        empty($name2)||empty($birth)||empty($address1)||empty($address2)||empty($city)||
+        empty($county)||empty($postcode)){
+            header("Location: ../sighnup_missing.php");
+            exit();
+            //validate that a email has been entered 
+        }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            header("Location: ../sighnup_email.php");
+            exit();
+            //if entered passwords dont match return error 
+        }else if($password != $password2){
+            header("Location: ../sighnup_pass.php");
+            exit();
+            //check if user already exists 
+        }else{
+            $sql = "SELECT * FROM patient WHERE email = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt, $sql)){
+                header("Location: ../sighnup.php?error=selesctemailerror" .$email);
+                exit();
+            }else{
+                mysqli_stmt_bind_param($stmt,"s",$email);
+                mysqli_stmt_execute($stmt);    
+                mysqli_stmt_store_result($stmt);     
+                $resultCheck = mysqli_stmt_num_rows($stmt); 
+                if($resultCheck > 0) {
+                    header("Location: ../sighnup_email.php");
+                    exit();
+                }else{
+                    //if no user exits, create new user and log in
+                $sql2 = "INSERT INTO `Patient` (`patient_ID` ,`email`, `userPass`, 
+                `first_name`, `second_name`,`birth`, `address1`,
+                `address2`, `city`,`county`,`post_code`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                $stmt2 = mysqli_stmt_init($conn);
+                if(!mysqli_stmt_prepare($stmt2, $sql2)){
+                    header("Location: ../sighnup.php?error=sqlerrorinsert&email=" .$email);
+                    exit();
+                }else{
+                    //$hashedPwd = password_hash($password2, PASSWORD_DEFAULT);
+
+                    mysqli_stmt_bind_param($stmt2,"sssssssssss",$email, $email, $password2,$name1,$name2,$birth,$address1,$address2,$city,$county,$postcode);
+                    mysqli_stmt_execute($stmt2);    
+                    //signup suuccesful
+                    //start session and initialise users records by inserting empty rows 
+                    $sql = "SELECT * FROM patient WHERE email = ?";
+                    $stmt = mysqli_stmt_init($conn);
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        header("Location: ../sighnup.php?error=selesctemailerror" .$email);
+                        exit();
+                    }else{
+                        mysqli_stmt_bind_param($stmt,"s",$email);
+                        mysqli_stmt_execute($stmt);    
+                        //mysqli_stmt_store_result($stmt); 
+                        $result = mysqli_stmt_get_result($stmt);
+                        if($row = mysqli_fetch_assoc($result)){
+                            session_start();
+                            $_SESSION["ID"] = $row['patient_ID'];
+                            $_SESSION["fNmae"] = $row['first_name'];
+                            $_SESSION["sName"] = $row ['second_name']; 
+                           
+                            $sql = "INSERT INTO `hep` (`patient_ID`,`severity`,`dose1`,`dose2`,`dose3`,`next_dose`) VALUES  (?,?,?,?,?,?)";
+                            $stmt = mysqli_stmt_init($conn);  
+                            if(!mysqli_stmt_prepare($stmt,$sql)){
+                                header("Location: ../sighnup.php?error=hepCreate" .$email);
+                                exit();
+                            }else{
+                                $empty = "";
+                                $priority = 2;
+                                mysqli_stmt_bind_param($stmt,"sissss",$_SESSION['ID'],$priority, 
+                                $empty, $empty, $empty, $empty);
+                                mysqli_stmt_execute($stmt);
+
+                                $sql3 = "INSERT INTO `hpv` (`patient_ID`,`severity`,`dose1`,`dose2`,`dose3`,`next_dose`) VALUES  (?,?,?,?,?,?)";
+                                $stmt3 = mysqli_stmt_init($conn);
+                                if(!mysqli_stmt_prepare($stmt3,$sql3)){
+                                    header("Location: ../sighnup.php?error=hpvCreate" .$email);
+                                    exit();
+                                }else{
+                                    mysqli_stmt_bind_param($stmt3,"sissss",$_SESSION['ID'],$priority, 
+                                    $empty, $empty, $empty, $empty);
+                                    mysqli_stmt_execute($stmt3);
+                                }
+                            } 
+                        }else{
+                            header("Location: ../sighnup.php?error=sessionsCreate" .$email);
+                            exit();
+                        }
+                    header("Location: ../interview.php" );
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+ 
+
+-- MySQL Script generated by MySQL Workbench
+-- Thu Apr 23 05:03:59 2020
+-- Model: New Model    Version: 1.0
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema ProjectDB2
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `ProjectDB2` ;
+
+-- -----------------------------------------------------
+-- Schema ProjectDB2
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `ProjectDB2` DEFAULT CHARACTER SET utf8 ;
+USE `ProjectDB2` ;
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`Patient`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`Patient` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`Patient` (
+  `patient_ID` VARCHAR(45) NULL,
+  `first_name` VARCHAR(45) NULL,
+  `second_name` VARCHAR(45) NULL,
+  `birth` VARCHAR(15) NULL,
+  `address1` VARCHAR(45) NULL,
+  `address2` VARCHAR(45) NULL,
+  `city` VARCHAR(45) NULL,
+  `county` VARCHAR(45) NULL,
+  `post_code` VARCHAR(10) NULL,
+  `email` VARCHAR(45) NULL,
+  `userPass` VARCHAR(200) NULL,
+  PRIMARY KEY (`patient_ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`HPV`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`HPV` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`HPV` (
+  `patient_ID` VARCHAR(45) NOT NULL,
+  `dose1` VARCHAR(40) NULL,
+  `dose2` VARCHAR(40) NULL,
+  `dose3` VARCHAR(40) NULL,
+  `next_dose` VARCHAR(45) NULL,
+  `severity` INT NULL,
+  PRIMARY KEY (`patient_ID`),
+  CONSTRAINT `fk_HPV_Vaccination_Patient1`
+    FOREIGN KEY (`patient_ID`)
+    REFERENCES `ProjectDB2`.`Patient` (`patient_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`HEP`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`HEP` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`HEP` (
+  `patient_ID` VARCHAR(45) NOT NULL,
+  `dose1` VARCHAR(40) NULL,
+  `dose2` VARCHAR(40) NULL,
+  `dose3` VARCHAR(40) NULL,
+  `next_dose` VARCHAR(40) NULL,
+  `severity` INT NULL,
+  PRIMARY KEY (`patient_ID`),
+  CONSTRAINT `fk_HEP_AB_Vaccination_Patient1`
+    FOREIGN KEY (`patient_ID`)
+    REFERENCES `ProjectDB2`.`Patient` (`patient_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`Screening`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`Screening` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`Screening` (
+  `screening_ID` INT NOT NULL AUTO_INCREMENT,
+  `patient_ID` VARCHAR(45) NOT NULL,
+  `date_tested` VARCHAR(45) NULL,
+  `latest_test` TINYINT NULL,
+  `Gonnorhea` VARCHAR(45) NULL,
+  `Chlamydia` VARCHAR(45) NULL,
+  `Syphilis` VARCHAR(45) NULL,
+  `HIV` VARCHAR(45) NULL,
+  PRIMARY KEY (`screening_ID`),
+  INDEX `fk_STI_Test_Patient1_idx` (`patient_ID` ASC),
+  CONSTRAINT `fk_STI_Test_Patient1`
+    FOREIGN KEY (`patient_ID`)
+    REFERENCES `ProjectDB2`.`Patient` (`patient_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`Patient_rersources`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`Patient_rersources` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`Patient_rersources` (
+  `resource_ID` INT NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(45) NULL,
+  `activity` VARCHAR(45) NULL,
+  `url` VARCHAR(245) NULL,
+  PRIMARY KEY (`resource_ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`STI_email_reminder`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`STI_email_reminder` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`STI_email_reminder` (
+  `severity` VARCHAR(45) NULL,
+  `date_created` VARCHAR(45) NULL,
+  `completed` VARCHAR(45) NULL,
+  `patient_ID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`patient_ID`),
+  CONSTRAINT `fk_STI_email_reminder_Patient1`
+    FOREIGN KEY (`patient_ID`)
+    REFERENCES `ProjectDB2`.`Patient` (`patient_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ProjectDB2`.`Interview`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ProjectDB2`.`Interview` ;
+
+CREATE TABLE IF NOT EXISTS `ProjectDB2`.`Interview` (
+  `happy` TINYINT NULL,
+  `p_out` TINYINT NULL,
+  `cut_drink` TINYINT NULL,
+  `felt_guilty` TINYINT NULL,
+  `drink_morning` TINYINT NULL,
+  `club_drugs` TINYINT NULL,
+  `smoker` TINYINT NULL,
+  `excercise` TINYINT NULL,
+  `annoyed` TINYINT NULL,
+  `patient_ID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`patient_ID`),
+  CONSTRAINT `fk_Interview_Patient`
+    FOREIGN KEY (`patient_ID`)
+    REFERENCES `ProjectDB2`.`Patient` (`patient_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -68,7 +68,7 @@ if(!mysqli_stmt_prepare($stmt,$sql)){
         <h1 href="#profile" class="btn"><i class="fas fa-pray"></i> Spirituality & Religion</h1>
         <br>
         <?php while ($row = $result->fetch_assoc()): ?>
-            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> <br> <hr>
+            <a href=<?php echo $row['url'] ?> class='cta' > <?php echo $row['activity'] ?>  </a> 
             <?php $count++; ?>
         <?php endwhile; ?>    
     </form>
